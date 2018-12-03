@@ -13,7 +13,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const iitsummaries = require('./controllers/iitsummaries');
-//const authors = require('./controllers/authors');
+const authors = require('./controllers/authors');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -28,7 +28,7 @@ app.set('view engine', 'pug');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
@@ -37,7 +37,8 @@ app.use('/', routes);
 app.use('/users', users);
 //Routing all HTTP requests to /iitsummaries to bucketlist controller
 app.use('/iitsummaries', iitsummaries);
-//app.use('/authors', authors);
+app.use('/authors', authors);
+
 
 //Connect mongoose to our database
 mongoose.connect(config.database, { useNewUrlParser: true });

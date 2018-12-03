@@ -12,14 +12,18 @@ const authorSchema = mongoose.Schema({
 const authors = module.exports = mongoose.model('authors', authorSchema );
 
 
-//BucketList.find() returns all the lists
-module.exports.getAllLists = (callback) => {
+//authors.find() returns all the lists
+module.exports.getAll = (callback) => {
     authors.find(callback);
 }
 
-//newList.save is used to insert the document into MongoDB
-module.exports.addList = (newList, callback) => {
-	newList.save(callback);
+//author.save is used to insert the document into MongoDB
+module.exports.add = (author, callback) => {
+	author.save(callback);
+}
+
+module.exports.addAll=(authorsarray,callback)=>{
+  authors.insertMany(authorsarray, callback);
 }
 
 

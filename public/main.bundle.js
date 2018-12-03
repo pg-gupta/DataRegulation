@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align: center\">\n  <h3>IIT OneStop </h3>\n  <h5>This is one place to find the summary of all data regulation documents</h5>\n  <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/search']\">SEARCH</button>\n\n</div>\n"
+module.exports = "<div style=\"text-align: center\">\n  <h3>Data Regulation </h3>\n  <h5>This is one place to find the summary of all data regulation documents</h5>\n  <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/search']\">SEARCH</button>\n\n</div>\n"
 
 /***/ }),
 

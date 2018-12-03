@@ -6,12 +6,12 @@ const authors = require('../models/Author');
 
 //GET HTTP method to
 router.get('/',(req,res) => {
-    authors.getAllLists((err, authors)=> {
+    authors.getAll((err, result)=> {
 		if(err) {
 			res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
 		}
 		else {
-			res.write(JSON.stringify({success: true, lists:authors},null,2));
+			res.write(JSON.stringify({success: true, authors:result},null,2));
 			res.end();
 
 	}
@@ -38,3 +38,18 @@ router.post('/insert', (req,res,next) => {
 
 	});
 });
+
+router.post('/insertmany', (req,res,next) => {
+  console.log(req.body);
+  authors.addAll(req.body,(err, list) => {
+    if(err) {
+      res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
+
+    }
+    else
+    res.json({success:true, message: "Added successfully."});
+
+  });
+});
+
+module.exports = router;
