@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AddListComponent, FilterPipe } from './add-list/add-list.component';
+import { AddListComponent } from './add-list/add-list.component';
 import { DocDetailsComponent } from './doc-details/doc-details.component';
 import { AboutComponent } from './about/about.component';
 import { ListService } from './services/list.service';
@@ -30,7 +30,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   declarations: [
   AppComponent,
   AddListComponent,
-  FilterPipe,
+  //FilterPipe,
   DocDetailsComponent,
   AboutComponent
 ],

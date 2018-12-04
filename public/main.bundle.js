@@ -57,7 +57,7 @@ var AboutComponent = (function () {
     return AboutComponent;
 }());
 AboutComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
         selector: 'app-about',
         template: __webpack_require__("./src/app/about/about.component.html"),
         styles: [__webpack_require__("./src/app/about/about.component.css")]
@@ -89,7 +89,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/add-list/add-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n      <form>\n        <div class=\"form-group\">\n          <br>\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n        </div>\n      </form>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <label *ngFor=\"let author of authors\">\n        <input\n        class=\"authorcheck\"\n        [(ngModel)]=\"author.isSelected\"\n        [checked]=\"author.isSelected\"\n        type=\"checkbox\"\n        value=\"{{author.name}}\"\n        (ngModelChange)=\"toggleSelection(author.name)\"\n        />\n        {{author.name}}\n      </label>\n    </div>\n    <div class=\"col-md-9\">\n      <!-- <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\"> -->\n\n      <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\">\n        <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n          <div class=\"d-flex w-100 justify-content-between\">\n            <h5 class=\"mb-1\">{{item.title}}</h5>\n            <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n          </div>\n          <p class=\"mb-1\">{{item.description}}</p>\n          <small>{{item.content}}</small>\n        </a>\n      </div>\n    </div>\n  </div>\n\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n      <form>\n        <div class=\"form-group\">\n          <br>\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n        </div>\n      </form>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <label *ngFor=\"let author of authors\">\n        <input\n        class=\"authorcheck\"\n        [(ngModel)]=\"author.isSelected\"\n        [checked]=\"author.isSelected\"\n        type=\"checkbox\"\n        value=\"{{author.name}}\"\n        (ngModelChange)=\"toggleSelection(author.name)\"\n        />\n        {{author.name}}\n      </label>\n    </div>\n    <div class=\"col-md-9\">\n      <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\">\n\n      <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n        <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n          <div class=\"d-flex w-100 justify-content-between\">\n            <h5 class=\"mb-1\">{{item.title}}</h5>\n            <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n          </div>\n          <p class=\"mb-1\">{{item.description}}</p>\n          <small>{{item.content}}</small>\n        </a>\n      </div>\n    </div>\n  </div>\n\n\n\n</div>\n"
 
 /***/ }),
 
@@ -101,7 +101,6 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div cla
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FilterPipe; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -116,26 +115,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var FilterPipe = (function () {
-    function FilterPipe() {
-    }
-    FilterPipe.prototype.transform = function (items, filter) {
-        if (items == null)
-            return null;
-        return items.filter(function (item) {
-            var notMatchingField = Object.keys(filter)
-                .find(function (key) { return item[key] !== filter[key]; });
-            return !notMatchingField;
-        });
-    };
-    return FilterPipe;
-}());
-FilterPipe = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Pipe */])({
-        name: 'myfilter'
-    })
-], FilterPipe);
-
+// @Pipe({
+//   name: 'myfilter'
+// })
+// export class FilterPipe implements PipeTransform {
+//   transform(items: List[], filter: {[key: string]: any }): List[] {
+//     if(items==null) return null;
+//     return items.filter(item => {
+//       let notMatchingField = Object.keys(filter)
+//       .find(key => item[key] !== filter[key]);
+//       return !notMatchingField;
+//     });
+//   }
+// }
 var AddListComponent = (function () {
     function AddListComponent(listServ, authorService, router) {
         this.listServ = listServ;
@@ -214,16 +206,16 @@ var AddListComponent = (function () {
     return AddListComponent;
 }());
 __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Output */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Output */])(),
     __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]) === "function" && _a || Object)
 ], AddListComponent.prototype, "addList", void 0);
 AddListComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
         selector: 'app-add-list',
         template: __webpack_require__("./src/app/add-list/add-list.component.html"),
         styles: [__webpack_require__("./src/app/add-list/add-list.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _d || Object])
 ], AddListComponent);
 
 var _a, _b, _c, _d;
@@ -276,7 +268,7 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 AppComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
         selector: 'app-root',
         template: __webpack_require__("./src/app/app.component.html"),
         styles: [__webpack_require__("./src/app/app.component.css")]
@@ -347,7 +339,7 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["a" /* AddListComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["b" /* FilterPipe */],
+            //FilterPipe,
             __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */],
             __WEBPACK_IMPORTED_MODULE_8__about_about_component__["a" /* AboutComponent */]
         ],
@@ -428,12 +420,12 @@ var DocDetailsComponent = (function () {
     return DocDetailsComponent;
 }());
 DocDetailsComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
         selector: 'app-doc-details',
         template: __webpack_require__("./src/app/doc-details/doc-details.component.html"),
         styles: [__webpack_require__("./src/app/doc-details/doc-details.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */]) === "function" && _b || Object])
 ], DocDetailsComponent);
 
 var _a, _b;

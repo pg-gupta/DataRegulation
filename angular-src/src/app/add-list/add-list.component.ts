@@ -1,23 +1,23 @@
-import { Component, OnInit, Output, EventEmitter, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { List } from '../models/List';
 import { ListService } from '../services/list.service';
 import { Author } from '../models/Author';
 import { AuthorService } from '../services/author.service';
 import { Router,ActivatedRoute } from '@angular/router';
 
-@Pipe({
-  name: 'myfilter'
-})
-export class FilterPipe implements PipeTransform {
-  transform(items: List[], filter: {[key: string]: any }): List[] {
-    if(items==null) return null;
-    return items.filter(item => {
-      let notMatchingField = Object.keys(filter)
-      .find(key => item[key] !== filter[key]);
-      return !notMatchingField;
-    });
-  }
-}
+// @Pipe({
+//   name: 'myfilter'
+// })
+// export class FilterPipe implements PipeTransform {
+//   transform(items: List[], filter: {[key: string]: any }): List[] {
+//     if(items==null) return null;
+//     return items.filter(item => {
+//       let notMatchingField = Object.keys(filter)
+//       .find(key => item[key] !== filter[key]);
+//       return !notMatchingField;
+//     });
+//   }
+// }
 
 @Component({
   selector: 'app-add-list',
