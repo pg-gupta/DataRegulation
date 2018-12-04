@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align: center\">\n  <h3>Data Regulation </h3>\n  <h5>This is one place to find the summary of all data regulation documents</h5>\n  <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/search']\">SEARCH</button>\n\n</div>\n"
+module.exports = "<div style=\"text-align: center\">\n  <h3>Data Regulation </h3>\n  <h5>This is one place to find the summary of all data regulation documents</h5>\n  <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/search']\">SEARCH</button>\n</div>\n"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/add-list/add-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <form>\n        <div class=\"form-group\">\n          <br>\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n        </div>\n      </form>\n    </div>\n  </div>\n\n  <!-- <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\"> -->\n    <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\">\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.description}}</p>\n      <small>{{item.content}}</small>\n    </a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n      <form>\n        <div class=\"form-group\">\n          <br>\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n        </div>\n      </form>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <label *ngFor=\"let author of authors\">\n        <input\n        class=\"authorcheck\"\n        [(ngModel)]=\"author.isSelected\"\n        [checked]=\"author.isSelected\"\n        type=\"checkbox\"\n        value=\"{{author.name}}\"\n        (ngModelChange)=\"toggleSelection(author.name)\"\n        />\n        {{author.name}}\n      </label>\n    </div>\n    <div class=\"col-md-9\">\n      <!-- <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\"> -->\n\n      <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\">\n        <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n          <div class=\"d-flex w-100 justify-content-between\">\n            <h5 class=\"mb-1\">{{item.title}}</h5>\n            <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n          </div>\n          <p class=\"mb-1\">{{item.description}}</p>\n          <small>{{item.content}}</small>\n        </a>\n      </div>\n    </div>\n  </div>\n\n\n\n</div>\n"
 
 /***/ }),
 
@@ -99,7 +99,8 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div cla
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FilterPipe; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -111,6 +112,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -135,13 +137,17 @@ FilterPipe = __decorate([
 ], FilterPipe);
 
 var AddListComponent = (function () {
-    function AddListComponent(listServ, router) {
+    function AddListComponent(listServ, authorService, router) {
         this.listServ = listServ;
+        this.authorService = authorService;
         this.router = router;
+        this.authorsSelected = [];
+        this.query = "";
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
     }
     AddListComponent.prototype.ngOnInit = function () {
         this.getList();
+        this.getAuthors();
     };
     AddListComponent.prototype.getList = function () {
         var _this = this;
@@ -149,6 +155,49 @@ var AddListComponent = (function () {
             _this.lists = result;
             //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
             _this.peopleFilter = {};
+        }, function (error) { return console.error(error); });
+    };
+    AddListComponent.prototype.getAuthors = function () {
+        var _this = this;
+        this.authorService.getAll().subscribe(function (result) {
+            _this.authors = result;
+            console.log(_this.authors);
+        }, function (error) { return console.error(error); });
+    };
+    AddListComponent.prototype.toggleSelection = function (authorname) {
+        var index = this.authorsSelected.indexOf(authorname);
+        if (index > -1) {
+            this.authorsSelected.splice(index, 1);
+        }
+        else {
+            this.authorsSelected.push(authorname);
+        }
+        this.createQuery();
+        console.log(this.authorsSelected);
+    };
+    AddListComponent.prototype.createQuery = function () {
+        if (this.authorsSelected != []) {
+            var querystr = "{$or:[";
+            this.authorsSelected.forEach(function (value) {
+                //var str= new String("{name:'"+value+"'},");
+                querystr = querystr + "{title:'" + value + "'},";
+                //querystr+=value;
+                //  console.log(value);
+            });
+            querystr = querystr.slice(0, -1);
+            querystr = querystr + "]}";
+            this.query = querystr;
+            console.log(querystr);
+        }
+        else {
+            this.query = "";
+        }
+        this.fetchData();
+    };
+    AddListComponent.prototype.fetchData = function () {
+        var _this = this;
+        this.listServ.query(this.query).subscribe(function (response) {
+            _this.lists = response;
         }, function (error) { return console.error(error); });
     };
     AddListComponent.prototype.onSubmit = function () {
@@ -174,10 +223,10 @@ AddListComponent = __decorate([
         template: __webpack_require__("./src/app/add-list/add-list.component.html"),
         styles: [__webpack_require__("./src/app/add-list/add-list.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _d || Object])
 ], AddListComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=add-list.component.js.map
 
 /***/ }),
@@ -252,7 +301,8 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__ = __webpack_require__("./src/app/doc-details/doc-details.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__about_about_component__ = __webpack_require__("./src/app/about/about.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_search_filter__ = __webpack_require__("./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_search_filter__ = __webpack_require__("./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -260,6 +310,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -283,7 +334,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_10_ng2_search_filter__["a" /* Ng2SearchPipeModule */],
+            __WEBPACK_IMPORTED_MODULE_11_ng2_search_filter__["a" /* Ng2SearchPipeModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* RouterModule */].forRoot([
                 { path: '', redirectTo: 'home', pathMatch: 'full' },
                 { path: 'search', component: __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["a" /* AddListComponent */], },
@@ -302,7 +353,7 @@ AppModule = __decorate([
         ],
         //All the modules are declared as imports
         //All the services go here.
-        providers: [__WEBPACK_IMPORTED_MODULE_9__services_list_service__["a" /* ListService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_9__services_list_service__["a" /* ListService */], __WEBPACK_IMPORTED_MODULE_10__services_author_service__["a" /* AuthorService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -390,6 +441,73 @@ var _a, _b;
 
 /***/ }),
 
+/***/ "./src/app/services/author.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthorService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthorService = (function () {
+    function AuthorService(http) {
+        this.http = http;
+        this.serverApi = 'http://localhost:3000';
+    }
+    AuthorService.prototype.getAll = function () {
+        var URI = this.serverApi + "/authors/";
+        return this.http.get(URI)
+            .map(function (res) { return res.json(); })
+            .map(function (res) { return res.authors; });
+    };
+    AuthorService.prototype.delete = function (id) {
+        var URI = this.serverApi + "/authors/" + id;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
+        headers.append('Content-Type', 'application/json');
+        return this.http.delete(URI, { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    AuthorService.prototype.get = function (id) {
+        var URI = this.serverApi + "/authors/" + id;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(URI)
+            .map(function (res) { return res.json(); })
+            .map(function (res) { return res.item; });
+    };
+    AuthorService.prototype.add = function (author) {
+        var URI = this.serverApi + "/authors/";
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
+        var body = JSON.stringify({ name: author.name, age: author.age });
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(URI, body, { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    return AuthorService;
+}());
+AuthorService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object])
+], AuthorService);
+
+var _a;
+//# sourceMappingURL=author.service.js.map
+
+/***/ }),
+
 /***/ "./src/app/services/list.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -414,9 +532,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ListService = (function () {
     function ListService(http) {
         this.http = http;
-        this.serverApi = 'http://localhost:3000';
+        //private serverApi= 'http://localhost:3000';
+        this.serverApi = 'http://dataregulation.azurewebsites.net/';
     }
-    //private serverApi= 'https://iitonestopdoc.azurewebsites.net/';
     ListService.prototype.getAllLists = function () {
         var URI = this.serverApi + "/iitsummaries/";
         //let URI = `/iitsummaries/`;
@@ -449,6 +567,15 @@ var ListService = (function () {
         headers.append('Content-Type', 'application/json');
         return this.http.post(URI, body, { headers: headers })
             .map(function (res) { return res.json(); });
+    };
+    ListService.prototype.query = function (querystr) {
+        var URI = this.serverApi + "/iitsummaries/query";
+        var body = JSON.stringify({ str: querystr });
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(URI, body, { headers: headers })
+            .map(function (res) { return res.json(); })
+            .map(function (res) { return res.lists; });
     };
     return ListService;
 }());

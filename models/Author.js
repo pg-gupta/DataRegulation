@@ -26,6 +26,10 @@ module.exports.addAll=(authorsarray,callback)=>{
   authors.insertMany(authorsarray, callback);
 }
 
+module.exports.query = (queryex,callback) => {
+    authors.find({$or:[{name:"John"},{age:29}]},callback);
+}
+
 
 //We pass on an id and remove it from DB using Bucketlist.remove()
 // module.exports.deleteListById = (id, callback) => {

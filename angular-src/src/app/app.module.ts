@@ -8,6 +8,7 @@ import { AddListComponent, FilterPipe } from './add-list/add-list.component';
 import { DocDetailsComponent } from './doc-details/doc-details.component';
 import { AboutComponent } from './about/about.component';
 import { ListService } from './services/list.service';
+import { AuthorService } from './services/author.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 //import {} from './'
 
@@ -36,7 +37,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 //All the modules are declared as imports
 
 //All the services go here.
-providers: [ListService],
+providers: [ListService,AuthorService],
 bootstrap: [AppComponent]
 })
 export class AppModule { }

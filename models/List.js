@@ -49,6 +49,11 @@ module.exports.addAll=(papers,callback)=>{
   iitsummaries.insertMany(papers, callback);
 }
 
+module.exports.queried = (queryex,callback) => {
+  console.log("query from apt:"+JSON.parse(queryex));
+    iitsummaries.find(JSON.parse(queryex),callback);
+}
+
 module.exports.getJsonData = () => {
   var data = [{
     "title": "testdoc",

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-9">
       <form>
         <div class="form-group">
           <br>
@@ -10,16 +10,36 @@
       </form>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-3">
+      <label *ngFor="let author of authors">
+        <input
+        class="authorcheck"
+        [(ngModel)]="author.isSelected"
+        [checked]="author.isSelected"
+        type="checkbox"
+        value="{{author.name}}"
+        (ngModelChange)="toggleSelection(author.name)"
+        />
+        {{author.name}}
+      </label>
+    </div>
+    <div class="col-md-9">
+      <!-- <div class="list-group" *ngFor="let item of lists | filter: searchText"> -->
 
-  <!-- <div class="list-group" *ngFor="let item of lists | filter: searchText"> -->
-    <div class="list-group" *ngFor="let item of lists | myfilter: peopleFilter;">
-    <a [routerLink]="['/details', item._id]" class="list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{item.title}}</h5>
-        <!-- <a [routerLink]="['/details', item._id]">{{item.title}}</a> -->
+      <div class="list-group" *ngFor="let item of lists | myfilter: peopleFilter;">
+        <a [routerLink]="['/details', item._id]" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{item.title}}</h5>
+            <!-- <a [routerLink]="['/details', item._id]">{{item.title}}</a> -->
+          </div>
+          <p class="mb-1">{{item.description}}</p>
+          <small>{{item.content}}</small>
+        </a>
       </div>
-      <p class="mb-1">{{item.description}}</p>
-      <small>{{item.content}}</small>
-    </a>
+    </div>
   </div>
+
+
+
 </div>

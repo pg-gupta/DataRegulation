@@ -104,4 +104,34 @@ router.get('/:id', (req,res,next)=> {
   })
 });
 
+router.post('/query', (req,res,next)=> {
+  let str = req.body.str;
+  //console.log("querystr: "+ JSON.parse(str));
+  iitsummaries.queried(str,(err,result) => {
+    if(err) {
+        console.log("err: "+ err);
+      res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
+    }
+    else if(result) {
+      console.log("result: "+ result);
+      res.write(JSON.stringify({success: true, lists:result},null,2));
+      res.end();
+    }
+    else
+    res.json({success:false});
+  })
+});
+
+// router.post('/query', (req,res,next) => {
+//   iitsummaries.addAll(req.body,(err, list) => {
+//     if(err) {
+//       res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
+//
+//     }
+//     else
+//     res.json({success:true, message: "Added successfully."});
+//
+//   });
+// });
+
 module.exports = router;

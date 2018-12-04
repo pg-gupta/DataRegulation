@@ -52,4 +52,19 @@ router.post('/insertmany', (req,res,next) => {
   });
 });
 
+
+
+router.post('/query',(req,res) => {
+    authors.query(req.body,(err, result)=> {
+		if(err) {
+			res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
+		}
+		else {
+			res.write(JSON.stringify({success: true, authors:result},null,2));
+			res.end();
+
+	}
+	});
+
+});
 module.exports = router;
