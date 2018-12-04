@@ -105,8 +105,8 @@ router.get('/:id', (req,res,next)=> {
 });
 
 router.post('/query', (req,res,next)=> {
-  let str = req.body.str;
-  //console.log("querystr: "+ JSON.parse(str));
+  let str = req.body.querystr;
+  console.log("querystr: "+ JSON.stringify(str));
   iitsummaries.queried(str,(err,result) => {
     if(err) {
         console.log("err: "+ err);

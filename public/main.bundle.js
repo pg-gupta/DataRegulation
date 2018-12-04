@@ -168,30 +168,27 @@ var AddListComponent = (function () {
         console.log(this.authorsSelected);
     };
     AddListComponent.prototype.createQuery = function () {
+        var queryObj = [];
         if (this.authorsSelected != []) {
-            var querystr = "{$or:[";
             this.authorsSelected.forEach(function (value) {
-                //var str= new String("{name:'"+value+"'},");
-                querystr = querystr + "{title:'" + value + "'},";
-                //querystr+=value;
-                //  console.log(value);
+                queryObj.push({ title: value });
             });
-            querystr = querystr.slice(0, -1);
-            querystr = querystr + "]}";
-            this.query = querystr;
-            console.log(querystr);
         }
         else {
-            this.query = "";
         }
-        this.fetchData();
+        this.fetchData(queryObj);
     };
-    AddListComponent.prototype.fetchData = function () {
+    AddListComponent.prototype.fetchData = function (queryObj) {
         var _this = this;
-        this.listServ.query(this.query).subscribe(function (response) {
+        this.listServ.query(queryObj).subscribe(function (response) {
             _this.lists = response;
         }, function (error) { return console.error(error); });
     };
+    // public fetchData(){
+    //   this.listServ.query(this.query).subscribe(response=>{
+    //     this.lists=response;
+    //   },error=>console.error(error))
+    // }
     AddListComponent.prototype.onSubmit = function () {
         var _this = this;
         console.log(this.newList.category);
@@ -562,7 +559,7 @@ var ListService = (function () {
     };
     ListService.prototype.query = function (querystr) {
         var URI = this.serverApi + "/iitsummaries/query";
-        var body = JSON.stringify({ str: querystr });
+        var body = JSON.stringify({ querystr: querystr });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
         headers.append('Content-Type', 'application/json');
         return this.http.post(URI, body, { headers: headers })

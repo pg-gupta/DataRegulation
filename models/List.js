@@ -50,8 +50,8 @@ module.exports.addAll=(papers,callback)=>{
 }
 
 module.exports.queried = (queryex,callback) => {
-  console.log("query from apt:"+JSON.parse(queryex));
-    iitsummaries.find(JSON.parse(queryex),callback);
+  var obj={$or:queryex};
+    iitsummaries.find(obj,callback);
 }
 
 module.exports.getJsonData = () => {

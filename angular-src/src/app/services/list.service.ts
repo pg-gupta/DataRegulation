@@ -51,9 +51,9 @@ export class ListService {
     .map(res => res.json());
   }
 
-  public query(querystr : string):Observable<List[]> {
+  public query(querystr : any):Observable<List[]> {
     let URI = `${this.serverApi}/iitsummaries/query`;
-    let body= JSON.stringify({str:querystr});
+    let body= JSON.stringify({querystr});
     let headers = new Headers;
     headers.append('Content-Type', 'application/json');
 

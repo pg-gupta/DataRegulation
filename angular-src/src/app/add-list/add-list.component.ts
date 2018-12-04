@@ -73,31 +73,29 @@ export class AddListComponent implements OnInit {
   }
 
   public createQuery(){
+    var queryObj=[];
     if(this.authorsSelected!=[]){
-      var querystr="{$or:[";
       this.authorsSelected.forEach(function (value) {
-        //var str= new String("{name:'"+value+"'},");
-        querystr= querystr+"{title:'"+value+"'},";
-        //querystr+=value;
-        //  console.log(value);
+        queryObj.push({title:value});
       });
-      querystr=querystr.slice(0,-1);
-      querystr=querystr+"]}";
-      this.query=querystr;
-      console.log(querystr);
     }
     else{
-      this.query="";
-    }
-    this.fetchData();
 
+    }
+    this.fetchData(queryObj);
   }
 
-  public fetchData(){
-    this.listServ.query(this.query).subscribe(response=>{
+  public fetchData(queryObj){
+    this.listServ.query(queryObj).subscribe(response=>{
       this.lists=response;
     },error=>console.error(error))
   }
+
+  // public fetchData(){
+  //   this.listServ.query(this.query).subscribe(response=>{
+  //     this.lists=response;
+  //   },error=>console.error(error))
+  // }
 
   public onSubmit() {
     console.log(this.newList.category);
