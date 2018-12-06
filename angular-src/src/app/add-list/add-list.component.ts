@@ -25,6 +25,12 @@ import { Router,ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-list.component.css']
 })
 export class AddListComponent implements OnInit {
+
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
+
+  /////////
   private newList: List;
   lists: List[];
   authors: Author[];
@@ -35,11 +41,11 @@ export class AddListComponent implements OnInit {
   constructor(private listServ: ListService,private authorService:AuthorService, private router: Router) {
   }
 
-  ngOnInit() {
-    this.getList();
-    this.getAuthors();
-
-  }
+  // ngOnInit() {
+  //   this.getList();
+  //   this.getAuthors();
+  //
+  // }
 
   public getList() {
     this.listServ.getAllLists().subscribe(result => {
@@ -49,14 +55,17 @@ export class AddListComponent implements OnInit {
     }, error => console.error(error));
   }
 
-  public getAuthors(){
+  public getAuthors(callback){
     this.authorService.getAll().subscribe(result=>{
-
-
       this.authors=result;
       console.log(this.authors);
-    },error=>console.error(error));
+      callback(this.authors);
+    },error=>{
+      console.error(error);
+      callback(false);
+    });
   }
+
   toggleSelection(authorname){
     var index=this.authorsSelected.indexOf(authorname);
     if(index>-1){
@@ -72,24 +81,20 @@ export class AddListComponent implements OnInit {
 
   }
 
-  public createQuery(){
-    var queryObj=[];
-    if(this.authorsSelected!=[]){
-      this.authorsSelected.forEach(function (value) {
-        queryObj.push({title:value});
-      });
-    }
-    else{
+  // public createQuery(){
+  //   var queryObj=[];
+  //   if(this.authorsSelected!=[]){
+  //     this.authorsSelected.forEach(function (value) {
+  //       queryObj.push({title:value});
+  //     });
+  //   }
+  //   else{
+  //
+  //   }
+  //   this.fetchData(queryObj);
+  // }
 
-    }
-    this.fetchData(queryObj);
-  }
 
-  public fetchData(queryObj){
-    this.listServ.query(queryObj).subscribe(response=>{
-      this.lists=response;
-    },error=>console.error(error))
-  }
 
   // public fetchData(){
   //   this.listServ.query(this.query).subscribe(response=>{
@@ -112,4 +117,70 @@ export class AddListComponent implements OnInit {
   onClick() {
     this.router.navigate(['app-doc-details', '456']);
   }
+  ngOnInit(){
+
+    this.getList();
+    this.authorService.getAll().subscribe(result=>{
+      this.authors=result;
+      this.dropdownList=this.authors;
+      this.selectedItems = [
+        // {"id":2,"itemName":"Singapore"},
+        // {"id":3,"itemName":"Australia"},
+        // {"id":4,"itemName":"Canada"},
+        // {"id":5,"itemName":"South Korea"}
+      ];
+      this.dropdownSettings = {
+        singleSelection: false,
+        text:"Select Author",
+        showCheckbox: true,
+        selectAllText:'Select All',
+        unSelectAllText:'UnSelect All',
+        enableSearchFilter: true,
+        classes:"myclass custom-class",
+        labelKey:'name',
+        primaryKey: '_id',
+      };
+    },error=>{
+      console.error(error);
+    });
+  }
+  public createQuery(){
+    var selected= this.selectedItems.map(function(obj){
+      return {'title':obj.name};
+    })
+    console.log("selected items: "+ selected);
+    this.fetchData(selected);
+  }
+
+  public fetchData(queryObj){
+    if(queryObj.length!=0){
+      this.listServ.query(queryObj).subscribe(response=>{
+        this.lists=response;
+      },error=>console.error(error))
+    }
+    else{
+      this.getList();
+    }
+  }
+  onItemSelect(item:any){
+    // console.log(item);
+    // console.log(this.selectedItems);
+    this.createQuery();
+  }
+  OnItemDeSelect(item:any){
+    // console.log(item);
+    // console.log(this.selectedItems);
+    this.createQuery();
+
+  }
+  onSelectAll(items: any){
+    //console.log(items);
+    this.createQuery();
+  }
+  onDeSelectAll(items: any){
+    //console.log(items);
+    this.createQuery();
+  }
+
+
 }

@@ -52,6 +52,18 @@ router.post('/insertmany', (req,res,next) => {
   });
 });
 
+router.post('/insertauthor', (req,res,next) => {
+  console.log(req.body);
+  authors.add(req.body,(err, list) => {
+    if(err) {
+      res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
+
+    }
+    else
+    res.json({success:true, message: "Added successfully."});
+
+  });
+});
 
 
 router.post('/query',(req,res) => {

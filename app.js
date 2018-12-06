@@ -38,6 +38,7 @@ app.use('/users', users);
 //Routing all HTTP requests to /iitsummaries to bucketlist controller
 app.use('/iitsummaries', iitsummaries);
 app.use('/authors', authors);
+//app.use('/countries',countries);
 
 
 //Connect mongoose to our database

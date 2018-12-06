@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { ListService } from './services/list.service';
 import { AuthorService } from './services/author.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4-multiselect-dropdown';
 //import {} from './'
 
 @NgModule({
@@ -18,6 +19,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     HttpModule,
     FormsModule,
     Ng2SearchPipeModule,
+    AngularMultiSelectModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'search', component: AddListComponent,  },

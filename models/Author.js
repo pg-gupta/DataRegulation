@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 //Define Source document with title, description and category
 const authorSchema = mongoose.Schema({
     name: String,
-    age: String
+    age: String,
+    address:String
 });
 
 //Create a model using mongoose.model and export it

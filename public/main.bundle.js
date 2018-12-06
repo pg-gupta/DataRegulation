@@ -89,7 +89,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/add-list/add-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n      <form>\n        <div class=\"form-group\">\n          <br>\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n        </div>\n      </form>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <label *ngFor=\"let author of authors\">\n        <input\n        class=\"authorcheck\"\n        [(ngModel)]=\"author.isSelected\"\n        [checked]=\"author.isSelected\"\n        type=\"checkbox\"\n        value=\"{{author.name}}\"\n        (ngModelChange)=\"toggleSelection(author.name)\"\n        />\n        {{author.name}}\n      </label>\n    </div>\n    <div class=\"col-md-9\">\n      <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\">\n\n      <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n        <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n          <div class=\"d-flex w-100 justify-content-between\">\n            <h5 class=\"mb-1\">{{item.title}}</h5>\n            <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n          </div>\n          <p class=\"mb-1\">{{item.description}}</p>\n          <small>{{item.content}}</small>\n        </a>\n      </div>\n    </div>\n  </div>\n\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.description}}</p>\n      <small>{{item.content}}</small>\n    </a>\n  </div>\n</div>\n</div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -133,14 +133,18 @@ var AddListComponent = (function () {
         this.listServ = listServ;
         this.authorService = authorService;
         this.router = router;
+        this.dropdownList = [];
+        this.selectedItems = [];
+        this.dropdownSettings = {};
         this.authorsSelected = [];
         this.query = "";
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
     }
-    AddListComponent.prototype.ngOnInit = function () {
-        this.getList();
-        this.getAuthors();
-    };
+    // ngOnInit() {
+    //   this.getList();
+    //   this.getAuthors();
+    //
+    // }
     AddListComponent.prototype.getList = function () {
         var _this = this;
         this.listServ.getAllLists().subscribe(function (result) {
@@ -149,12 +153,16 @@ var AddListComponent = (function () {
             _this.peopleFilter = {};
         }, function (error) { return console.error(error); });
     };
-    AddListComponent.prototype.getAuthors = function () {
+    AddListComponent.prototype.getAuthors = function (callback) {
         var _this = this;
         this.authorService.getAll().subscribe(function (result) {
             _this.authors = result;
             console.log(_this.authors);
-        }, function (error) { return console.error(error); });
+            callback(_this.authors);
+        }, function (error) {
+            console.error(error);
+            callback(false);
+        });
     };
     AddListComponent.prototype.toggleSelection = function (authorname) {
         var index = this.authorsSelected.indexOf(authorname);
@@ -167,23 +175,18 @@ var AddListComponent = (function () {
         this.createQuery();
         console.log(this.authorsSelected);
     };
-    AddListComponent.prototype.createQuery = function () {
-        var queryObj = [];
-        if (this.authorsSelected != []) {
-            this.authorsSelected.forEach(function (value) {
-                queryObj.push({ title: value });
-            });
-        }
-        else {
-        }
-        this.fetchData(queryObj);
-    };
-    AddListComponent.prototype.fetchData = function (queryObj) {
-        var _this = this;
-        this.listServ.query(queryObj).subscribe(function (response) {
-            _this.lists = response;
-        }, function (error) { return console.error(error); });
-    };
+    // public createQuery(){
+    //   var queryObj=[];
+    //   if(this.authorsSelected!=[]){
+    //     this.authorsSelected.forEach(function (value) {
+    //       queryObj.push({title:value});
+    //     });
+    //   }
+    //   else{
+    //
+    //   }
+    //   this.fetchData(queryObj);
+    // }
     // public fetchData(){
     //   this.listServ.query(this.query).subscribe(response=>{
     //     this.lists=response;
@@ -199,6 +202,64 @@ var AddListComponent = (function () {
     };
     AddListComponent.prototype.onClick = function () {
         this.router.navigate(['app-doc-details', '456']);
+    };
+    AddListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.getList();
+        this.authorService.getAll().subscribe(function (result) {
+            _this.authors = result;
+            _this.dropdownList = _this.authors;
+            _this.selectedItems = [];
+            _this.dropdownSettings = {
+                singleSelection: false,
+                text: "Select Author",
+                showCheckbox: true,
+                selectAllText: 'Select All',
+                unSelectAllText: 'UnSelect All',
+                enableSearchFilter: true,
+                classes: "myclass custom-class",
+                labelKey: 'name',
+                primaryKey: '_id',
+            };
+        }, function (error) {
+            console.error(error);
+        });
+    };
+    AddListComponent.prototype.createQuery = function () {
+        var selected = this.selectedItems.map(function (obj) {
+            return { 'title': obj.name };
+        });
+        console.log("selected items: " + selected);
+        this.fetchData(selected);
+    };
+    AddListComponent.prototype.fetchData = function (queryObj) {
+        var _this = this;
+        if (queryObj.length != 0) {
+            this.listServ.query(queryObj).subscribe(function (response) {
+                _this.lists = response;
+            }, function (error) { return console.error(error); });
+        }
+        else {
+            this.getList();
+        }
+    };
+    AddListComponent.prototype.onItemSelect = function (item) {
+        // console.log(item);
+        // console.log(this.selectedItems);
+        this.createQuery();
+    };
+    AddListComponent.prototype.OnItemDeSelect = function (item) {
+        // console.log(item);
+        // console.log(this.selectedItems);
+        this.createQuery();
+    };
+    AddListComponent.prototype.onSelectAll = function (items) {
+        //console.log(items);
+        this.createQuery();
+    };
+    AddListComponent.prototype.onDeSelectAll = function (items) {
+        //console.log(items);
+        this.createQuery();
     };
     return AddListComponent;
 }());
@@ -292,6 +353,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_search_filter__ = __webpack_require__("./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angular4_multiselect_dropdown_angular4_multiselect_dropdown__ = __webpack_require__("./node_modules/angular4-multiselect-dropdown/angular4-multiselect-dropdown.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -299,6 +361,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -324,6 +387,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_11_ng2_search_filter__["a" /* Ng2SearchPipeModule */],
+            __WEBPACK_IMPORTED_MODULE_12_angular4_multiselect_dropdown_angular4_multiselect_dropdown__["a" /* AngularMultiSelectModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* RouterModule */].forRoot([
                 { path: '', redirectTo: 'home', pathMatch: 'full' },
                 { path: 'search', component: __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["a" /* AddListComponent */], },
@@ -454,7 +518,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthorService = (function () {
     function AuthorService(http) {
         this.http = http;
-        this.serverApi = 'http://localhost:3000';
+        //private serverApi= 'http://localhost:3000';
+        this.serverApi = 'http://dataregulation.azurewebsites.net/';
     }
     AuthorService.prototype.getAll = function () {
         var URI = this.serverApi + "/authors/";
