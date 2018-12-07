@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AddListComponent } from './add-list/add-list.component';
+import { SearchDocComponent } from './search-doc/search-doc.component';
 import { DocDetailsComponent } from './doc-details/doc-details.component';
 import { HomeComponent } from './home/home.component';
 import { ListService } from './services/list.service';
@@ -22,7 +22,7 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
     AngularMultiSelectModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'search', component: AddListComponent,  },
+      { path: 'search', component: SearchDocComponent,  },
       { path: 'details/:id', component: DocDetailsComponent },
       { path: 'home',component:HomeComponent},
       { path: '**', redirectTo: 'home' }
@@ -31,7 +31,7 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
   //Components are added here
   declarations: [
   AppComponent,
-  AddListComponent,
+  SearchDocComponent,
   //FilterPipe,
   DocDetailsComponent,
   HomeComponent

@@ -20,11 +20,11 @@ import { Router,ActivatedRoute } from '@angular/router';
 // }
 
 @Component({
-  selector: 'app-add-list',
-  templateUrl: './add-list.component.html',
-  styleUrls: ['./add-list.component.css']
+  selector: 'app-search-doc',
+  templateUrl: './search-doc.component.html',
+  styleUrls: ['./search-doc.component.css']
 })
-export class AddListComponent implements OnInit {
+export class SearchDocComponent implements OnInit {
 
   dropdownList = [];
   selectedItems = [];

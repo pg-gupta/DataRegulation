@@ -13,219 +13,6 @@ webpackEmptyContext.id = "./src async recursive";
 
 /***/ }),
 
-/***/ "./src/app/add-list/add-list.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".push-button-down {\n\tmargin-top: 5%;\n}\n\n#search {\n\twidth:30%;\n}\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "./src/app/add-list/add-list.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.description}}</p>\n      <small>{{item.content}}</small>\n    </a>\n  </div>\n</div>\n</div>\n\n\n</div>\n"
-
-/***/ }),
-
-/***/ "./src/app/add-list/add-list.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddListComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-// @Pipe({
-//   name: 'myfilter'
-// })
-// export class FilterPipe implements PipeTransform {
-//   transform(items: List[], filter: {[key: string]: any }): List[] {
-//     if(items==null) return null;
-//     return items.filter(item => {
-//       let notMatchingField = Object.keys(filter)
-//       .find(key => item[key] !== filter[key]);
-//       return !notMatchingField;
-//     });
-//   }
-// }
-var AddListComponent = (function () {
-    function AddListComponent(listServ, authorService, router) {
-        this.listServ = listServ;
-        this.authorService = authorService;
-        this.router = router;
-        this.dropdownList = [];
-        this.selectedItems = [];
-        this.dropdownSettings = {};
-        this.authorsSelected = [];
-        this.query = "";
-        this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
-    }
-    // ngOnInit() {
-    //   this.getList();
-    //   this.getAuthors();
-    //
-    // }
-    AddListComponent.prototype.getList = function () {
-        var _this = this;
-        this.listServ.getAllLists().subscribe(function (result) {
-            _this.lists = result;
-            //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
-            _this.peopleFilter = {};
-        }, function (error) { return console.error(error); });
-    };
-    AddListComponent.prototype.getAuthors = function (callback) {
-        var _this = this;
-        this.authorService.getAll().subscribe(function (result) {
-            _this.authors = result;
-            console.log(_this.authors);
-            callback(_this.authors);
-        }, function (error) {
-            console.error(error);
-            callback(false);
-        });
-    };
-    AddListComponent.prototype.toggleSelection = function (authorname) {
-        var index = this.authorsSelected.indexOf(authorname);
-        if (index > -1) {
-            this.authorsSelected.splice(index, 1);
-        }
-        else {
-            this.authorsSelected.push(authorname);
-        }
-        this.createQuery();
-        console.log(this.authorsSelected);
-    };
-    // public createQuery(){
-    //   var queryObj=[];
-    //   if(this.authorsSelected!=[]){
-    //     this.authorsSelected.forEach(function (value) {
-    //       queryObj.push({title:value});
-    //     });
-    //   }
-    //   else{
-    //
-    //   }
-    //   this.fetchData(queryObj);
-    // }
-    // public fetchData(){
-    //   this.listServ.query(this.query).subscribe(response=>{
-    //     this.lists=response;
-    //   },error=>console.error(error))
-    // }
-    AddListComponent.prototype.onSubmit = function () {
-        var _this = this;
-        console.log(this.newList.category);
-        this.listServ.addList(this.newList).subscribe(function (response) {
-            if (response.success == true)
-                _this.addList.emit(_this.newList);
-        });
-    };
-    AddListComponent.prototype.onClick = function () {
-        this.router.navigate(['app-doc-details', '456']);
-    };
-    AddListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.getList();
-        this.authorService.getAll().subscribe(function (result) {
-            _this.authors = result;
-            _this.dropdownList = _this.authors;
-            _this.selectedItems = [];
-            _this.dropdownSettings = {
-                singleSelection: false,
-                text: "Select Author",
-                showCheckbox: true,
-                selectAllText: 'Select All',
-                unSelectAllText: 'UnSelect All',
-                enableSearchFilter: true,
-                classes: "myclass custom-class",
-                labelKey: 'name',
-                primaryKey: '_id',
-            };
-        }, function (error) {
-            console.error(error);
-        });
-    };
-    AddListComponent.prototype.createQuery = function () {
-        var selected = this.selectedItems.map(function (obj) {
-            return { 'title': obj.name };
-        });
-        console.log("selected items: " + selected);
-        this.fetchData(selected);
-    };
-    AddListComponent.prototype.fetchData = function (queryObj) {
-        var _this = this;
-        if (queryObj.length != 0) {
-            this.listServ.query(queryObj).subscribe(function (response) {
-                _this.lists = response;
-            }, function (error) { return console.error(error); });
-        }
-        else {
-            this.getList();
-        }
-    };
-    AddListComponent.prototype.onItemSelect = function (item) {
-        // console.log(item);
-        // console.log(this.selectedItems);
-        this.createQuery();
-    };
-    AddListComponent.prototype.OnItemDeSelect = function (item) {
-        // console.log(item);
-        // console.log(this.selectedItems);
-        this.createQuery();
-    };
-    AddListComponent.prototype.onSelectAll = function (items) {
-        //console.log(items);
-        this.createQuery();
-    };
-    AddListComponent.prototype.onDeSelectAll = function (items) {
-        //console.log(items);
-        this.createQuery();
-    };
-    return AddListComponent;
-}());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Output */])(),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]) === "function" && _a || Object)
-], AddListComponent.prototype, "addList", void 0);
-AddListComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
-        selector: 'app-add-list',
-        template: __webpack_require__("./src/app/add-list/add-list.component.html"),
-        styles: [__webpack_require__("./src/app/add-list/add-list.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _d || Object])
-], AddListComponent);
-
-var _a, _b, _c, _d;
-//# sourceMappingURL=add-list.component.js.map
-
-/***/ }),
-
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -292,7 +79,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__ = __webpack_require__("./src/app/add-list/add-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__ = __webpack_require__("./src/app/search-doc/search-doc.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__ = __webpack_require__("./src/app/doc-details/doc-details.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
@@ -335,7 +122,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_12_angular4_multiselect_dropdown_angular4_multiselect_dropdown__["a" /* AngularMultiSelectModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* RouterModule */].forRoot([
                 { path: '', redirectTo: 'home', pathMatch: 'full' },
-                { path: 'search', component: __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["a" /* AddListComponent */], },
+                { path: 'search', component: __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__["a" /* SearchDocComponent */], },
                 { path: 'details/:id', component: __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */] },
                 { path: 'home', component: __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */] },
                 { path: '**', redirectTo: 'home' }
@@ -344,7 +131,7 @@ AppModule = __decorate([
         //Components are added here
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["a" /* AddListComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__["a" /* SearchDocComponent */],
             //FilterPipe,
             __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */],
             __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */]
@@ -494,6 +281,219 @@ HomeComponent = __decorate([
 
 /***/ }),
 
+/***/ "./src/app/search-doc/search-doc.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".push-button-down {\n\tmargin-top: 5%;\n}\n\n#search {\n\twidth:30%;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "./src/app/search-doc/search-doc.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.description}}</p>\n      <small>{{item.content}}</small>\n    </a>\n  </div>\n</div>\n</div>\n\n\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/search-doc/search-doc.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchDocComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+// @Pipe({
+//   name: 'myfilter'
+// })
+// export class FilterPipe implements PipeTransform {
+//   transform(items: List[], filter: {[key: string]: any }): List[] {
+//     if(items==null) return null;
+//     return items.filter(item => {
+//       let notMatchingField = Object.keys(filter)
+//       .find(key => item[key] !== filter[key]);
+//       return !notMatchingField;
+//     });
+//   }
+// }
+var SearchDocComponent = (function () {
+    function SearchDocComponent(listServ, authorService, router) {
+        this.listServ = listServ;
+        this.authorService = authorService;
+        this.router = router;
+        this.dropdownList = [];
+        this.selectedItems = [];
+        this.dropdownSettings = {};
+        this.authorsSelected = [];
+        this.query = "";
+        this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
+    }
+    // ngOnInit() {
+    //   this.getList();
+    //   this.getAuthors();
+    //
+    // }
+    SearchDocComponent.prototype.getList = function () {
+        var _this = this;
+        this.listServ.getAllLists().subscribe(function (result) {
+            _this.lists = result;
+            //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
+            _this.peopleFilter = {};
+        }, function (error) { return console.error(error); });
+    };
+    SearchDocComponent.prototype.getAuthors = function (callback) {
+        var _this = this;
+        this.authorService.getAll().subscribe(function (result) {
+            _this.authors = result;
+            console.log(_this.authors);
+            callback(_this.authors);
+        }, function (error) {
+            console.error(error);
+            callback(false);
+        });
+    };
+    SearchDocComponent.prototype.toggleSelection = function (authorname) {
+        var index = this.authorsSelected.indexOf(authorname);
+        if (index > -1) {
+            this.authorsSelected.splice(index, 1);
+        }
+        else {
+            this.authorsSelected.push(authorname);
+        }
+        this.createQuery();
+        console.log(this.authorsSelected);
+    };
+    // public createQuery(){
+    //   var queryObj=[];
+    //   if(this.authorsSelected!=[]){
+    //     this.authorsSelected.forEach(function (value) {
+    //       queryObj.push({title:value});
+    //     });
+    //   }
+    //   else{
+    //
+    //   }
+    //   this.fetchData(queryObj);
+    // }
+    // public fetchData(){
+    //   this.listServ.query(this.query).subscribe(response=>{
+    //     this.lists=response;
+    //   },error=>console.error(error))
+    // }
+    SearchDocComponent.prototype.onSubmit = function () {
+        var _this = this;
+        console.log(this.newList.category);
+        this.listServ.addList(this.newList).subscribe(function (response) {
+            if (response.success == true)
+                _this.addList.emit(_this.newList);
+        });
+    };
+    SearchDocComponent.prototype.onClick = function () {
+        this.router.navigate(['app-doc-details', '456']);
+    };
+    SearchDocComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.getList();
+        this.authorService.getAll().subscribe(function (result) {
+            _this.authors = result;
+            _this.dropdownList = _this.authors;
+            _this.selectedItems = [];
+            _this.dropdownSettings = {
+                singleSelection: false,
+                text: "Select Author",
+                showCheckbox: true,
+                selectAllText: 'Select All',
+                unSelectAllText: 'UnSelect All',
+                enableSearchFilter: true,
+                classes: "myclass custom-class",
+                labelKey: 'name',
+                primaryKey: '_id',
+            };
+        }, function (error) {
+            console.error(error);
+        });
+    };
+    SearchDocComponent.prototype.createQuery = function () {
+        var selected = this.selectedItems.map(function (obj) {
+            return { 'title': obj.name };
+        });
+        console.log("selected items: " + selected);
+        this.fetchData(selected);
+    };
+    SearchDocComponent.prototype.fetchData = function (queryObj) {
+        var _this = this;
+        if (queryObj.length != 0) {
+            this.listServ.query(queryObj).subscribe(function (response) {
+                _this.lists = response;
+            }, function (error) { return console.error(error); });
+        }
+        else {
+            this.getList();
+        }
+    };
+    SearchDocComponent.prototype.onItemSelect = function (item) {
+        // console.log(item);
+        // console.log(this.selectedItems);
+        this.createQuery();
+    };
+    SearchDocComponent.prototype.OnItemDeSelect = function (item) {
+        // console.log(item);
+        // console.log(this.selectedItems);
+        this.createQuery();
+    };
+    SearchDocComponent.prototype.onSelectAll = function (items) {
+        //console.log(items);
+        this.createQuery();
+    };
+    SearchDocComponent.prototype.onDeSelectAll = function (items) {
+        //console.log(items);
+        this.createQuery();
+    };
+    return SearchDocComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Output */])(),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]) === "function" && _a || Object)
+], SearchDocComponent.prototype, "addList", void 0);
+SearchDocComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
+        selector: 'app-search-doc',
+        template: __webpack_require__("./src/app/search-doc/search-doc.component.html"),
+        styles: [__webpack_require__("./src/app/search-doc/search-doc.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _d || Object])
+], SearchDocComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=search-doc.component.js.map
+
+/***/ }),
+
 /***/ "./src/app/services/author.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -518,9 +518,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthorService = (function () {
     function AuthorService(http) {
         this.http = http;
-        this.serverApi = 'http://localhost:3000';
+        //private serverApi= 'http://localhost:3000';
+        this.serverApi = 'http://dataregulation.azurewebsites.net/';
     }
-    //private serverApi= 'http://dataregulation.azurewebsites.net/';
     AuthorService.prototype.getAll = function () {
         var URI = this.serverApi + "/authors/";
         return this.http.get(URI)
