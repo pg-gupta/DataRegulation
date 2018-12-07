@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { List } from '../models/List';
-import { ListService } from '../services/list.service';
+import { DocService } from '../services/doc.service';
 import { Author } from '../models/Author';
 import { AuthorService } from '../services/author.service';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -38,7 +38,7 @@ export class SearchDocComponent implements OnInit {
   authorsSelected:string[]=[];
   query:string="";
   @Output() addList: EventEmitter<List> = new EventEmitter<List>();
-  constructor(private listServ: ListService,private authorService:AuthorService, private router: Router) {
+  constructor(private listServ: DocService,private authorService:AuthorService, private router: Router) {
   }
 
   // ngOnInit() {

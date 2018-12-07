@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container\">\n  <!--Navbar-->\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n    <a class=\"navbar-brand\" href=\"#\">IIT OneStop</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n      <ul class=\"navbar-nav mr-auto\">\n        <li class=\"nav-item active\">\n          <a class=\"nav-link\" [routerLink]=\"['/home']\">Home</a>\n        </li>\n      </ul>\n    </div>\n  </nav>\n  <br>\n  <!-- <app-add-list></app-add-list> -->\n  <router-outlet></router-outlet>\n  <!--<app-view-list> </app-view-list>-->\n\n</div>\n</div>\n"
+module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container\">\n  <!--Navbar-->\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n    <a class=\"navbar-brand\" href=\"#\">IIT OneStop</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n      <ul class=\"navbar-nav mr-auto\">\n        <li class=\"nav-item active\">\n          <a class=\"nav-link\" [routerLink]=\"['/home']\">Home</a>\n        </li>\n      </ul>\n    </div>\n  </nav>\n  <br>\n  <router-outlet></router-outlet>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -82,7 +82,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__ = __webpack_require__("./src/app/search-doc/search-doc.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__ = __webpack_require__("./src/app/doc-details/doc-details.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_doc_service__ = __webpack_require__("./src/app/services/doc.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_search_filter__ = __webpack_require__("./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angular4_multiselect_dropdown_angular4_multiselect_dropdown__ = __webpack_require__("./node_modules/angular4-multiselect-dropdown/angular4-multiselect-dropdown.ts");
@@ -138,7 +138,7 @@ AppModule = __decorate([
         ],
         //All the modules are declared as imports
         //All the services go here.
-        providers: [__WEBPACK_IMPORTED_MODULE_9__services_list_service__["a" /* ListService */], __WEBPACK_IMPORTED_MODULE_10__services_author_service__["a" /* AuthorService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_9__services_doc_service__["a" /* DocService */], __WEBPACK_IMPORTED_MODULE_10__services_author_service__["a" /* AuthorService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -178,7 +178,7 @@ module.exports = "<div>\n  <h3>Document Details</h3>\n  <b>ID:</b>  {{item._id}}
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_doc_service__ = __webpack_require__("./src/app/services/doc.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocDetailsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -218,7 +218,7 @@ DocDetailsComponent = __decorate([
         template: __webpack_require__("./src/app/doc-details/doc-details.component.html"),
         styles: [__webpack_require__("./src/app/doc-details/doc-details.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_doc_service__["a" /* DocService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_doc_service__["a" /* DocService */]) === "function" && _b || Object])
 ], DocDetailsComponent);
 
 var _a, _b;
@@ -311,7 +311,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div cla
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_doc_service__ = __webpack_require__("./src/app/services/doc.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchDocComponent; });
@@ -486,7 +486,7 @@ SearchDocComponent = __decorate([
         template: __webpack_require__("./src/app/search-doc/search-doc.component.html"),
         styles: [__webpack_require__("./src/app/search-doc/search-doc.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _d || Object])
 ], SearchDocComponent);
 
 var _a, _b, _c, _d;
@@ -562,7 +562,7 @@ var _a;
 
 /***/ }),
 
-/***/ "./src/app/services/list.service.ts":
+/***/ "./src/app/services/doc.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -570,7 +570,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/add/operator/map.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DocService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -583,20 +583,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ListService = (function () {
-    function ListService(http) {
+var DocService = (function () {
+    function DocService(http) {
         this.http = http;
         //private serverApi= 'http://localhost:3000';
         this.serverApi = 'http://dataregulation.azurewebsites.net/';
     }
-    ListService.prototype.getAllLists = function () {
+    DocService.prototype.getAllLists = function () {
         var URI = this.serverApi + "/iitsummaries/";
         //let URI = `/iitsummaries/`;
         return this.http.get(URI)
             .map(function (res) { return res.json(); })
             .map(function (res) { return res.lists; });
     };
-    ListService.prototype.deleteList = function (listId) {
+    DocService.prototype.deleteList = function (listId) {
         var URI = this.serverApi + "/iitsummaries/" + listId;
         //let URI = `/iitsummaries/${listId}`;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
@@ -604,7 +604,7 @@ var ListService = (function () {
         return this.http.delete(URI, { headers: headers })
             .map(function (res) { return res.json(); });
     };
-    ListService.prototype.get = function (listId) {
+    DocService.prototype.get = function (listId) {
         var URI = this.serverApi + "/iitsummaries/" + listId;
         //let URI = `/iitsummaries/${listId}`;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
@@ -613,7 +613,7 @@ var ListService = (function () {
             .map(function (res) { return res.json(); })
             .map(function (res) { return res.item; });
     };
-    ListService.prototype.addList = function (list) {
+    DocService.prototype.addList = function (list) {
         var URI = this.serverApi + "/iitsummaries/";
         // let URI = `/iitsummaries/`;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
@@ -622,7 +622,7 @@ var ListService = (function () {
         return this.http.post(URI, body, { headers: headers })
             .map(function (res) { return res.json(); });
     };
-    ListService.prototype.query = function (querystr) {
+    DocService.prototype.query = function (querystr) {
         var URI = this.serverApi + "/iitsummaries/query";
         var body = JSON.stringify({ querystr: querystr });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
@@ -631,15 +631,15 @@ var ListService = (function () {
             .map(function (res) { return res.json(); })
             .map(function (res) { return res.lists; });
     };
-    return ListService;
+    return DocService;
 }());
-ListService = __decorate([
+DocService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object])
-], ListService);
+], DocService);
 
 var _a;
-//# sourceMappingURL=list.service.js.map
+//# sourceMappingURL=doc.service.js.map
 
 /***/ }),
 

@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { SearchDocComponent } from './search-doc/search-doc.component';
 import { DocDetailsComponent } from './doc-details/doc-details.component';
 import { HomeComponent } from './home/home.component';
-import { ListService } from './services/list.service';
+import { DocService } from './services/doc.service';
 import { AuthorService } from './services/author.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4-multiselect-dropdown';
@@ -39,7 +39,7 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
 //All the modules are declared as imports
 
 //All the services go here.
-providers: [ListService,AuthorService],
+providers: [DocService,AuthorService],
 bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { List } from '../models/List';
-import { ListService } from '../services/list.service';
+import { DocService } from '../services/doc.service';
 
 @Component({
   selector: 'app-doc-details',
@@ -14,7 +14,7 @@ export class DocDetailsComponent {
   private sub: any;
   private item: List;
   //private listServ;
-  constructor(private route: ActivatedRoute,private listServ: ListService) { }
+  constructor(private route: ActivatedRoute,private listServ: DocService) { }
 
   private ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

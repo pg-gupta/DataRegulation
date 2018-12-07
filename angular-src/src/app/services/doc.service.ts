@@ -6,7 +6,7 @@ import { List } from '../models/List'
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class ListService {
+export class DocService {
 
   constructor(private http: Http) { }
 

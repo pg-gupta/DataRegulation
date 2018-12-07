@@ -3,8 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchDocComponent } from './search-doc.component';
 
 describe('AddListComponent', () => {
-  let component: AddListComponent;
-  let fixture: ComponentFixture<AddListComponent>;
+  let component: SearchDocComponent;
+  let fixture: ComponentFixture<SearchDocComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('AddListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddListComponent);
+    fixture = TestBed.createComponent(SearchDocComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
