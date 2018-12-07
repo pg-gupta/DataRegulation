@@ -18,7 +18,7 @@ export class DocService {
     let URI = `${this.serverApi}/iitsummaries/`;
     return this.http.get(URI)
     .map(res => res.json())
-    .map(res => <Document[]>res.lists);
+    .map(res => <Document[]>res.docs);
   }
 
   public delete(listId : string) {
@@ -35,7 +35,7 @@ export class DocService {
     headers.append('Content-Type', 'application/json');
     return this.http.get(URI)
     .map(res => res.json())
-    .map(res => <Document>res.item);
+    .map(res => <Document>res.doc);
   }
 
   public add(list: Document) {
@@ -55,6 +55,6 @@ export class DocService {
 
     return this.http.post(URI,body,{headers: headers})
     .map(res => res.json())
-    .map(res => <Document[]>res.lists);
+    .map(res => <Document[]>res.docs);
   }
 }

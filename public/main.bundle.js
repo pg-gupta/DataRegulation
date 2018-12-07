@@ -371,10 +371,10 @@ var SearchDocComponent = (function () {
     };
     SearchDocComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log(this.newList.category);
-        this.docServ.add(this.newList).subscribe(function (response) {
+        console.log(this.newDoc.category);
+        this.docServ.add(this.newDoc).subscribe(function (response) {
             if (response.success == true)
-                _this.addList.emit(_this.newList);
+                _this.addList.emit(_this.newDoc);
         });
     };
     SearchDocComponent.prototype.onClick = function () {
@@ -557,7 +557,7 @@ var DocService = (function () {
         var URI = this.serverApi + "/iitsummaries/";
         return this.http.get(URI)
             .map(function (res) { return res.json(); })
-            .map(function (res) { return res.lists; });
+            .map(function (res) { return res.docs; });
     };
     DocService.prototype.delete = function (listId) {
         var URI = this.serverApi + "/iitsummaries/" + listId;
@@ -572,7 +572,7 @@ var DocService = (function () {
         headers.append('Content-Type', 'application/json');
         return this.http.get(URI)
             .map(function (res) { return res.json(); })
-            .map(function (res) { return res.item; });
+            .map(function (res) { return res.doc; });
     };
     DocService.prototype.add = function (list) {
         var URI = this.serverApi + "/iitsummaries/";
@@ -589,7 +589,7 @@ var DocService = (function () {
         headers.append('Content-Type', 'application/json');
         return this.http.post(URI, body, { headers: headers })
             .map(function (res) { return res.json(); })
-            .map(function (res) { return res.lists; });
+            .map(function (res) { return res.docs; });
     };
     return DocService;
 }());

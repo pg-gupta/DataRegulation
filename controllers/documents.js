@@ -1,17 +1,17 @@
 //Require the express package and use express.Router()
 const express = require('express');
 const router = express.Router();
-const documents = require('../models/Document');
+const document = require('../models/Document');
 
 
 //GET HTTP method to /bucketlist
 router.get('/init', (req, res) => {
-  documents.getAll((err, lists) => {
+  document.getAll((err, result) => {
     if (err) {
       res.json({ success: false, message: `Failed to load all lists. Error: ${err}` });
     }
     else {
-      res.write(JSON.stringify({ success: true, lists: lists }, null, 2));
+      res.write(JSON.stringify({ success: true, docs: result }, null, 2));
       res.end();
 
     }
@@ -20,12 +20,12 @@ router.get('/init', (req, res) => {
 
 //GET HTTP method to /bucketlist
 router.get('/',(req,res) => {
-  documents.getAll((err, lists)=> {
+  document.getAll((err, result)=> {
     if(err) {
       res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
     }
     else {
-      res.write(JSON.stringify({success: true, lists:lists},null,2));
+      res.write(JSON.stringify({success: true, docs:result},null,2));
       res.end();
 
     }
@@ -38,7 +38,7 @@ router.get('/',(req,res) => {
 
 router.post('/', (req,res,next) => {
   console.log(req.body);
-  let newList = new iitsummaries({
+  let newDoc = new document({
     title: req.body.title,
     description: req.body.description,
     url: req.body.url,
@@ -46,7 +46,7 @@ router.post('/', (req,res,next) => {
     doctype: req.body.doctype
 
   });
-  documents.add(newList,(err, list) => {
+  document.add(newDoc,(err, result) => {
     if(err) {
       res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
       res.write(JSON.stringify({success: true, message: `Failed to create a new list. Error: ${err}`}));
@@ -60,7 +60,7 @@ router.post('/', (req,res,next) => {
 
 
 router.post('/insertmany', (req,res,next) => {
-  documents.add(req.body,(err, list) => {
+  document.add(req.body,(err, result) => {
     if(err) {
       res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
 
@@ -75,7 +75,7 @@ router.post('/insertmany', (req,res,next) => {
 router.delete('/:id', (req,res,next)=> {
   let id = req.params.id;
   console.log(id);
-  documents.deleteById(id,(err,list) => {
+  document.deleteById(id,(err,result) => {
     if(err) {
       res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
     }
@@ -91,12 +91,12 @@ router.delete('/:id', (req,res,next)=> {
 router.get('/:id', (req,res,next)=> {
   let id = req.params.id;
   console.log(id);
-  documents.getById(id,(err,list) => {
+  document.getById(id,(err,result) => {
     if(err) {
       res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
     }
     else if(list) {
-      res.write(JSON.stringify({success: true, item:list},null,2));
+      res.write(JSON.stringify({success: true, doc:result},null,2));
       res.end();
     }
     else
@@ -107,14 +107,14 @@ router.get('/:id', (req,res,next)=> {
 router.post('/query', (req,res,next)=> {
   let str = req.body.querystr;
   console.log("querystr: "+ JSON.stringify(str));
-  documents.query(str,(err,result) => {
+  document.query(str,(err,result) => {
     if(err) {
       console.log("err: "+ err);
       res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
     }
     else if(result) {
       console.log("result: "+ result);
-      res.write(JSON.stringify({success: true, lists:result},null,2));
+      res.write(JSON.stringify({success: true, docs:result},null,2));
       res.end();
     }
     else

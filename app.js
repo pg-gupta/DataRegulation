@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database');
-const iitsummaries = require('./controllers/iitsummaries');
+const documents = require('./controllers/documents');
 const authors = require('./controllers/authors');
 
 var routes = require('./routes/index');
@@ -36,7 +36,7 @@ app.use(cors());
 app.use('/', routes);
 app.use('/users', users);
 //Routing all HTTP requests to /iitsummaries to bucketlist controller
-app.use('/iitsummaries', iitsummaries);
+app.use('/iitsummaries', documents);
 app.use('/authors', authors);
 //app.use('/countries',countries);
 

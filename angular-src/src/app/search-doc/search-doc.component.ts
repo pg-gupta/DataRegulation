@@ -15,7 +15,7 @@ export class SearchDocComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  private newList: Document;
+  private newDoc: Document;
   docs: Document[];
   authors: Author[];
   peopleFilter: any;
@@ -61,12 +61,12 @@ export class SearchDocComponent implements OnInit {
 
 
   public onSubmit() {
-    console.log(this.newList.category);
-    this.docServ.add(this.newList).subscribe(
+    console.log(this.newDoc.category);
+    this.docServ.add(this.newDoc).subscribe(
       response=> {
 
         if(response.success== true)
-        this.addList.emit(this.newList);
+        this.addList.emit(this.newDoc);
       },
     );
 
