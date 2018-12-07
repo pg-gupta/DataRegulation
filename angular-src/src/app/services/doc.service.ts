@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import { List } from '../models/List'
+import { Document } from '../models/Document'
 
 import 'rxjs/add/operator/map';
 
@@ -14,36 +14,32 @@ export class DocService {
   private serverApi= 'http://dataregulation.azurewebsites.net/';
 
 
-  public getAllLists():Observable<List[]> {
+  public getAllLists():Observable<Document[]> {
     let URI = `${this.serverApi}/iitsummaries/`;
-    //let URI = `/iitsummaries/`;
     return this.http.get(URI)
     .map(res => res.json())
-    .map(res => <List[]>res.lists);
+    .map(res => <Document[]>res.lists);
   }
 
   public deleteList(listId : string) {
     let URI = `${this.serverApi}/iitsummaries/${listId}`;
-    //let URI = `/iitsummaries/${listId}`;
     let headers = new Headers;
     headers.append('Content-Type', 'application/json');
     return this.http.delete(URI, {headers: headers})
     .map(res => res.json());
   }
 
-  public get(listId : string):Observable<List> {
+  public get(listId : string):Observable<Document> {
     let URI = `${this.serverApi}/iitsummaries/${listId}`;
-    //let URI = `/iitsummaries/${listId}`;
     let headers = new Headers;
     headers.append('Content-Type', 'application/json');
     return this.http.get(URI)
     .map(res => res.json())
-    .map(res => <List>res.item);
+    .map(res => <Document>res.item);
   }
 
-  public addList(list: List) {
+  public addList(list: Document) {
     let URI = `${this.serverApi}/iitsummaries/`;
-    // let URI = `/iitsummaries/`;
     let headers = new Headers;
     let body = JSON.stringify({title: list.title, description: list.description, category: list.category});
     headers.append('Content-Type', 'application/json');
@@ -51,7 +47,7 @@ export class DocService {
     .map(res => res.json());
   }
 
-  public query(querystr : any):Observable<List[]> {
+  public query(querystr : any):Observable<Document[]> {
     let URI = `${this.serverApi}/iitsummaries/query`;
     let body= JSON.stringify({querystr});
     let headers = new Headers;
@@ -59,6 +55,6 @@ export class DocService {
 
     return this.http.post(URI,body,{headers: headers})
     .map(res => res.json())
-    .map(res => <List[]>res.lists);
+    .map(res => <Document[]>res.lists);
   }
 }

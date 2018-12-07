@@ -193,16 +193,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var DocDetailsComponent = (function () {
-    //private listServ;
-    function DocDetailsComponent(route, listServ) {
+    function DocDetailsComponent(route, docServ) {
         this.route = route;
-        this.listServ = listServ;
+        this.docServ = docServ;
     }
     DocDetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this.route.params.subscribe(function (params) {
             _this.id = params.id; // (+) converts string 'id' to a number
-            _this.listServ.get(_this.id).subscribe(function (result) {
+            _this.docServ.get(_this.id).subscribe(function (result) {
                 _this.item = result;
             }, function (error) { return console.error(error); });
         });
@@ -302,7 +301,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.description}}</p>\n      <small>{{item.content}}</small>\n    </a>\n  </div>\n</div>\n</div>\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.description}}</p>\n      <small>{{item.content}}</small>\n    </a>\n  </div>\n</div>\n</div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -328,22 +327,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// @Pipe({
-//   name: 'myfilter'
-// })
-// export class FilterPipe implements PipeTransform {
-//   transform(items: List[], filter: {[key: string]: any }): List[] {
-//     if(items==null) return null;
-//     return items.filter(item => {
-//       let notMatchingField = Object.keys(filter)
-//       .find(key => item[key] !== filter[key]);
-//       return !notMatchingField;
-//     });
-//   }
-// }
 var SearchDocComponent = (function () {
-    function SearchDocComponent(listServ, authorService, router) {
-        this.listServ = listServ;
+    function SearchDocComponent(docServ, authorService, router) {
+        this.docServ = docServ;
         this.authorService = authorService;
         this.router = router;
         this.dropdownList = [];
@@ -353,15 +339,10 @@ var SearchDocComponent = (function () {
         this.query = "";
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
     }
-    // ngOnInit() {
-    //   this.getList();
-    //   this.getAuthors();
-    //
-    // }
     SearchDocComponent.prototype.getList = function () {
         var _this = this;
-        this.listServ.getAllLists().subscribe(function (result) {
-            _this.lists = result;
+        this.docServ.getAllLists().subscribe(function (result) {
+            _this.docs = result;
             //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
             _this.peopleFilter = {};
         }, function (error) { return console.error(error); });
@@ -388,27 +369,10 @@ var SearchDocComponent = (function () {
         this.createQuery();
         console.log(this.authorsSelected);
     };
-    // public createQuery(){
-    //   var queryObj=[];
-    //   if(this.authorsSelected!=[]){
-    //     this.authorsSelected.forEach(function (value) {
-    //       queryObj.push({title:value});
-    //     });
-    //   }
-    //   else{
-    //
-    //   }
-    //   this.fetchData(queryObj);
-    // }
-    // public fetchData(){
-    //   this.listServ.query(this.query).subscribe(response=>{
-    //     this.lists=response;
-    //   },error=>console.error(error))
-    // }
     SearchDocComponent.prototype.onSubmit = function () {
         var _this = this;
         console.log(this.newList.category);
-        this.listServ.addList(this.newList).subscribe(function (response) {
+        this.docServ.addList(this.newList).subscribe(function (response) {
             if (response.success == true)
                 _this.addList.emit(_this.newList);
         });
@@ -448,8 +412,8 @@ var SearchDocComponent = (function () {
     SearchDocComponent.prototype.fetchData = function (queryObj) {
         var _this = this;
         if (queryObj.length != 0) {
-            this.listServ.query(queryObj).subscribe(function (response) {
-                _this.lists = response;
+            this.docServ.query(queryObj).subscribe(function (response) {
+                _this.docs = response;
             }, function (error) { return console.error(error); });
         }
         else {
@@ -591,14 +555,12 @@ var DocService = (function () {
     }
     DocService.prototype.getAllLists = function () {
         var URI = this.serverApi + "/iitsummaries/";
-        //let URI = `/iitsummaries/`;
         return this.http.get(URI)
             .map(function (res) { return res.json(); })
             .map(function (res) { return res.lists; });
     };
     DocService.prototype.deleteList = function (listId) {
         var URI = this.serverApi + "/iitsummaries/" + listId;
-        //let URI = `/iitsummaries/${listId}`;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
         headers.append('Content-Type', 'application/json');
         return this.http.delete(URI, { headers: headers })
@@ -606,7 +568,6 @@ var DocService = (function () {
     };
     DocService.prototype.get = function (listId) {
         var URI = this.serverApi + "/iitsummaries/" + listId;
-        //let URI = `/iitsummaries/${listId}`;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
         headers.append('Content-Type', 'application/json');
         return this.http.get(URI)
@@ -615,7 +576,6 @@ var DocService = (function () {
     };
     DocService.prototype.addList = function (list) {
         var URI = this.serverApi + "/iitsummaries/";
-        // let URI = `/iitsummaries/`;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
         var body = JSON.stringify({ title: list.title, description: list.description, category: list.category });
         headers.append('Content-Type', 'application/json');

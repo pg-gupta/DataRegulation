@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { List } from '../models/List';
+import { Document } from '../models/Document';
 import { DocService } from '../services/doc.service';
 
 @Component({
@@ -12,15 +12,14 @@ export class DocDetailsComponent {
 
   private id;
   private sub: any;
-  private item: List;
-  //private listServ;
-  constructor(private route: ActivatedRoute,private listServ: DocService) { }
+  private item: Document;
+  constructor(private route: ActivatedRoute,private docServ: DocService) { }
 
   private ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params.id; // (+) converts string 'id' to a number
 
-      this.listServ.get(this.id).subscribe(result => {
+      this.docServ.get(this.id).subscribe(result => {
         this.item = result;
       }, error => console.error(error));
     });

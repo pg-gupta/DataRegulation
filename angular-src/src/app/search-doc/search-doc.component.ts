@@ -1,23 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { List } from '../models/List';
+import { Document } from '../models/Document';
 import { DocService } from '../services/doc.service';
 import { Author } from '../models/Author';
 import { AuthorService } from '../services/author.service';
 import { Router,ActivatedRoute } from '@angular/router';
-
-// @Pipe({
-//   name: 'myfilter'
-// })
-// export class FilterPipe implements PipeTransform {
-//   transform(items: List[], filter: {[key: string]: any }): List[] {
-//     if(items==null) return null;
-//     return items.filter(item => {
-//       let notMatchingField = Object.keys(filter)
-//       .find(key => item[key] !== filter[key]);
-//       return !notMatchingField;
-//     });
-//   }
-// }
 
 @Component({
   selector: 'app-search-doc',
@@ -29,27 +15,19 @@ export class SearchDocComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-
-  /////////
-  private newList: List;
-  lists: List[];
+  private newList: Document;
+  docs: Document[];
   authors: Author[];
   peopleFilter: any;
   authorsSelected:string[]=[];
   query:string="";
-  @Output() addList: EventEmitter<List> = new EventEmitter<List>();
-  constructor(private listServ: DocService,private authorService:AuthorService, private router: Router) {
+  @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
+  constructor(private docServ: DocService,private authorService:AuthorService, private router: Router) {
   }
 
-  // ngOnInit() {
-  //   this.getList();
-  //   this.getAuthors();
-  //
-  // }
-
   public getList() {
-    this.listServ.getAllLists().subscribe(result => {
-      this.lists = result;
+    this.docServ.getAllLists().subscribe(result => {
+      this.docs = result;
       //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
       this.peopleFilter={};
     }, error => console.error(error));
@@ -81,30 +59,10 @@ export class SearchDocComponent implements OnInit {
 
   }
 
-  // public createQuery(){
-  //   var queryObj=[];
-  //   if(this.authorsSelected!=[]){
-  //     this.authorsSelected.forEach(function (value) {
-  //       queryObj.push({title:value});
-  //     });
-  //   }
-  //   else{
-  //
-  //   }
-  //   this.fetchData(queryObj);
-  // }
-
-
-
-  // public fetchData(){
-  //   this.listServ.query(this.query).subscribe(response=>{
-  //     this.lists=response;
-  //   },error=>console.error(error))
-  // }
 
   public onSubmit() {
     console.log(this.newList.category);
-    this.listServ.addList(this.newList).subscribe(
+    this.docServ.addList(this.newList).subscribe(
       response=> {
 
         if(response.success== true)
@@ -124,10 +82,6 @@ export class SearchDocComponent implements OnInit {
       this.authors=result;
       this.dropdownList=this.authors;
       this.selectedItems = [
-        // {"id":2,"itemName":"Singapore"},
-        // {"id":3,"itemName":"Australia"},
-        // {"id":4,"itemName":"Canada"},
-        // {"id":5,"itemName":"South Korea"}
       ];
       this.dropdownSettings = {
         singleSelection: false,
@@ -154,8 +108,8 @@ export class SearchDocComponent implements OnInit {
 
   public fetchData(queryObj){
     if(queryObj.length!=0){
-      this.listServ.query(queryObj).subscribe(response=>{
-        this.lists=response;
+      this.docServ.query(queryObj).subscribe(response=>{
+        this.docs=response;
       },error=>console.error(error))
     }
     else{

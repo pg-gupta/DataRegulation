@@ -1,4 +1,4 @@
-export interface List {
+export interface Document {
     _id?: string;
     title: string;
     description: string;
@@ -7,5 +7,5 @@ export interface List {
   doctype: string,
   content:string,
 
-    
+
 }

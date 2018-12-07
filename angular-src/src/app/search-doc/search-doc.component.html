@@ -21,7 +21,7 @@
     </angular4-multiselect>
 </div>
 <div class="col-md-9">
-  <div class="list-group" *ngFor="let item of lists | filter: searchText">
+  <div class="list-group" *ngFor="let item of docs | filter: searchText">
 
     <!-- <div class="list-group" *ngFor="let item of lists | myfilter: peopleFilter;"> -->
     <a [routerLink]="['/details', item._id]" class="list-group-item list-group-item-action flex-column align-items-start">
