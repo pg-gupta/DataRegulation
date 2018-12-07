@@ -1,12 +1,12 @@
 //Require the express package and use express.Router()
 const express = require('express');
 const router = express.Router();
-const iitsummaries = require('../models/List');
+const documents = require('../models/Document');
 
 
 //GET HTTP method to /bucketlist
 router.get('/init', (req, res) => {
-  iitsummaries.getAllLists((err, lists) => {
+  documents.getAll((err, lists) => {
     if (err) {
       res.json({ success: false, message: `Failed to load all lists. Error: ${err}` });
     }
@@ -20,7 +20,7 @@ router.get('/init', (req, res) => {
 
 //GET HTTP method to /bucketlist
 router.get('/',(req,res) => {
-  iitsummaries.getAllLists((err, lists)=> {
+  documents.getAll((err, lists)=> {
     if(err) {
       res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
     }
@@ -46,7 +46,7 @@ router.post('/', (req,res,next) => {
     doctype: req.body.doctype
 
   });
-  iitsummaries.addList(newList,(err, list) => {
+  documents.add(newList,(err, list) => {
     if(err) {
       res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
       res.write(JSON.stringify({success: true, message: `Failed to create a new list. Error: ${err}`}));
@@ -60,7 +60,7 @@ router.post('/', (req,res,next) => {
 
 
 router.post('/insertmany', (req,res,next) => {
-  iitsummaries.addAll(req.body,(err, list) => {
+  documents.add(req.body,(err, list) => {
     if(err) {
       res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
 
@@ -75,7 +75,7 @@ router.post('/insertmany', (req,res,next) => {
 router.delete('/:id', (req,res,next)=> {
   let id = req.params.id;
   console.log(id);
-  iitsummaries.deleteListById(id,(err,list) => {
+  documents.deleteById(id,(err,list) => {
     if(err) {
       res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
     }
@@ -91,7 +91,7 @@ router.delete('/:id', (req,res,next)=> {
 router.get('/:id', (req,res,next)=> {
   let id = req.params.id;
   console.log(id);
-  iitsummaries.getListById(id,(err,list) => {
+  documents.getById(id,(err,list) => {
     if(err) {
       res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
     }
@@ -107,9 +107,9 @@ router.get('/:id', (req,res,next)=> {
 router.post('/query', (req,res,next)=> {
   let str = req.body.querystr;
   console.log("querystr: "+ JSON.stringify(str));
-  iitsummaries.queried(str,(err,result) => {
+  documents.query(str,(err,result) => {
     if(err) {
-        console.log("err: "+ err);
+      console.log("err: "+ err);
       res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
     }
     else if(result) {
@@ -121,17 +121,5 @@ router.post('/query', (req,res,next)=> {
     res.json({success:false});
   })
 });
-
-// router.post('/query', (req,res,next) => {
-//   iitsummaries.addAll(req.body,(err, list) => {
-//     if(err) {
-//       res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
-//
-//     }
-//     else
-//     res.json({success:true, message: "Added successfully."});
-//
-//   });
-// });
 
 module.exports = router;

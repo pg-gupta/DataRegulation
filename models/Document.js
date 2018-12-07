@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 //Define Source document with title, description and category
-const iitsummariesSchema = mongoose.Schema({
+const documentSchema = mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -15,30 +15,30 @@ const iitsummariesSchema = mongoose.Schema({
 });
 
 //Create a model using mongoose.model and export it
-const iitsummaries = module.exports = mongoose.model('iitsummaries', iitsummariesSchema );
+const documents = module.exports = mongoose.model('iitsummaries', documentSchema );
 
 
 //BucketList.find() returns all the lists
-module.exports.getAllLists = (callback) => {
-  iitsummaries.find(callback);
+module.exports.getAll = (callback) => {
+  documents.find(callback);
 }
 
 //newList.save is used to insert the document into MongoDB
-module.exports.addList = (newList, callback) => {
-  newList.save(callback);
+module.exports.add = (newDoc, callback) => {
+  newDoc.save(callback);
 }
 
 
 //We pass on an id and remove it from DB using Bucketlist.remove()
-module.exports.deleteListById = (id, callback) => {
+module.exports.deleteById = (id, callback) => {
   let query = {_id: id};
-  iitsummaries.remove(query, callback);
+  documents.remove(query, callback);
 }
 
 //We pass on an id and remove it from DB using Bucketlist.remove()
-module.exports.getListById = (id, callback) => {
+module.exports.getById = (id, callback) => {
   let query = {_id: id};
-  iitsummaries.findOne({_id: id}, callback);
+  documents.findOne({_id: id}, callback);
 }
 
 module.exports.addAll=(papers,callback)=>{
@@ -46,12 +46,12 @@ module.exports.addAll=(papers,callback)=>{
   { title: 'Paper 2', description: "sfaff", url: "rwtwtet",doctype:'asdaff',content:'fhjgkgj' },
   { title: 'Paper 3', description: "twttew", url: "ewrwetey",doctype:'asdaff',content:'fhjgkgj' }];
 
-  iitsummaries.insertMany(papers, callback);
+  documents.insertMany(papers, callback);
 }
 
-module.exports.queried = (queryex,callback) => {
-  var obj={$or:queryex};
-    iitsummaries.find(obj,callback);
+module.exports.query = (queryExp,callback) => {
+  var obj={$or:queryExp};
+  documents.find(obj,callback);
 }
 
 module.exports.getJsonData = () => {
