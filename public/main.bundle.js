@@ -341,7 +341,7 @@ var SearchDocComponent = (function () {
     }
     SearchDocComponent.prototype.getList = function () {
         var _this = this;
-        this.docServ.getAllLists().subscribe(function (result) {
+        this.docServ.getAll().subscribe(function (result) {
             _this.docs = result;
             //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
             _this.peopleFilter = {};
@@ -372,7 +372,7 @@ var SearchDocComponent = (function () {
     SearchDocComponent.prototype.onSubmit = function () {
         var _this = this;
         console.log(this.newList.category);
-        this.docServ.addList(this.newList).subscribe(function (response) {
+        this.docServ.add(this.newList).subscribe(function (response) {
             if (response.success == true)
                 _this.addList.emit(_this.newList);
         });
@@ -553,13 +553,13 @@ var DocService = (function () {
         //private serverApi= 'http://localhost:3000';
         this.serverApi = 'http://dataregulation.azurewebsites.net/';
     }
-    DocService.prototype.getAllLists = function () {
+    DocService.prototype.getAll = function () {
         var URI = this.serverApi + "/iitsummaries/";
         return this.http.get(URI)
             .map(function (res) { return res.json(); })
             .map(function (res) { return res.lists; });
     };
-    DocService.prototype.deleteList = function (listId) {
+    DocService.prototype.delete = function (listId) {
         var URI = this.serverApi + "/iitsummaries/" + listId;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
         headers.append('Content-Type', 'application/json');
@@ -574,7 +574,7 @@ var DocService = (function () {
             .map(function (res) { return res.json(); })
             .map(function (res) { return res.item; });
     };
-    DocService.prototype.addList = function (list) {
+    DocService.prototype.add = function (list) {
         var URI = this.serverApi + "/iitsummaries/";
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
         var body = JSON.stringify({ title: list.title, description: list.description, category: list.category });

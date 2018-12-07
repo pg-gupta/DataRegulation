@@ -14,14 +14,14 @@ export class DocService {
   private serverApi= 'http://dataregulation.azurewebsites.net/';
 
 
-  public getAllLists():Observable<Document[]> {
+  public getAll():Observable<Document[]> {
     let URI = `${this.serverApi}/iitsummaries/`;
     return this.http.get(URI)
     .map(res => res.json())
     .map(res => <Document[]>res.lists);
   }
 
-  public deleteList(listId : string) {
+  public delete(listId : string) {
     let URI = `${this.serverApi}/iitsummaries/${listId}`;
     let headers = new Headers;
     headers.append('Content-Type', 'application/json');
@@ -38,7 +38,7 @@ export class DocService {
     .map(res => <Document>res.item);
   }
 
-  public addList(list: Document) {
+  public add(list: Document) {
     let URI = `${this.serverApi}/iitsummaries/`;
     let headers = new Headers;
     let body = JSON.stringify({title: list.title, description: list.description, category: list.category});

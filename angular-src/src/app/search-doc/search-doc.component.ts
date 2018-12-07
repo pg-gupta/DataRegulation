@@ -26,7 +26,7 @@ export class SearchDocComponent implements OnInit {
   }
 
   public getList() {
-    this.docServ.getAllLists().subscribe(result => {
+    this.docServ.getAll().subscribe(result => {
       this.docs = result;
       //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
       this.peopleFilter={};
@@ -62,7 +62,7 @@ export class SearchDocComponent implements OnInit {
 
   public onSubmit() {
     console.log(this.newList.category);
-    this.docServ.addList(this.newList).subscribe(
+    this.docServ.add(this.newList).subscribe(
       response=> {
 
         if(response.success== true)
