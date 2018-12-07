@@ -13,61 +13,6 @@ webpackEmptyContext.id = "./src async recursive";
 
 /***/ }),
 
-/***/ "./src/app/about/about.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "./src/app/about/about.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div style=\"text-align: center\">\n  <h3>Data Regulation </h3>\n  <h5>This is one place to find the summary of all data regulation documents</h5>\n  <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/search']\">SEARCH</button>\n</div>\n"
-
-/***/ }),
-
-/***/ "./src/app/about/about.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var AboutComponent = (function () {
-    function AboutComponent() {
-    }
-    return AboutComponent;
-}());
-AboutComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
-        selector: 'app-about',
-        template: __webpack_require__("./src/app/about/about.component.html"),
-        styles: [__webpack_require__("./src/app/about/about.component.css")]
-    })
-], AboutComponent);
-
-//# sourceMappingURL=about.component.js.map
-
-/***/ }),
-
 /***/ "./src/app/add-list/add-list.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -349,7 +294,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("./src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__ = __webpack_require__("./src/app/add-list/add-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__ = __webpack_require__("./src/app/doc-details/doc-details.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__about_about_component__ = __webpack_require__("./src/app/about/about.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_search_filter__ = __webpack_require__("./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
@@ -392,7 +337,7 @@ AppModule = __decorate([
                 { path: '', redirectTo: 'home', pathMatch: 'full' },
                 { path: 'search', component: __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["a" /* AddListComponent */], },
                 { path: 'details/:id', component: __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */] },
-                { path: 'home', component: __WEBPACK_IMPORTED_MODULE_8__about_about_component__["a" /* AboutComponent */] },
+                { path: 'home', component: __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */] },
                 { path: '**', redirectTo: 'home' }
             ]),
         ],
@@ -402,7 +347,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["a" /* AddListComponent */],
             //FilterPipe,
             __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__about_about_component__["a" /* AboutComponent */]
+            __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */]
         ],
         //All the modules are declared as imports
         //All the services go here.
@@ -494,6 +439,61 @@ var _a, _b;
 
 /***/ }),
 
+/***/ "./src/app/home/home.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "./src/app/home/home.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div style=\"text-align: center\">\n  <h3>Data Regulation </h3>\n  <h5>This is one place to find the summary of all data regulation documents</h5>\n  <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/search']\">SEARCH</button>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/home/home.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var HomeComponent = (function () {
+    function HomeComponent() {
+    }
+    return HomeComponent;
+}());
+HomeComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
+        selector: 'app-home',
+        template: __webpack_require__("./src/app/home/home.component.html"),
+        styles: [__webpack_require__("./src/app/home/home.component.css")]
+    })
+], HomeComponent);
+
+//# sourceMappingURL=home.component.js.map
+
+/***/ }),
+
 /***/ "./src/app/services/author.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -518,9 +518,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthorService = (function () {
     function AuthorService(http) {
         this.http = http;
-        //private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulation.azurewebsites.net/';
+        this.serverApi = 'http://localhost:3000';
     }
+    //private serverApi= 'http://dataregulation.azurewebsites.net/';
     AuthorService.prototype.getAll = function () {
         var URI = this.serverApi + "/authors/";
         return this.http.get(URI)

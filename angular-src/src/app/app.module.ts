@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AddListComponent } from './add-list/add-list.component';
 import { DocDetailsComponent } from './doc-details/doc-details.component';
-import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
 import { ListService } from './services/list.service';
 import { AuthorService } from './services/author.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -24,7 +24,7 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'search', component: AddListComponent,  },
       { path: 'details/:id', component: DocDetailsComponent },
-      { path: 'home',component:AboutComponent},
+      { path: 'home',component:HomeComponent},
       { path: '**', redirectTo: 'home' }
     ]),
   ],
@@ -34,7 +34,7 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
   AddListComponent,
   //FilterPipe,
   DocDetailsComponent,
-  AboutComponent
+  HomeComponent
 ],
 //All the modules are declared as imports
 
