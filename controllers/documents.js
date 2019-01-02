@@ -60,7 +60,7 @@ router.post('/', (req,res,next) => {
 
 
 router.post('/insertmany', (req,res,next) => {
-  document.add(req.body,(err, result) => {
+  document.addAll(req.body,(err, result) => {
     if(err) {
       res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
 

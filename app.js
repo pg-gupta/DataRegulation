@@ -36,7 +36,7 @@ app.use(cors());
 app.use('/', routes);
 app.use('/users', users);
 //Routing all HTTP requests to /iitsummaries to bucketlist controller
-app.use('/iitsummaries', documents);
+app.use('/documents', documents);
 app.use('/authors', authors);
 //app.use('/countries',countries);
 

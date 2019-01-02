@@ -8,14 +8,22 @@ const documentSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  description: String,
-  url: String,
-  doctype: String,
-  content:String
+  link:String,
+  abstract:String,
+  authors: new Array(),
+  version_date: String,
+  keywords: new Array(),
+  no_of_pages:Number,
+  research_status: String,
+  research_scope: String,
+  type_of_article: String,
+  geographic_scope: String,
+  citations: new Array(),
+  supplementary:String
 });
 
 //Create a model using mongoose.model and export it
-const documents = module.exports = mongoose.model('iitsummaries', documentSchema );
+const documents = module.exports = mongoose.model('documents', documentSchema );
 
 
 //BucketList.find() returns all the lists
@@ -41,12 +49,12 @@ module.exports.getById = (id, callback) => {
   documents.findOne({_id: id}, callback);
 }
 
-module.exports.addAll=(papers,callback)=>{
-  var papers = [{ title: 'Paper 1', description: "saff", url: "wetewte",doctype:'asdaff',content:'fhjgkgj'  },
-  { title: 'Paper 2', description: "sfaff", url: "rwtwtet",doctype:'asdaff',content:'fhjgkgj' },
-  { title: 'Paper 3', description: "twttew", url: "ewrwetey",doctype:'asdaff',content:'fhjgkgj' }];
+module.exports.addAll=(docs,callback)=>{
+  // var papers = [{ title: 'Paper 1', description: "saff", url: "wetewte",doctype:'asdaff',content:'fhjgkgj'  },
+  // { title: 'Paper 2', description: "sfaff", url: "rwtwtet",doctype:'asdaff',content:'fhjgkgj' },
+  // { title: 'Paper 3', description: "twttew", url: "ewrwetey",doctype:'asdaff',content:'fhjgkgj' }];
 
-  documents.insertMany(papers, callback);
+  documents.insertMany(docs, callback);
 }
 
 module.exports.query = (queryExp,callback) => {

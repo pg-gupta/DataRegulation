@@ -15,14 +15,14 @@ export class DocService {
 
 
   public getAll():Observable<Document[]> {
-    let URI = `${this.serverApi}/iitsummaries/`;
+    let URI = `${this.serverApi}/documents/`;
     return this.http.get(URI)
     .map(res => res.json())
     .map(res => <Document[]>res.docs);
   }
 
   public delete(listId : string) {
-    let URI = `${this.serverApi}/iitsummaries/${listId}`;
+    let URI = `${this.serverApi}/documents/${listId}`;
     let headers = new Headers;
     headers.append('Content-Type', 'application/json');
     return this.http.delete(URI, {headers: headers})
@@ -30,7 +30,7 @@ export class DocService {
   }
 
   public get(listId : string):Observable<Document> {
-    let URI = `${this.serverApi}/iitsummaries/${listId}`;
+    let URI = `${this.serverApi}/documents/${listId}`;
     let headers = new Headers;
     headers.append('Content-Type', 'application/json');
     return this.http.get(URI)
@@ -39,7 +39,7 @@ export class DocService {
   }
 
   public add(list: Document) {
-    let URI = `${this.serverApi}/iitsummaries/`;
+    let URI = `${this.serverApi}/documents/`;
     let headers = new Headers;
     let body = JSON.stringify({title: list.title, description: list.description, category: list.category});
     headers.append('Content-Type', 'application/json');
@@ -48,7 +48,7 @@ export class DocService {
   }
 
   public query(querystr : any):Observable<Document[]> {
-    let URI = `${this.serverApi}/iitsummaries/query`;
+    let URI = `${this.serverApi}/documents/query`;
     let body= JSON.stringify({querystr});
     let headers = new Headers;
     headers.append('Content-Type', 'application/json');
