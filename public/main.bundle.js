@@ -301,7 +301,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <small>{{item.type_of_article}}</small>\n    </a>\n  </div>\n</div>\n</div>\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-9\">\n      <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n      <span><i  class=\"fa fa-search search-icon\"></i></span>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n<br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n  </div>\n  <div class=\"col-md-9\">\n    <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n      <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n      <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n        <div class=\"d-flex w-100 justify-content-between\">\n          <h5 class=\"mb-1\">{{item.title}}</h5>\n          <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n        </div>\n        <p class=\"mb-1\">{{item.abstract}}</p>\n        <small>{{item.type_of_article}}</small>\n      </a>\n    </div>\n  </div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -335,8 +335,11 @@ var SearchDocComponent = (function () {
         this.dropdownList = [];
         this.selectedItems = [];
         this.dropdownSettings = {};
+        this.dropdownListTypeOfDoc = [];
+        this.selectedTypeOfDoc = [];
+        this.dropdownSettingsTypeOfDoc = {};
         this.authorsSelected = [];
-        this.query = "";
+        this.query = [];
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
     }
     SearchDocComponent.prototype.getList = function () {
@@ -401,20 +404,42 @@ var SearchDocComponent = (function () {
         }, function (error) {
             console.error(error);
         });
+        this.bindType();
     };
-    // public createQuery(){
-    //   var selected= this.selectedItems.map(function(obj){
-    //     return {'title':obj.name};
-    //   })
-    //   console.log("selected items: "+ selected);
-    //   this.fetchData(selected);
-    // }
+    SearchDocComponent.prototype.bindType = function () {
+        this.dropdownListTypeOfDoc = [
+            { "id": 1, "name": "Empirical" },
+            { "id": 2, "name": "Theoretical" }
+        ];
+        this.selectedTypeOfDoc = [];
+        this.dropdownSettingsTypeOfDoc = {
+            singleSelection: false,
+            text: "Select Type",
+            showCheckbox: true,
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            enableSearchFilter: true,
+            classes: "myclass custom-class",
+            labelKey: 'name',
+            primaryKey: 'id',
+        };
+    };
     SearchDocComponent.prototype.createQuery = function () {
-        var selected = this.selectedItems.map(function (obj) {
+        var selectedAuthors = this.selectedItems.map(function (obj) {
             return { 'authors': obj.name };
         });
-        console.log("selected items: " + selected);
-        this.fetchData(selected);
+        var selectedType = this.selectedTypeOfDoc.map(function (obj) {
+            return { 'type_of_article': obj.name };
+        });
+        this.query = [];
+        if (selectedAuthors.length != 0) {
+            this.query.push({ $or: selectedAuthors });
+        }
+        if (selectedType.length != 0) {
+            this.query.push({ $or: selectedType });
+        }
+        console.log("selected items: " + JSON.stringify(selectedAuthors) + " ** " + JSON.stringify(selectedType) + "***" + JSON.stringify(this.query));
+        this.fetchData(this.query);
     };
     SearchDocComponent.prototype.fetchData = function (queryObj) {
         var _this = this;

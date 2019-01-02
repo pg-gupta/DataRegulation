@@ -15,12 +15,15 @@ export class SearchDocComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
+  dropdownListTypeOfDoc = [];
+  selectedTypeOfDoc = [];
+  dropdownSettingsTypeOfDoc = {};
   private newDoc: Document;
   docs: Document[];
   authors: Author[];
   peopleFilter: any;
   authorsSelected:string[]=[];
-  query:string="";
+  query=[];
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
   constructor(private docServ: DocService,private authorService:AuthorService, private router: Router) {
   }
@@ -97,21 +100,49 @@ export class SearchDocComponent implements OnInit {
     },error=>{
       console.error(error);
     });
+
+    this.bindType();
   }
-  // public createQuery(){
-  //   var selected= this.selectedItems.map(function(obj){
-  //     return {'title':obj.name};
-  //   })
-  //   console.log("selected items: "+ selected);
-  //   this.fetchData(selected);
-  // }
+
+  public bindType(){
+    this.dropdownListTypeOfDoc=[
+      {"id":1,"name":"Empirical"},
+      {"id":2,"name":"Theoretical"}
+    ]
+    this.selectedTypeOfDoc = [
+    ];
+    this.dropdownSettingsTypeOfDoc = {
+      singleSelection: false,
+      text:"Select Type",
+      showCheckbox: true,
+      selectAllText:'Select All',
+      unSelectAllText:'UnSelect All',
+      enableSearchFilter: true,
+      classes:"myclass custom-class",
+      labelKey:'name',
+      primaryKey: 'id',
+    };
+  }
 
   public createQuery(){
-    var selected= this.selectedItems.map(function(obj){
+    var selectedAuthors= this.selectedItems.map(function(obj){
       return {'authors':obj.name};
-    })
-    console.log("selected items: "+ selected);
-    this.fetchData(selected);
+    });
+
+    var selectedType= this.selectedTypeOfDoc.map(function(obj){
+      return {'type_of_article':obj.name};
+    });
+
+    this.query=[];
+    if(selectedAuthors.length!=0){
+      this.query.push({$or:selectedAuthors});
+    }
+    if(selectedType.length!=0){
+      this.query.push({$or:selectedType});
+    }
+
+    console.log("selected items: "+ JSON.stringify(selectedAuthors)+ " ** "+ JSON.stringify(selectedType)+"***"+ JSON.stringify(this.query));
+    this.fetchData(this.query);
   }
 
   public fetchData(queryObj){

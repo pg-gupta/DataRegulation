@@ -58,7 +58,31 @@ module.exports.addAll=(docs,callback)=>{
 }
 
 module.exports.query = (queryExp,callback) => {
-  var obj={$or:queryExp};
+   console.log(queryExp);
+   console.log(JSON.stringify(queryExp));
+
+  // queryExp.forEach(function(message){
+  //     console.log(message);
+  //     console.log(JSON.stringify(message));
+
+// var orquery=[];
+//       for (var key in queryExp) {
+//           var message = queryExp[key];
+//
+//           orquery.push({$or:message});
+//       }
+//
+//   var obj={$and:orquery};
+//        console.log(obj);
+//        console.log(JSON.stringify(obj));
+
+       var obj= {$and:queryExp};
+
+//   var obj={ $and: [
+//   {$or:[{"authors":"Laura Brandimarte"}]},
+//   {$or:[{"type_of_article":"Empirical"}]}
+// ]};
+
   documents.find(obj,callback);
 }
 
