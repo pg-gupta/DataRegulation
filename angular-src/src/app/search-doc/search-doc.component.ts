@@ -98,9 +98,17 @@ export class SearchDocComponent implements OnInit {
       console.error(error);
     });
   }
+  // public createQuery(){
+  //   var selected= this.selectedItems.map(function(obj){
+  //     return {'title':obj.name};
+  //   })
+  //   console.log("selected items: "+ selected);
+  //   this.fetchData(selected);
+  // }
+
   public createQuery(){
     var selected= this.selectedItems.map(function(obj){
-      return {'title':obj.name};
+      return {'authors':obj.name};
     })
     console.log("selected items: "+ selected);
     this.fetchData(selected);
