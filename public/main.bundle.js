@@ -155,7 +155,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, ".btn-danger {\n\tcolor: #eeeeee;\n\n}\n\n.align-center {\n\ttext-align: center;\n}", ""]);
+exports.push([module.i, ".btn-danger {\n\tcolor: #eeeeee;\n\n}\n.align-center {\n\ttext-align: center;\n}\n.article-title{\n\tcolor: #0081C6\n}\n", ""]);
 
 // exports
 
@@ -168,7 +168,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/doc-details/doc-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <h3>Document Details</h3>\n  <b>ID:</b>  {{item._id}} <br>\n  <b>TITLE:</b> {{item.title}} <br>\n  <b>DESCRIPTION:</b> {{item.description}} <br>\n  <b>URL:</b> {{item.url}} <br>\n  <b>CONTENT:</b> {{item.content}} <br>\n  <b>TYPE OF DOCUMENT:</b> {{item.doctype}} <br>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-9\">\n    <h4 class=\"article-title\">{{item.title}}</h4>\n    <small *ngFor=\"let author of item.authors; let i=index\"><u>{{author}}</u> <span *ngIf=\"i!==item.authors.length-1\">,</span>&nbsp;</small>\n    <br> <small>{{item.version_date}}</small>\n    <br><small>{{item.type_of_article}}</small>\n    <br><small>{{item.research_status}}</small>\n    <hr>\n    <h6>Abstract</h6>\n    {{item.abstract}}\n    <hr>\n    <h6>Keywords</h6>\n    <small *ngFor=\"let keyword of item.keywords;let i=index\">{{keyword}} <span *ngIf=\"i!==item.keywords.length-1\">,</span> &nbsp;</small>\n  </div>\n  <div class=\"col-3\">\n    <a href=\"{{item.link}}\" target=\"_blank\"><h6>View Article</h6></a>\n  </div>\n</div>\n"
 
 /***/ }),
 

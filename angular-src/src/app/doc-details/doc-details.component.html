@@ -1,9 +1,18 @@
-<div>
-  <h3>Document Details</h3>
-  <b>ID:</b>  {{item._id}} <br>
-  <b>TITLE:</b> {{item.title}} <br>
-  <b>DESCRIPTION:</b> {{item.description}} <br>
-  <b>URL:</b> {{item.url}} <br>
-  <b>CONTENT:</b> {{item.content}} <br>
-  <b>TYPE OF DOCUMENT:</b> {{item.doctype}} <br>
+<div class="row">
+  <div class="col-9">
+    <h4 class="article-title">{{item.title}}</h4>
+    <small *ngFor="let author of item.authors; let i=index"><u>{{author}}</u> <span *ngIf="i!==item.authors.length-1">,</span>&nbsp;</small>
+    <br> <small>{{item.version_date}}</small>
+    <br><small>{{item.type_of_article}}</small>
+    <br><small>{{item.research_status}}</small>
+    <hr>
+    <h6>Abstract</h6>
+    {{item.abstract}}
+    <hr>
+    <h6>Keywords</h6>
+    <small *ngFor="let keyword of item.keywords;let i=index">{{keyword}} <span *ngIf="i!==item.keywords.length-1">,</span> &nbsp;</small>
+  </div>
+  <div class="col-3">
+    <a href="{{item.link}}" target="_blank"><h6>View Article</h6></a>
+  </div>
 </div>

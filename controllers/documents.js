@@ -95,7 +95,7 @@ router.get('/:id', (req,res,next)=> {
     if(err) {
       res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
     }
-    else if(list) {
+    else if(result) {
       res.write(JSON.stringify({success: true, doc:result},null,2));
       res.end();
     }
