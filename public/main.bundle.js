@@ -301,7 +301,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3 dropdown\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <small>{{item.type_of_article}}</small>\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        {{author}} ,\n\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3 dropdown\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n\n  <br>\n  <angular4-multiselect [data]=\"dropdownListResearchScope\" [(ngModel)]=\"selectedResearchScope\" [settings]=\"dropdownSettingsResearchScope\"\n  (onSelect)=\"onItemSelect($event)\"\n  (onDeSelect)=\"OnItemDeSelect($event)\"\n  (onSelectAll)=\"onSelectAll($event)\"\n  (onDeSelectAll)=\"onDeSelectAll($event)\"\n  >\n  <c-item>\n    <ng-template let-item=\"item\">\n      <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n    </ng-template>\n  </c-item>\n</angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <small>{{item.type_of_article}}</small>\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        {{author}} ,\n\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -338,6 +338,9 @@ var SearchDocComponent = (function () {
         this.dropdownListTypeOfDoc = [];
         this.selectedTypeOfDoc = [];
         this.dropdownSettingsTypeOfDoc = {};
+        this.dropdownListResearchScope = [];
+        this.selectedResearchScope = [];
+        this.dropdownSettingsResearchScope = {};
         this.authorsSelected = [];
         this.query = [];
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
@@ -405,6 +408,7 @@ var SearchDocComponent = (function () {
             console.error(error);
         });
         this.bindType();
+        this.bindResearchScope();
     };
     SearchDocComponent.prototype.bindType = function () {
         this.dropdownListTypeOfDoc = [
@@ -424,6 +428,25 @@ var SearchDocComponent = (function () {
             primaryKey: 'id',
         };
     };
+    SearchDocComponent.prototype.bindResearchScope = function () {
+        this.dropdownListResearchScope = [
+            { "id": 1, "name": "Academic" },
+            { "id": 2, "name": "Article" },
+            { "id": 3, "name": "Report" }
+        ];
+        this.selectedResearchScope = [];
+        this.dropdownSettingsResearchScope = {
+            singleSelection: false,
+            text: "Select Research Scope",
+            showCheckbox: true,
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            enableSearchFilter: true,
+            classes: "myclass custom-class",
+            labelKey: 'name',
+            primaryKey: 'id',
+        };
+    };
     SearchDocComponent.prototype.createQuery = function () {
         var selectedAuthors = this.selectedItems.map(function (obj) {
             return { 'authors': obj.name };
@@ -431,12 +454,18 @@ var SearchDocComponent = (function () {
         var selectedType = this.selectedTypeOfDoc.map(function (obj) {
             return { 'type_of_article': obj.name };
         });
+        var selectedResearchScopeItem = this.selectedResearchScope.map(function (obj) {
+            return { 'research_scope': obj.name };
+        });
         this.query = [];
         if (selectedAuthors.length != 0) {
             this.query.push({ $or: selectedAuthors });
         }
         if (selectedType.length != 0) {
             this.query.push({ $or: selectedType });
+        }
+        if (selectedResearchScopeItem.length != 0) {
+            this.query.push({ $or: selectedResearchScopeItem });
         }
         console.log("selected items: " + JSON.stringify(selectedAuthors) + " ** " + JSON.stringify(selectedType) + "***" + JSON.stringify(this.query));
         this.fetchData(this.query);

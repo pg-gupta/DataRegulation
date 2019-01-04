@@ -18,6 +18,9 @@ export class SearchDocComponent implements OnInit {
   dropdownListTypeOfDoc = [];
   selectedTypeOfDoc = [];
   dropdownSettingsTypeOfDoc = {};
+  dropdownListResearchScope = [];
+  selectedResearchScope = [];
+  dropdownSettingsResearchScope = {};
   private newDoc: Document;
   docs: Document[];
   authors: Author[];
@@ -102,6 +105,7 @@ export class SearchDocComponent implements OnInit {
     });
 
     this.bindType();
+    this.bindResearchScope();
   }
 
   public bindType(){
@@ -124,6 +128,27 @@ export class SearchDocComponent implements OnInit {
     };
   }
 
+  public bindResearchScope(){
+    this.dropdownListResearchScope=[
+      {"id":1,"name":"Academic"},
+      {"id":2,"name":"Article"},
+      {"id":3,"name":"Report"}
+    ]
+    this.selectedResearchScope = [
+    ];
+    this.dropdownSettingsResearchScope = {
+      singleSelection: false,
+      text:"Select Research Scope",
+      showCheckbox: true,
+      selectAllText:'Select All',
+      unSelectAllText:'UnSelect All',
+      enableSearchFilter: true,
+      classes:"myclass custom-class",
+      labelKey:'name',
+      primaryKey: 'id',
+    };
+  }
+
   public createQuery(){
     var selectedAuthors= this.selectedItems.map(function(obj){
       return {'authors':obj.name};
@@ -133,12 +158,20 @@ export class SearchDocComponent implements OnInit {
       return {'type_of_article':obj.name};
     });
 
+    var selectedResearchScopeItem= this.selectedResearchScope.map(function(obj){
+      return {'research_scope':obj.name};
+    });
+
     this.query=[];
     if(selectedAuthors.length!=0){
       this.query.push({$or:selectedAuthors});
     }
     if(selectedType.length!=0){
       this.query.push({$or:selectedType});
+    }
+
+    if(selectedResearchScopeItem.length!=0){
+      this.query.push({$or:selectedResearchScopeItem});
     }
 
     console.log("selected items: "+ JSON.stringify(selectedAuthors)+ " ** "+ JSON.stringify(selectedType)+"***"+ JSON.stringify(this.query));
