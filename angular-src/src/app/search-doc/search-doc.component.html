@@ -49,7 +49,7 @@
     <!-- <div class="list-group" *ngFor="let item of lists | myfilter: peopleFilter;"> -->
     <a [routerLink]="['/details', item._id]" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{item.title}}</h5>
+        <h5 class="mb-1" class="article-title">{{item.title}}</h5>
         <!-- <a [routerLink]="['/details', item._id]">{{item.title}}</a> -->
       </div>
       <p class="mb-1">{{item.abstract}}</p>
