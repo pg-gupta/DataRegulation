@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div id="custom-search-input">
+        <div class="input-group">
+          <input [(ngModel)]="searchText"  name="searchDoc" type="text" id="search" type="text" class="search-query form-control" placeholder="Search" />
+          <span class="input-group-btn">
+            <button type="button" disabled>
+              <span class="fa fa-search"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="list-group" *ngFor="let item of events | filter: searchText">
+
+        <!-- <div class="list-group" *ngFor="let item of lists | myfilter: peopleFilter;"> -->
+        <a [routerLink]="['/details', item._id]" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" class="article-title">{{item.title}}</h5>
+            <!-- <a [routerLink]="['/details', item._id]">{{item.title}}</a> -->
+          </div>
+          <p class="mb-1">{{item.summary}}</p>
+          <p class="mb-1">{{item.link}}</p>
+          <p class="mb-1">{{item.location}}</p>
+          <small>{{item.date | date}}</small>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

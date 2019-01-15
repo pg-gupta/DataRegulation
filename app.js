@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 const documents = require('./controllers/documents');
 const authors = require('./controllers/authors');
+const events = require('./controllers/events');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -38,6 +39,7 @@ app.use('/users', users);
 //Routing all HTTP requests to /iitsummaries to bucketlist controller
 app.use('/documents', documents);
 app.use('/authors', authors);
+app.use('/events',events);
 //app.use('/countries',countries);
 
 
