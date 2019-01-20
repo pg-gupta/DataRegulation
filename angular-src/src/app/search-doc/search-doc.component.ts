@@ -33,7 +33,9 @@ export class SearchDocComponent implements OnInit {
 
   public getList() {
     this.docServ.getAll().subscribe(result => {
-      this.docs = result;
+      this.docs = result.sort((a: any, b: any) =>
+      new Date(b.version_date).getTime() - new Date(a.version_date).getTime()
+    );
       //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
       this.peopleFilter={};
     }, error => console.error(error));
@@ -67,7 +69,6 @@ export class SearchDocComponent implements OnInit {
 
 
   public onSubmit() {
-    console.log(this.newDoc.category);
     this.docServ.add(this.newDoc).subscribe(
       response=> {
 

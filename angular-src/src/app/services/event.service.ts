@@ -10,8 +10,8 @@ export class EventService {
 
   constructor(private http: Http) { }
 
-  //private serverApi= 'http://localhost:3000';
-  private serverApi= 'http://dataregulation.azurewebsites.net/';
+  private serverApi= 'http://localhost:3000';
+  //private serverApi= 'http://dataregulation.azurewebsites.net/';
 
   public getAll():Observable<Event[]> {
     let URI = `${this.serverApi}/events/`;

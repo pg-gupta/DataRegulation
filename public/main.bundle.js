@@ -21,7 +21,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, ".bg-blue{\n  background-color: #0081C6 !important;\n}\n", ""]);
+exports.push([module.i, ".bg-blue{\n  background-color: #0081C6 !important;\n}\n\n.nav-tab{\n  font-size: 1.10em;\n}\n\n.nav-title{\n  font-size: 1.35em;\n}\n", ""]);
 
 // exports
 
@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container\">\n    <!--Navbar-->\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-blue\">\n      <a class=\"navbar-brand\" href=\"#\">Data Regulation</a>\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" [routerLink]=\"['/home']\">Home</a>\n\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/events']\">Events & Conference</a>\n          </li>\n        </ul>\n      </div>\n    </nav>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container\">\n    <!--Navbar-->\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-blue\">\n      <span class=\"navbar-brand nav-title\">Data Regulation</span>\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link nav-tab\" [routerLink]=\"['/search']\">Research & News</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [routerLink]=\"['/events']\">Events & Conference</a>\n          </li>\n        </ul>\n      </div>\n    </nav>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -125,10 +125,10 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_13_ng2_search_filter__["a" /* Ng2SearchPipeModule */],
             __WEBPACK_IMPORTED_MODULE_14_angular4_multiselect_dropdown_angular4_multiselect_dropdown__["a" /* AngularMultiSelectModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* RouterModule */].forRoot([
-                { path: '', redirectTo: 'home', pathMatch: 'full' },
+                { path: '', redirectTo: 'search', pathMatch: 'full' },
                 { path: 'search', component: __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__["a" /* SearchDocComponent */], },
                 { path: 'details/:id', component: __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */] },
-                { path: 'home', component: __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */] },
+                //{ path: 'home',component:HomeComponent},
                 { path: 'events', component: __WEBPACK_IMPORTED_MODULE_9__event_event_component__["a" /* EventComponent */] },
                 { path: '**', redirectTo: 'home' }
             ]),
@@ -137,7 +137,6 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__["a" /* SearchDocComponent */],
-            //FilterPipe,
             __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */],
             __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */],
             __WEBPACK_IMPORTED_MODULE_9__event_event_component__["a" /* EventComponent */]
@@ -174,7 +173,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/doc-details/doc-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-9\">\n    <h4 class=\"article-title\">{{item.title}}</h4>\n    <small *ngFor=\"let author of item.authors; let i=index\"><u>{{author}}</u> <span *ngIf=\"i!==item.authors.length-1\">,</span>&nbsp;</small>\n    <br> <small>{{item.version_date}}</small>\n    <br><small>{{item.type_of_article}}</small>\n    <br><small>{{item.research_status}}</small>\n    <hr>\n    <h6>Abstract</h6>\n    {{item.abstract}}\n    <hr>\n    <h6>Keywords</h6>\n    <small *ngFor=\"let keyword of item.keywords;let i=index\">{{keyword}} <span *ngIf=\"i!==item.keywords.length-1\">,</span> &nbsp;</small>\n  </div>\n  <div class=\"col-3\">\n    <a href=\"{{item.link}}\" target=\"_blank\"><h6>View Article</h6></a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-9\">\n    <h4 class=\"article-title\">{{item.title}}</h4>\n    <small *ngFor=\"let author of item.authors; let i=index\">{{author}} <span *ngIf=\"i!==item.authors.length-1\">,</span>&nbsp;</small>\n    <br> <small>{{item.version_date}}</small>\n    <br><small>{{item.type_of_article}}</small>\n    <br><small>{{item.research_status}}</small>\n    <hr>\n    <h6>Abstract</h6>\n    {{item.abstract}}\n    <hr>\n    <h6>Keywords</h6>\n    <small *ngFor=\"let keyword of item.keywords;let i=index\">{{keyword}} <span *ngIf=\"i!==item.keywords.length-1\">,</span> &nbsp;</small>\n    <hr>\n    <a href=\"{{item.link}}\" target=\"_blank\"><u><h6>View Article</h6></u></a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -284,9 +283,8 @@ var EventComponent = (function () {
     EventComponent.prototype.getList = function () {
         var _this = this;
         this.eventServ.getAll().subscribe(function (result) {
-            // this.events = result;
             _this.events = result.sort(function (a, b) {
-                return new Date(a.date).getTime() - new Date(b.date).getTime();
+                return new Date(b.date).getTime() - new Date(a.date).getTime();
             });
         }, function (error) { return console.error(error); });
     };
@@ -387,7 +385,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3 dropdown\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n\n  <br>\n  <angular4-multiselect [data]=\"dropdownListResearchScope\" [(ngModel)]=\"selectedResearchScope\" [settings]=\"dropdownSettingsResearchScope\"\n  (onSelect)=\"onItemSelect($event)\"\n  (onDeSelect)=\"OnItemDeSelect($event)\"\n  (onSelectAll)=\"onSelectAll($event)\"\n  (onDeSelectAll)=\"onDeSelectAll($event)\"\n  >\n  <c-item>\n    <ng-template let-item=\"item\">\n      <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n    </ng-template>\n  </c-item>\n</angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <!-- <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\"> -->\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <small>{{item.type_of_article}}</small>\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        {{author}} ,\n\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3 dropdown\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n\n  <br>\n  <angular4-multiselect [data]=\"dropdownListResearchScope\" [(ngModel)]=\"selectedResearchScope\" [settings]=\"dropdownSettingsResearchScope\"\n  (onSelect)=\"onItemSelect($event)\"\n  (onDeSelect)=\"OnItemDeSelect($event)\"\n  (onSelectAll)=\"onSelectAll($event)\"\n  (onDeSelectAll)=\"onDeSelectAll($event)\"\n  >\n  <c-item>\n    <ng-template let-item=\"item\">\n      <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n    </ng-template>\n  </c-item>\n</angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <p class=\"mb-1\">{{item.version_date}}</p>\n\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        <small>{{author}}</small>\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -434,7 +432,9 @@ var SearchDocComponent = (function () {
     SearchDocComponent.prototype.getList = function () {
         var _this = this;
         this.docServ.getAll().subscribe(function (result) {
-            _this.docs = result;
+            _this.docs = result.sort(function (a, b) {
+                return new Date(b.version_date).getTime() - new Date(a.version_date).getTime();
+            });
             //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
             _this.peopleFilter = {};
         }, function (error) { return console.error(error); });
@@ -463,7 +463,6 @@ var SearchDocComponent = (function () {
     };
     SearchDocComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log(this.newDoc.category);
         this.docServ.add(this.newDoc).subscribe(function (response) {
             if (response.success == true)
                 _this.addList.emit(_this.newDoc);
@@ -629,9 +628,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthorService = (function () {
     function AuthorService(http) {
         this.http = http;
-        //private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulation.azurewebsites.net/';
+        this.serverApi = 'http://localhost:3000';
     }
+    //private serverApi= 'http://dataregulation.azurewebsites.net/';
     AuthorService.prototype.getAll = function () {
         var URI = this.serverApi + "/authors/";
         return this.http.get(URI)
@@ -697,9 +696,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DocService = (function () {
     function DocService(http) {
         this.http = http;
-        //private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulation.azurewebsites.net/';
+        this.serverApi = 'http://localhost:3000';
     }
+    //private serverApi= 'http://dataregulation.azurewebsites.net/';
     DocService.prototype.getAll = function () {
         var URI = this.serverApi + "/documents/";
         return this.http.get(URI)
@@ -724,7 +723,7 @@ var DocService = (function () {
     DocService.prototype.add = function (list) {
         var URI = this.serverApi + "/documents/";
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */];
-        var body = JSON.stringify({ title: list.title, description: list.description, category: list.category });
+        var body = JSON.stringify({ title: list.title, abstract: list.abstract });
         headers.append('Content-Type', 'application/json');
         return this.http.post(URI, body, { headers: headers })
             .map(function (res) { return res.json(); });
@@ -774,9 +773,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var EventService = (function () {
     function EventService(http) {
         this.http = http;
-        //private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulation.azurewebsites.net/';
+        this.serverApi = 'http://localhost:3000';
     }
+    //private serverApi= 'http://dataregulation.azurewebsites.net/';
     EventService.prototype.getAll = function () {
         var URI = this.serverApi + "/events/";
         return this.http.get(URI)

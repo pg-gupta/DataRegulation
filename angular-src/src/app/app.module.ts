@@ -23,10 +23,10 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
     Ng2SearchPipeModule,
     AngularMultiSelectModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '', redirectTo: 'search', pathMatch: 'full' },
       { path: 'search', component: SearchDocComponent,  },
       { path: 'details/:id', component: DocDetailsComponent },
-      { path: 'home',component:HomeComponent},
+      //{ path: 'home',component:HomeComponent},
       { path: 'events',component:EventComponent},
       { path: '**', redirectTo: 'home' }
     ]),
@@ -35,7 +35,6 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
   declarations: [
   AppComponent,
   SearchDocComponent,
-  //FilterPipe,
   DocDetailsComponent,
   HomeComponent,
   EventComponent

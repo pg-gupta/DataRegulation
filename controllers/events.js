@@ -122,4 +122,16 @@ router.post('/query', (req,res,next)=> {
   })
 });
 
+router.post('/deleteAll', (req,res,next) => {
+  event.deleteAll(req.body,(err, result) => {
+    if(err) {
+      res.json({success: false, message: `Failed to deletelist. Error: ${err}`});
+
+    }
+    else
+    res.json({success:true, message: "Deleted successfully."});
+
+  });
+});
+
 module.exports = router;

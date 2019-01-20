@@ -71,6 +71,17 @@ router.post('/insertmany', (req,res,next) => {
   });
 });
 
+router.post('/deleteAll', (req,res,next) => {
+  document.deleteAll(req.body,(err, result) => {
+    if(err) {
+      res.json({success: false, message: `Failed to deletelist. Error: ${err}`});
+    }
+    else
+    res.json({success:true, message: "Deleted successfully."});
+
+  });
+});
+
 //DELETE HTTP method to /bucketlist. Here, we pass in a params which is the object id.
 router.delete('/:id', (req,res,next)=> {
   let id = req.params.id;

@@ -47,6 +47,10 @@ module.exports.addAll=(eventList,callback)=>{
   events.insertMany(eventList, callback);
 }
 
+module.exports.deleteAll=(callback)=>{
+  events.collection.drop(callback);
+}
+
 module.exports.query = (queryExp,callback) => {
   console.log(queryExp);
   console.log(JSON.stringify(queryExp));

@@ -31,6 +31,10 @@ module.exports.getAll = (callback) => {
   documents.find(callback);
 }
 
+module.exports.deleteAll = (callback) => {
+  documents.collection.drop(callback);
+}
+
 //newList.save is used to insert the document into MongoDB
 module.exports.add = (newDoc, callback) => {
   newDoc.save(callback);
@@ -50,39 +54,13 @@ module.exports.getById = (id, callback) => {
 }
 
 module.exports.addAll=(docs,callback)=>{
-  // var papers = [{ title: 'Paper 1', description: "saff", url: "wetewte",doctype:'asdaff',content:'fhjgkgj'  },
-  // { title: 'Paper 2', description: "sfaff", url: "rwtwtet",doctype:'asdaff',content:'fhjgkgj' },
-  // { title: 'Paper 3', description: "twttew", url: "ewrwetey",doctype:'asdaff',content:'fhjgkgj' }];
-
   documents.insertMany(docs, callback);
 }
 
 module.exports.query = (queryExp,callback) => {
-   console.log(queryExp);
-   console.log(JSON.stringify(queryExp));
-
-  // queryExp.forEach(function(message){
-  //     console.log(message);
-  //     console.log(JSON.stringify(message));
-
-// var orquery=[];
-//       for (var key in queryExp) {
-//           var message = queryExp[key];
-//
-//           orquery.push({$or:message});
-//       }
-//
-//   var obj={$and:orquery};
-//        console.log(obj);
-//        console.log(JSON.stringify(obj));
-
-       var obj= {$and:queryExp};
-
-//   var obj={ $and: [
-//   {$or:[{"authors":"Laura Brandimarte"}]},
-//   {$or:[{"type_of_article":"Empirical"}]}
-// ]};
-
+  console.log(queryExp);
+  console.log(JSON.stringify(queryExp));
+  var obj= {$and:queryExp};
   documents.find(obj,callback);
 }
 

@@ -17,9 +17,8 @@ export class EventComponent implements OnInit {
 
   public getList() {
     this.eventServ.getAll().subscribe(result => {
-      // this.events = result;
       this.events = result.sort((a: any, b: any) =>
-      new Date(a.date).getTime() - new Date(b.date).getTime()
+      new Date(b.date).getTime() - new Date(a.date).getTime()
     );
   }, error => console.error(error));
 }

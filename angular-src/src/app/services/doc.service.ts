@@ -10,8 +10,8 @@ export class DocService {
 
   constructor(private http: Http) { }
 
-  //private serverApi= 'http://localhost:3000';
-  private serverApi= 'http://dataregulation.azurewebsites.net/';
+  private serverApi= 'http://localhost:3000';
+  //private serverApi= 'http://dataregulation.azurewebsites.net/';
 
 
   public getAll():Observable<Document[]> {
@@ -41,7 +41,7 @@ export class DocService {
   public add(list: Document) {
     let URI = `${this.serverApi}/documents/`;
     let headers = new Headers;
-    let body = JSON.stringify({title: list.title, description: list.description, category: list.category});
+    let body = JSON.stringify({title: list.title, abstract: list.abstract});
     headers.append('Content-Type', 'application/json');
     return this.http.post(URI, body ,{headers: headers})
     .map(res => res.json());
