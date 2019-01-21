@@ -2,7 +2,7 @@
   <div class="col-9">
     <h4 class="article-title">{{item.title}}</h4>
     <small *ngFor="let author of item.authors; let i=index">{{author}} <span *ngIf="i!==item.authors.length-1">,</span>&nbsp;</small>
-    <br> <small>{{item.version_date}}</small>
+    <br> <small>{{item.version_date | date}}</small>
     <br><small>{{item.type_of_article}}</small>
     <br><small>{{item.research_status}}</small>
     <hr>

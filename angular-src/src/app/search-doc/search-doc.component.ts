@@ -131,9 +131,9 @@ export class SearchDocComponent implements OnInit {
 
   public bindResearchScope(){
     this.dropdownListResearchScope=[
-      {"id":1,"name":"Academic"},
-      {"id":2,"name":"Article"},
-      {"id":3,"name":"Report"}
+      {"id":1,"name":"Academic Research"},
+      {"id":2,"name":"News Articles"},
+      {"id":3,"name":"Report & White Papers"}
     ]
     this.selectedResearchScope = [
     ];
