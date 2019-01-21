@@ -10,8 +10,8 @@ export class EventService {
 
   constructor(private http: Http) { }
 
-  private serverApi= 'http://localhost:3000';
-  //private serverApi= 'http://dataregulation.azurewebsites.net/';
+  //private serverApi= 'http://localhost:3000';
+  private serverApi= 'http://dataregulation.azurewebsites.net/';
 
   public getAll():Observable<Event[]> {
     let URI = `${this.serverApi}/events/`;
@@ -40,7 +40,7 @@ export class EventService {
   public add(event: Event) {
     let URI = `${this.serverApi}/events/`;
     let headers = new Headers;
-    let body = JSON.stringify({name: event.title, age: event.summary});
+    let body = JSON.stringify({name: event.title, age: event.abstract});
     headers.append('Content-Type', 'application/json');
     return this.http.post(URI, body ,{headers: headers})
     .map(res => res.json());

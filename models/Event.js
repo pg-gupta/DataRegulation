@@ -10,10 +10,12 @@ const eventSchema = mongoose.Schema({
     required: true,
     unique: true
   },
-  summary: String,
+  abstract: String,
   link:String,
-  date: Date,
-  location: String
+  start_date: Date,
+  end_date:Date,
+  research_scope: String,
+  geographic_scope: String
 });
 
 //Create a model using mongoose.model and export it

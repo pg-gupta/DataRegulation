@@ -2,11 +2,13 @@
 //Require mongoose package
 const mongoose = require('mongoose');
 
+mongoose.set('useCreateIndex', true);
 //Define Source document with title, description and category
 const documentSchema = mongoose.Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   link:String,
   abstract:String,
@@ -22,10 +24,13 @@ const documentSchema = mongoose.Schema({
   supplementary:String
 });
 
+const keywordSchema= mongoose.Schema({
+  name:String
+});
+
 //Create a model using mongoose.model and export it
 const documents = module.exports = mongoose.model('documents', documentSchema );
-
-
+const keywords=module.exports=mongoose.model('keywords',keywordSchema);
 //BucketList.find() returns all the lists
 module.exports.getAll = (callback) => {
   documents.find(callback);

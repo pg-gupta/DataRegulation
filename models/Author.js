@@ -27,6 +27,10 @@ module.exports.addAll=(authorsarray,callback)=>{
   authors.insertMany(authorsarray, callback);
 }
 
+module.exports.deleteAll = (callback) => {
+  authors.collection.drop(callback);
+}
+
 module.exports.query = (queryex,callback) => {
     authors.find({$or:[{name:"John"},{age:29}]},callback);
 }

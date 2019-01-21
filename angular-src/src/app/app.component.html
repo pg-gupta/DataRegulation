@@ -9,11 +9,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link nav-tab" [routerLink]="['/search']">Research & News</a>
+          <li class="nav-item">
+            <a class="nav-link nav-tab" [ngClass]="{'active': researchTab.isClicked}" (click)="researchTab.isClicked = !researchTab.isClicked; eventsTab.isClicked = !eventsTab.isClicked" [routerLink]="['/search']">Research & News</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-tab" [routerLink]="['/events']">Events & Conference</a>
+            <a class="nav-link nav-tab" [ngClass]="{'active': eventsTab.isClicked}" (click)="eventsTab.isClicked = !eventsTab.isClicked; researchTab.isClicked = !researchTab.isClicked" [routerLink]="['/events']">Events & Conference</a>
           </li>
         </ul>
       </div>

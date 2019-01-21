@@ -52,6 +52,17 @@ router.post('/insertmany', (req,res,next) => {
   });
 });
 
+router.post('/deleteAll', (req,res,next) => {
+  authors.deleteAll(req.body,(err, result) => {
+    if(err) {
+      res.json({success: false, message: `Failed to deletelist. Error: ${err}`});
+    }
+    else
+    res.json({success:true, message: "Deleted successfully."});
+
+  });
+});
+
 router.post('/insertauthor', (req,res,next) => {
   console.log(req.body);
   authors.add(req.body,(err, list) => {

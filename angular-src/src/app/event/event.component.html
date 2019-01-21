@@ -22,10 +22,11 @@
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1" class="article-title">{{item.title}}</h5>
           </div>
-          <p class="mb-1">{{item.summary}}</p>
-          <p class="mb-1">{{item.link}}</p>
-          <p class="mb-1">{{item.location}}</p>
-          <small>{{item.date | date}}</small>
+          <p class="mb-1">{{item.abstract}}</p>
+          <a href="{{item.link}}" target="_blank"><u><h6>{{item.link}}</h6></u></a>
+          <p class="mb-1">{{item.geographic_scope}}</p>
+          <small>{{item.start_date | date}}</small> - <small>{{item.end_date | date}}</small>
+
         </a>
       </div>
     </div>
