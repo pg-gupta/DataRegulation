@@ -517,9 +517,9 @@ var SearchDocComponent = (function () {
     };
     SearchDocComponent.prototype.bindResearchScope = function () {
         this.dropdownListResearchScope = [
-            { "id": 1, "name": "Academic Research" },
-            { "id": 2, "name": "News Articles" },
-            { "id": 3, "name": "Report & White Papers" }
+            { "id": 1, "name": "Academic Research", "value": "Academic" },
+            { "id": 2, "name": "News Articles", "value": "News" },
+            { "id": 3, "name": "Report & White Papers", "value": "Report" }
         ];
         this.selectedResearchScope = [];
         this.dropdownSettingsResearchScope = {
@@ -542,7 +542,7 @@ var SearchDocComponent = (function () {
             return { 'type_of_article': obj.name };
         });
         var selectedResearchScopeItem = this.selectedResearchScope.map(function (obj) {
-            return { 'research_scope': obj.name };
+            return { 'research_scope': obj.value };
         });
         this.query = [];
         if (selectedAuthors.length != 0) {
