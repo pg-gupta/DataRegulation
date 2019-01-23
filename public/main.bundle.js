@@ -405,7 +405,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3 dropdown\">\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n\n  <br>\n  <angular4-multiselect [data]=\"dropdownListResearchScope\" [(ngModel)]=\"selectedResearchScope\" [settings]=\"dropdownSettingsResearchScope\"\n  (onSelect)=\"onItemSelect($event)\"\n  (onDeSelect)=\"OnItemDeSelect($event)\"\n  (onSelectAll)=\"onSelectAll($event)\"\n  (onDeSelectAll)=\"onDeSelectAll($event)\"\n  >\n  <c-item>\n    <ng-template let-item=\"item\">\n      <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n    </ng-template>\n  </c-item>\n</angular4-multiselect>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <p class=\"mb-1\">{{item.version_date | date}}</p>\n\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        <small>{{author}}</small>\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3 dropdown\">\n\n      <input type=\"checkbox\" [(ngModel)]=\"isAcademicChecked\" (change)=\"checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked); resetType(isAcademicChecked)\" />\n      <label for=\"\">Academic Research</label>\n      <br>\n      <input type=\"checkbox\" [(ngModel)]=\"isNewsChecked\" (change)=\"checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked)\"  />\n      <label for=\"\">News Article</label>\n      <br>\n      <input type=\"checkbox\" [(ngModel)]=\"isReportChecked\" (change)=\"checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked)\" />\n      <label for=\"\">Report & White Papers</label>\n      <br>\n      <br>\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n  <br>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <p class=\"mb-1\">{{item.version_date | date}}</p>\n\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        <small>{{author}}</small>\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -533,6 +533,22 @@ var SearchDocComponent = (function () {
             primaryKey: 'id',
         };
     };
+    SearchDocComponent.prototype.checkResearchScopeValue = function (isAcademicChecked, isNewsChecked, isReportChecked) {
+        this.selectedResearchScope = [];
+        if (isAcademicChecked) {
+            this.selectedResearchScope.push({ 'research_scope': 'Academic' });
+        }
+        if (isNewsChecked) {
+            this.selectedResearchScope.push({ 'research_scope': 'News' });
+        }
+        if (isReportChecked) {
+            this.selectedResearchScope.push({ 'research_scope': 'Report' });
+        }
+        if (isAcademicChecked == undefined || isAcademicChecked == false) {
+            this.selectedTypeOfDoc = [];
+        }
+        this.createQuery();
+    };
     SearchDocComponent.prototype.bindResearchScope = function () {
         this.dropdownListResearchScope = [
             { "id": 1, "name": "Academic Research", "value": "Academic" },
@@ -559,9 +575,10 @@ var SearchDocComponent = (function () {
         var selectedType = this.selectedTypeOfDoc.map(function (obj) {
             return { 'type_of_article': obj.name };
         });
-        var selectedResearchScopeItem = this.selectedResearchScope.map(function (obj) {
-            return { 'research_scope': obj.value };
-        });
+        // var selectedResearchScopeItem= this.selectedResearchScope.map(function(obj){
+        //   return {'research_scope':obj.value};
+        // });
+        var selectedResearchScopeItem = this.selectedResearchScope;
         this.query = [];
         if (selectedAuthors.length != 0) {
             this.query.push({ $or: selectedAuthors });

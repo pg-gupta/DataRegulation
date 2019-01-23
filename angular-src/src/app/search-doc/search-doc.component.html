@@ -17,6 +17,17 @@
   <br>
   <div class="row">
     <div class="col-md-3 dropdown">
+
+      <input type="checkbox" [(ngModel)]="isAcademicChecked" (change)="checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked); resetType(isAcademicChecked)" />
+      <label for="">Academic Research</label>
+      <br>
+      <input type="checkbox" [(ngModel)]="isNewsChecked" (change)="checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked)"  />
+      <label for="">News Article</label>
+      <br>
+      <input type="checkbox" [(ngModel)]="isReportChecked" (change)="checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked)" />
+      <label for="">Report & White Papers</label>
+      <br>
+      <br>
       <angular4-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
       (onSelect)="onItemSelect($event)"
       (onDeSelect)="OnItemDeSelect($event)"
@@ -30,7 +41,7 @@
       </c-item>
     </angular4-multiselect>
     <br>
-    <angular4-multiselect [data]="dropdownListTypeOfDoc" [(ngModel)]="selectedTypeOfDoc" [settings]="dropdownSettingsTypeOfDoc"
+    <angular4-multiselect [data]="dropdownListTypeOfDoc" *ngIf="isAcademicChecked" [(ngModel)]="selectedTypeOfDoc" [settings]="dropdownSettingsTypeOfDoc"
     (onSelect)="onItemSelect($event)"
     (onDeSelect)="OnItemDeSelect($event)"
     (onSelectAll)="onSelectAll($event)"
@@ -42,20 +53,7 @@
       </ng-template>
     </c-item>
   </angular4-multiselect>
-
   <br>
-  <angular4-multiselect [data]="dropdownListResearchScope" [(ngModel)]="selectedResearchScope" [settings]="dropdownSettingsResearchScope"
-  (onSelect)="onItemSelect($event)"
-  (onDeSelect)="OnItemDeSelect($event)"
-  (onSelectAll)="onSelectAll($event)"
-  (onDeSelectAll)="onDeSelectAll($event)"
-  >
-  <c-item>
-    <ng-template let-item="item">
-      <label style="color: #333;min-width: 150px;">{{item.name}}</label>
-    </ng-template>
-  </c-item>
-</angular4-multiselect>
 </div>
 <div class="col-md-9">
   <div class="list-group" *ngFor="let item of docs | filter: searchText">
