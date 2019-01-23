@@ -27,7 +27,7 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
       { path: 'search', component: SearchDocComponent,  },
       { path: 'details/:id', component: DocDetailsComponent },
       //{ path: 'home',component:HomeComponent},
-      { path: 'events',component:EventComponent},
+      { path: 'eventsconf',component:EventComponent},
       { path: '**', redirectTo: 'home' }
     ]),
   ],
