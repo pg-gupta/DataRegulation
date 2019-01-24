@@ -16,16 +16,12 @@
 
   <br>
   <div class="row">
-    <div class="col-md-3 dropdown">
-
-      <input type="checkbox" [(ngModel)]="isAcademicChecked" (change)="checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked); resetType(isAcademicChecked)" />
-      <label for="">Academic Research</label>
-      <br>
-      <input type="checkbox" [(ngModel)]="isNewsChecked" (change)="checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked)"  />
-      <label for="">News Article</label>
-      <br>
-      <input type="checkbox" [(ngModel)]="isReportChecked" (change)="checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked)" />
-      <label for="">Report & White Papers</label>
+    <div class="col-md-3">
+      <div class="btn-group-vertical container">
+        <button type="button" class="btn btn-outline-primary" (click)="showAcademicResearchDocs(true,false,false)" name="AcademicResearch">Academic Research</button>
+        <button type="button" class="btn btn-outline-primary" (click)="showAcademicResearchDocs(false,true,false)" name="NewsArticles">News Articles</button>
+        <button type="button" class="btn btn-outline-primary" (click)="showAcademicResearchDocs(false,false,true)" name="ReportsWhitepapers">Reports & White Papers</button>
+      </div>
       <br>
       <br>
       <angular4-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
@@ -34,7 +30,7 @@
       (onSelectAll)="onSelectAll($event)"
       (onDeSelectAll)="onDeSelectAll($event)"
       >
-      <c-item>
+      <c-item class="dr-dropdown">
         <ng-template let-item="item">
           <label style="color: #333;min-width: 150px;">{{item.name}}</label>
         </ng-template>

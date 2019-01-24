@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container\">\n    <!--Navbar-->\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-blue\">\n      <span class=\"navbar-brand nav-title\">Data Regulation</span>\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': researchTab.isClicked}\" (click)=researchActive() [routerLink]=\"['/search']\">Research & News</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': eventsTab.isClicked}\" (click)=EventsAndConferenceActive() [routerLink]=\"['/eventsconf']\">Events & Conference</a>\n          </li>\n        </ul>\n      </div>\n    </nav>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container\">\n    <!--Navbar-->\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-blue\">\n      <span class=\"navbar-brand nav-title\">Data Regulation</span>\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': researchTab.isClicked}\" (click)=researchActive() [routerLink]=\"['/search']\">Research & News</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': eventsTab.isClicked}\" (click)=EventsAndConferenceActive() [routerLink]=\"['/eventsconf']\">Events & Conferences</a>\n          </li>\n        </ul>\n      </div>\n    </nav>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -271,7 +271,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/event/event.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"list-group\" *ngFor=\"let item of events | filter: searchText\">\n        <a class=\"list-group-item list-group-item-action flex-column align-items-start\">\n          <div class=\"d-flex w-100 justify-content-between\">\n            <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n          </div>\n          <p class=\"mb-1\">{{item.abstract}}</p>\n          <a href=\"{{item.link}}\" target=\"_blank\"><u><h6>{{item.link}}</h6></u></a>\n          <p class=\"mb-1\">{{item.geographic_scope}}</p>\n          <small>{{item.start_date | date}}</small> - <small>{{item.end_date | date}}</small>\n\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div class=\"list-group\" *ngFor=\"let item of events | filter: searchText\">\n        <a class=\"list-group-item list-group-item-action flex-column align-items-start\">\n          <div class=\"d-flex w-100 justify-content-between\">\n            <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n          </div>\n          <p class=\"mb-1\">{{item.abstract}}</p>\n          <a href=\"{{item.link}}\" target=\"_blank\"><u><h6>{{item.link}}</h6></u></a>\n          <p class=\"mb-1\"> <span class=\"fa fa-map-marker\" aria-hidden=\"true\"></span> {{item.geographic_scope}}</p>\n          <span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> <small>{{item.start_date | date}}</small> - <small>{{item.end_date | date}}</small>\n\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -392,7 +392,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, ".push-button-down {\n\tmargin-top: 5%;\n}\n\n/* #search {\nwidth: 40%;\nmargin-left: 90%;\n} */\n\n#custom-search-input {\n\tmargin:0;\n\tmargin-top: 10px;\n\tpadding: 0;\n\tmargin-left: 277px;\n}\n\n#custom-search-input .search-query {\n\twidth:100%;\n\tpadding-right: 3px;\n\tpadding-left: 15px;\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 0;\n}\n\n#custom-search-input button {\n\tborder: 0;\n\tbackground: none;\n\t/** belows styles are working good */\n\tpadding: 2px 5px;\n\tmargin-top: 2px;\n\tposition: absolute;\n\tright:0;\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 3px;\n\tcolor:#D9230F;\n\tcursor: unset;\n\tz-index: 2;\n}\n\n.search-query:focus{\n\tz-index: 0;\n}\n\n.bg-blue{\n  background-color: #0081C6 !important;\n}\n\n.article-title{\n\tcolor: #0081C6\n}\n", ""]);
+exports.push([module.i, ".push-button-down {\n\tmargin-top: 5%;\n}\n\n/* #search {\nwidth: 40%;\nmargin-left: 90%;\n} */\n\n#custom-search-input {\n\tmargin:0;\n\tmargin-top: 10px;\n\tpadding: 0;\n\tmargin-left: 277px;\n}\n\n#custom-search-input .search-query {\n\twidth:100%;\n\tpadding-right: 3px;\n\tpadding-left: 15px;\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 0;\n}\n\n#custom-search-input button {\n\tborder: 0;\n\tbackground: none;\n\t/** belows styles are working good */\n\tpadding: 2px 5px;\n\tmargin-top: 2px;\n\tposition: absolute;\n\tright:0;\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 3px;\n\tcolor:#D9230F;\n\tcursor: unset;\n\tz-index: 2;\n}\n\n.search-query:focus{\n\tz-index: 0;\n}\n\n.bg-blue{\n\tbackground-color: #0081C6 !important;\n}\n\n.article-title{\n\tcolor: #0081C6\n}\n\n.btn-outline-primary {\n\tcolor:#0081C6 !important;\n\tborder-color:#0081C6;\n\tfont-family: sans-serif;\n\tfont-size: medium;\n\tmargin-left: -27px !important;\n\tborder-radius: 4px !important;\n}\n\n\n.btn-outline-primary:hover {\n\tbackground-color: #0081C6 !important;\n\tcolor: white !important;\n}\n\n.btn-outline-primary:active:focus{\n\tbackground-color: #0081C6 !important;\n}\n\n.dr-dropdown{\n\tmargin-left: -11px;\n}\n\n.cuppa-dropdown{\n\tmargin-left: -11px !important;\n}\n", ""]);
 
 // exports
 
@@ -405,7 +405,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3 dropdown\">\n\n      <input type=\"checkbox\" [(ngModel)]=\"isAcademicChecked\" (change)=\"checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked); resetType(isAcademicChecked)\" />\n      <label for=\"\">Academic Research</label>\n      <br>\n      <input type=\"checkbox\" [(ngModel)]=\"isNewsChecked\" (change)=\"checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked)\"  />\n      <label for=\"\">News Article</label>\n      <br>\n      <input type=\"checkbox\" [(ngModel)]=\"isReportChecked\" (change)=\"checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked)\" />\n      <label for=\"\">Report & White Papers</label>\n      <br>\n      <br>\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n  <br>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <p class=\"mb-1\">{{item.version_date | date}}</p>\n\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        <small>{{author}}</small>\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <div class=\"btn-group-vertical container\">\n        <button type=\"button\" class=\"btn btn-outline-primary\" (click)=\"showAcademicResearchDocs(true,false,false)\" name=\"AcademicResearch\">Academic Research</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" (click)=\"showAcademicResearchDocs(false,true,false)\" name=\"NewsArticles\">News Articles</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" (click)=\"showAcademicResearchDocs(false,false,true)\" name=\"ReportsWhitepapers\">Reports & White Papers</button>\n      </div>\n      <br>\n      <br>\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item class=\"dr-dropdown\">\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n  <br>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <p class=\"mb-1\">{{item.version_date | date}}</p>\n\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        <small>{{author}}</small>\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -447,6 +447,7 @@ var SearchDocComponent = (function () {
         this.dropdownSettingsResearchScope = {};
         this.authorsSelected = [];
         this.query = [];
+        this.isAcademicChecked = false;
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
     }
     SearchDocComponent.prototype.getList = function () {
@@ -505,7 +506,7 @@ var SearchDocComponent = (function () {
                 selectAllText: 'Select All',
                 unSelectAllText: 'UnSelect All',
                 enableSearchFilter: true,
-                classes: "myclass custom-class",
+                classes: "",
                 labelKey: 'name',
                 primaryKey: '_id',
             };
@@ -532,6 +533,24 @@ var SearchDocComponent = (function () {
             labelKey: 'name',
             primaryKey: 'id',
         };
+    };
+    SearchDocComponent.prototype.showAcademicResearchDocs = function (isAcademicChecked, isNewsChecked, isReportChecked) {
+        this.selectedResearchScope = [];
+        if (isAcademicChecked) {
+            this.selectedResearchScope.push({ 'research_scope': 'Academic' });
+            this.isAcademicChecked = true;
+        }
+        else if (isNewsChecked) {
+            this.selectedResearchScope.push({ 'research_scope': 'News' });
+        }
+        else if (isReportChecked) {
+            this.selectedResearchScope.push({ 'research_scope': 'Report' });
+        }
+        if (isAcademicChecked == undefined || isAcademicChecked == false) {
+            this.isAcademicChecked = false;
+            this.selectedTypeOfDoc = [];
+        }
+        this.createQuery();
     };
     SearchDocComponent.prototype.checkResearchScopeValue = function (isAcademicChecked, isNewsChecked, isReportChecked) {
         this.selectedResearchScope = [];
@@ -596,7 +615,9 @@ var SearchDocComponent = (function () {
         var _this = this;
         if (queryObj.length != 0) {
             this.docServ.query(queryObj).subscribe(function (response) {
-                _this.docs = response;
+                _this.docs = response.sort(function (a, b) {
+                    return new Date(b.version_date).getTime() - new Date(a.version_date).getTime();
+                });
             }, function (error) { return console.error(error); });
         }
         else {

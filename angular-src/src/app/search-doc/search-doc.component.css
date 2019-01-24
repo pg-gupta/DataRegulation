@@ -48,9 +48,36 @@ margin-left: 90%;
 }
 
 .bg-blue{
-  background-color: #0081C6 !important;
+	background-color: #0081C6 !important;
 }
 
 .article-title{
 	color: #0081C6
+}
+
+.btn-outline-primary {
+	color:#0081C6 !important;
+	border-color:#0081C6;
+	font-family: sans-serif;
+	font-size: medium;
+	margin-left: -27px !important;
+	border-radius: 4px !important;
+}
+
+
+.btn-outline-primary:hover {
+	background-color: #0081C6 !important;
+	color: white !important;
+}
+
+.btn-outline-primary:active:focus{
+	background-color: #0081C6 !important;
+}
+
+.dr-dropdown{
+	margin-left: -11px;
+}
+
+.cuppa-dropdown{
+	margin-left: -11px !important;
 }

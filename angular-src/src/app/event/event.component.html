@@ -24,8 +24,8 @@
           </div>
           <p class="mb-1">{{item.abstract}}</p>
           <a href="{{item.link}}" target="_blank"><u><h6>{{item.link}}</h6></u></a>
-          <p class="mb-1">{{item.geographic_scope}}</p>
-          <small>{{item.start_date | date}}</small> - <small>{{item.end_date | date}}</small>
+          <p class="mb-1"> <span class="fa fa-map-marker" aria-hidden="true"></span> {{item.geographic_scope}}</p>
+          <span class="fa fa-calendar" aria-hidden="true"></span> <small>{{item.start_date | date}}</small> - <small>{{item.end_date | date}}</small>
 
         </a>
       </div>

@@ -27,6 +27,7 @@ export class SearchDocComponent implements OnInit {
   peopleFilter: any;
   authorsSelected:string[]=[];
   query=[];
+  isAcademicChecked=false;
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
   constructor(private docServ: DocService,private authorService:AuthorService, private router: Router) {
   }
@@ -97,7 +98,7 @@ ngOnInit(){
       selectAllText:'Select All',
       unSelectAllText:'UnSelect All',
       enableSearchFilter: true,
-      classes:"myclass custom-class",
+      classes:"",
       labelKey:'name',
       primaryKey: '_id',
     };
@@ -127,6 +128,28 @@ public bindType(){
     labelKey:'name',
     primaryKey: 'id',
   };
+}
+
+public showAcademicResearchDocs(isAcademicChecked,isNewsChecked,isReportChecked){
+  this.selectedResearchScope=[];
+  if(isAcademicChecked){
+    this.selectedResearchScope.push({'research_scope':'Academic'});
+    this.isAcademicChecked=true;
+  }
+  else if(isNewsChecked){
+    this.selectedResearchScope.push({'research_scope':'News'});
+  }
+  else
+  if(isReportChecked){
+    this.selectedResearchScope.push({'research_scope':'Report'});
+  }
+
+  if(isAcademicChecked==undefined || isAcademicChecked==false){
+    this.isAcademicChecked=false;
+    this.selectedTypeOfDoc=[];
+  }
+
+  this.createQuery();
 }
 
 public checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked){
@@ -205,12 +228,14 @@ public createQuery(){
 public fetchData(queryObj){
   if(queryObj.length!=0){
     this.docServ.query(queryObj).subscribe(response=>{
-      this.docs=response;
-    },error=>console.error(error))
-  }
-  else{
-    this.getList();
-  }
+      this.docs=response.sort((a: any, b: any) =>
+      new Date(b.version_date).getTime() - new Date(a.version_date).getTime()
+    );
+  },error=>console.error(error))
+}
+else{
+  this.getList();
+}
 }
 onItemSelect(item:any){
   // console.log(item);
