@@ -98,16 +98,17 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("./node_modules/@angular/http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__ = __webpack_require__("./src/app/search-doc/search-doc.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__ = __webpack_require__("./src/app/doc-details/doc-details.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__event_event_component__ = __webpack_require__("./src/app/event/event.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_doc_service__ = __webpack_require__("./src/app/services/doc.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_event_service__ = __webpack_require__("./src/app/services/event.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_search_filter__ = __webpack_require__("./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angular4_multiselect_dropdown_angular4_multiselect_dropdown__ = __webpack_require__("./node_modules/angular4-multiselect-dropdown/angular4-multiselect-dropdown.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("./node_modules/@angular/common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__search_doc_search_doc_component__ = __webpack_require__("./src/app/search-doc/search-doc.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__doc_details_doc_details_component__ = __webpack_require__("./src/app/doc-details/doc-details.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__event_event_component__ = __webpack_require__("./src/app/event/event.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_doc_service__ = __webpack_require__("./src/app/services/doc.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_event_service__ = __webpack_require__("./src/app/services/event.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ng2_search_filter__ = __webpack_require__("./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angular4_multiselect_dropdown_angular4_multiselect_dropdown__ = __webpack_require__("./node_modules/angular4-multiselect-dropdown/angular4-multiselect-dropdown.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -115,6 +116,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -142,29 +144,30 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_13_ng2_search_filter__["a" /* Ng2SearchPipeModule */],
-            __WEBPACK_IMPORTED_MODULE_14_angular4_multiselect_dropdown_angular4_multiselect_dropdown__["a" /* AngularMultiSelectModule */],
+            __WEBPACK_IMPORTED_MODULE_14_ng2_search_filter__["a" /* Ng2SearchPipeModule */],
+            __WEBPACK_IMPORTED_MODULE_15_angular4_multiselect_dropdown_angular4_multiselect_dropdown__["a" /* AngularMultiSelectModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* RouterModule */].forRoot([
                 { path: '', redirectTo: 'search', pathMatch: 'full' },
-                { path: 'search', component: __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__["a" /* SearchDocComponent */], },
-                { path: 'details/:id', component: __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */] },
+                { path: 'search', component: __WEBPACK_IMPORTED_MODULE_7__search_doc_search_doc_component__["a" /* SearchDocComponent */], },
+                { path: 'details/:id', component: __WEBPACK_IMPORTED_MODULE_8__doc_details_doc_details_component__["a" /* DocDetailsComponent */] },
                 //{ path: 'home',component:HomeComponent},
-                { path: 'eventsconf', component: __WEBPACK_IMPORTED_MODULE_9__event_event_component__["a" /* EventComponent */] },
+                { path: 'eventsconf', component: __WEBPACK_IMPORTED_MODULE_10__event_event_component__["a" /* EventComponent */] },
                 { path: '**', redirectTo: 'home' }
             ]),
         ],
         //Components are added here
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__search_doc_search_doc_component__["a" /* SearchDocComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__event_event_component__["a" /* EventComponent */]
+            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_7__search_doc_search_doc_component__["a" /* SearchDocComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__doc_details_doc_details_component__["a" /* DocDetailsComponent */],
+            __WEBPACK_IMPORTED_MODULE_9__home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__event_event_component__["a" /* EventComponent */]
         ],
         //All the modules are declared as imports
         //All the services go here.
-        providers: [__WEBPACK_IMPORTED_MODULE_10__services_doc_service__["a" /* DocService */], __WEBPACK_IMPORTED_MODULE_11__services_author_service__["a" /* AuthorService */], __WEBPACK_IMPORTED_MODULE_12__services_event_service__["a" /* EventService */]],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
+        providers: [__WEBPACK_IMPORTED_MODULE_11__services_doc_service__["a" /* DocService */], __WEBPACK_IMPORTED_MODULE_12__services_author_service__["a" /* AuthorService */], __WEBPACK_IMPORTED_MODULE_13__services_event_service__["a" /* EventService */], { provide: __WEBPACK_IMPORTED_MODULE_5__angular_common__["a" /* LocationStrategy */], useClass: __WEBPACK_IMPORTED_MODULE_5__angular_common__["b" /* HashLocationStrategy */] }
+        ],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
@@ -193,7 +196,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/doc-details/doc-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-9\">\n    <h4 class=\"article-title\">{{item.title}}</h4>\n      <span class=\"fa fa-user\" aria-hidden=\"true\"></span> <small *ngFor=\"let author of item.authors; let i=index\">{{author}} <span *ngIf=\"i!==item.authors.length-1\">,</span>&nbsp;</small>\n    <br>   <span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> <small>{{item.version_date | date}}</small>\n    <br><small>{{item.type_of_article}}</small>\n    <br><small>{{item.research_status}}</small>\n    <hr>\n    <h6>Abstract</h6>\n    {{item.abstract}}\n    <hr>\n    <h6>Keywords</h6>\n    <small *ngFor=\"let keyword of item.keywords;let i=index\">{{keyword}} <span *ngIf=\"i!==item.keywords.length-1\">,</span> &nbsp;</small>\n    <hr>\n    <a href=\"{{item.link}}\" target=\"_blank\"><u><h6>View Article</h6></u></a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-9\">\n    <h4 class=\"article-title\">{{item.title}}</h4>\n      <span class=\"fa fa-user\" aria-hidden=\"true\"></span> <small *ngFor=\"let author of item.authors; let i=index\">{{author}}<span *ngIf=\"i!==item.authors.length-1\">,</span>&nbsp;</small>\n    <br>   <span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> <small>{{item.version_date | date}}</small>\n    <br><small>{{item.type_of_article}}</small>\n    <br><small>{{item.research_status}}</small>\n    <hr>\n    <h6>Abstract</h6>\n    {{item.abstract}}\n    <hr>\n    <h6>Keywords</h6>\n    <small *ngFor=\"let keyword of item.keywords;let i=index\">{{keyword}}<span *ngIf=\"i!==item.keywords.length-1\">,</span> &nbsp;</small>\n    <hr>\n    <a href=\"{{item.link}}\" target=\"_blank\"><u><h6>View Article</h6></u></a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -451,7 +454,7 @@ var SearchDocComponent = (function () {
         this.isAcademicPressed = false;
         this.isNewsArticlePressed = false;
         this.isReportsPressed = false;
-        this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
+        this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]();
     }
     SearchDocComponent.prototype.getList = function () {
         var _this = this;
@@ -644,11 +647,11 @@ var SearchDocComponent = (function () {
 }());
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* ViewChild */])('AcademicBtn'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* ElementRef */]) === "function" && _a || Object)
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* ElementRef */]) === "function" && _a || Object)
 ], SearchDocComponent.prototype, "AcademicBtn", void 0);
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Output */])(),
-    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]) === "function" && _b || Object)
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]) === "function" && _b || Object)
 ], SearchDocComponent.prototype, "addList", void 0);
 SearchDocComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
@@ -723,7 +726,7 @@ var AuthorService = (function () {
     return AuthorService;
 }());
 AuthorService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Injectable */])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object])
 ], AuthorService);
 
@@ -800,7 +803,7 @@ var DocService = (function () {
     return DocService;
 }());
 DocService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Injectable */])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object])
 ], DocService);
 
@@ -868,7 +871,7 @@ var EventService = (function () {
     return EventService;
 }());
 EventService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Injectable */])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object])
 ], EventService);
 

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { SearchDocComponent } from './search-doc/search-doc.component';
 import { DocDetailsComponent } from './doc-details/doc-details.component';
@@ -42,7 +43,8 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
 //All the modules are declared as imports
 
 //All the services go here.
-providers: [DocService,AuthorService,EventService],
+providers: [DocService,AuthorService,EventService,{provide: LocationStrategy, useClass: HashLocationStrategy}
+],
 bootstrap: [AppComponent]
 })
 export class AppModule { }
