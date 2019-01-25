@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef  } from '@angular/core';
 import { Document } from '../models/Document';
 import { DocService } from '../services/doc.service';
 import { Author } from '../models/Author';
@@ -28,6 +28,10 @@ export class SearchDocComponent implements OnInit {
   authorsSelected:string[]=[];
   query=[];
   isAcademicChecked=false;
+  isAcademicPressed=false;
+  isNewsArticlePressed=false;
+  isReportsPressed=false;
+  @ViewChild('AcademicBtn') AcademicBtn: ElementRef;
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
   constructor(private docServ: DocService,private authorService:AuthorService, private router: Router) {
   }
@@ -85,7 +89,10 @@ onClick() {
 }
 ngOnInit(){
 
-  this.getList();
+  let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
+      el.click();
+
+  //this.getList();
   this.authorService.getAll().subscribe(result=>{
     this.authors=result;
     this.dropdownList=this.authors;
@@ -135,13 +142,25 @@ public showAcademicResearchDocs(isAcademicChecked,isNewsChecked,isReportChecked)
   if(isAcademicChecked){
     this.selectedResearchScope.push({'research_scope':'Academic'});
     this.isAcademicChecked=true;
+    this.isAcademicPressed=true;
+    this.isNewsArticlePressed=false;
+    this.isReportsPressed=false;
+
   }
   else if(isNewsChecked){
     this.selectedResearchScope.push({'research_scope':'News'});
+    this.isNewsArticlePressed=true;
+    this.isAcademicPressed=false;
+    this.isReportsPressed=false;
+
+
   }
   else
   if(isReportChecked){
     this.selectedResearchScope.push({'research_scope':'Report'});
+    this.isNewsArticlePressed=false;
+    this.isAcademicPressed=false;
+    this.isReportsPressed=true;
   }
 
   if(isAcademicChecked==undefined || isAcademicChecked==false){
@@ -151,28 +170,6 @@ public showAcademicResearchDocs(isAcademicChecked,isNewsChecked,isReportChecked)
 
   this.createQuery();
 }
-
-public checkResearchScopeValue(isAcademicChecked,isNewsChecked,isReportChecked){
-  this.selectedResearchScope=[];
-  if(isAcademicChecked){
-    this.selectedResearchScope.push({'research_scope':'Academic'});
-  }
-
-  if(isNewsChecked){
-    this.selectedResearchScope.push({'research_scope':'News'});
-  }
-
-  if(isReportChecked){
-    this.selectedResearchScope.push({'research_scope':'Report'});
-  }
-
-  if(isAcademicChecked==undefined || isAcademicChecked==false){
-    this.selectedTypeOfDoc=[];
-  }
-
-  this.createQuery();
-}
-
 
 public bindResearchScope(){
   this.dropdownListResearchScope=[

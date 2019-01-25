@@ -193,7 +193,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/doc-details/doc-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-9\">\n    <h4 class=\"article-title\">{{item.title}}</h4>\n    <small *ngFor=\"let author of item.authors; let i=index\">{{author}} <span *ngIf=\"i!==item.authors.length-1\">,</span>&nbsp;</small>\n    <br> <small>{{item.version_date | date}}</small>\n    <br><small>{{item.type_of_article}}</small>\n    <br><small>{{item.research_status}}</small>\n    <hr>\n    <h6>Abstract</h6>\n    {{item.abstract}}\n    <hr>\n    <h6>Keywords</h6>\n    <small *ngFor=\"let keyword of item.keywords;let i=index\">{{keyword}} <span *ngIf=\"i!==item.keywords.length-1\">,</span> &nbsp;</small>\n    <hr>\n    <a href=\"{{item.link}}\" target=\"_blank\"><u><h6>View Article</h6></u></a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-9\">\n    <h4 class=\"article-title\">{{item.title}}</h4>\n      <span class=\"fa fa-user\" aria-hidden=\"true\"></span> <small *ngFor=\"let author of item.authors; let i=index\">{{author}} <span *ngIf=\"i!==item.authors.length-1\">,</span>&nbsp;</small>\n    <br>   <span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> <small>{{item.version_date | date}}</small>\n    <br><small>{{item.type_of_article}}</small>\n    <br><small>{{item.research_status}}</small>\n    <hr>\n    <h6>Abstract</h6>\n    {{item.abstract}}\n    <hr>\n    <h6>Keywords</h6>\n    <small *ngFor=\"let keyword of item.keywords;let i=index\">{{keyword}} <span *ngIf=\"i!==item.keywords.length-1\">,</span> &nbsp;</small>\n    <hr>\n    <a href=\"{{item.link}}\" target=\"_blank\"><u><h6>View Article</h6></u></a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -392,7 +392,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, ".push-button-down {\n\tmargin-top: 5%;\n}\n\n/* #search {\nwidth: 40%;\nmargin-left: 90%;\n} */\n\n#custom-search-input {\n\tmargin:0;\n\tmargin-top: 10px;\n\tpadding: 0;\n\tmargin-left: 277px;\n}\n\n#custom-search-input .search-query {\n\twidth:100%;\n\tpadding-right: 3px;\n\tpadding-left: 15px;\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 0;\n}\n\n#custom-search-input button {\n\tborder: 0;\n\tbackground: none;\n\t/** belows styles are working good */\n\tpadding: 2px 5px;\n\tmargin-top: 2px;\n\tposition: absolute;\n\tright:0;\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 3px;\n\tcolor:#D9230F;\n\tcursor: unset;\n\tz-index: 2;\n}\n\n.search-query:focus{\n\tz-index: 0;\n}\n\n.bg-blue{\n\tbackground-color: #0081C6 !important;\n}\n\n.article-title{\n\tcolor: #0081C6\n}\n\n.btn-outline-primary {\n\tcolor:#0081C6 !important;\n\tborder-color:#0081C6;\n\tfont-family: sans-serif;\n\tfont-size: medium;\n\tmargin-left: -27px !important;\n\tborder-radius: 4px !important;\n}\n\n\n.btn-outline-primary:hover {\n\tbackground-color: #0081C6 !important;\n\tcolor: white !important;\n}\n\n.btn-outline-primary:active:focus{\n\tbackground-color: #0081C6 !important;\n}\n\n.dr-dropdown{\n\tmargin-left: -11px;\n}\n\n.cuppa-dropdown{\n\tmargin-left: -11px !important;\n}\n", ""]);
+exports.push([module.i, ".push-button-down {\n\tmargin-top: 5%;\n}\n\n/* #search {\nwidth: 40%;\nmargin-left: 90%;\n} */\n\n#custom-search-input {\n\tmargin:0;\n\tmargin-top: 10px;\n\tpadding: 0;\n\tmargin-left: 277px;\n}\n\n#custom-search-input .search-query {\n\twidth:100%;\n\tpadding-right: 3px;\n\tpadding-left: 15px;\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 0;\n}\n\n#custom-search-input button {\n\tborder: 0;\n\tbackground: none;\n\t/** belows styles are working good */\n\tpadding: 2px 5px;\n\tmargin-top: 2px;\n\tposition: absolute;\n\tright:0;\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 3px;\n\tcolor:#D9230F;\n\tcursor: unset;\n\tz-index: 2;\n}\n\n.search-query:focus{\n\tz-index: 0;\n}\n\n.bg-blue{\n\tbackground-color: #0081C6 !important;\n}\n\n.article-title{\n\tcolor: #0081C6\n}\n\n.btn-outline-primary {\n\tcolor:#0081C6 !important;\n\tborder-color:#0081C6;\n\tfont-family: sans-serif;\n\tfont-size: medium;\n\tmargin-left: -27px !important;\n\tborder-radius: 4px !important;\n}\n\n\n.btn-outline-primary:hover {\n\tbackground-color: #0081C6 !important;\n\tcolor: white !important;\n}\n\n.dr-dropdown{\n\tmargin-left: -11px;\n}\n\n.btn-pressed {\n\tbackground-color: #0081C6 !important;\n\tcolor: white !important;\n}\n", ""]);
 
 // exports
 
@@ -405,7 +405,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <div class=\"btn-group-vertical container\">\n        <button type=\"button\" class=\"btn btn-outline-primary\" (click)=\"showAcademicResearchDocs(true,false,false)\" name=\"AcademicResearch\">Academic Research</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" (click)=\"showAcademicResearchDocs(false,true,false)\" name=\"NewsArticles\">News Articles</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" (click)=\"showAcademicResearchDocs(false,false,true)\" name=\"ReportsWhitepapers\">Reports & White Papers</button>\n      </div>\n      <br>\n      <br>\n      <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item class=\"dr-dropdown\">\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n    <br>\n    <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n    (onSelect)=\"onItemSelect($event)\"\n    (onDeSelect)=\"OnItemDeSelect($event)\"\n    (onSelectAll)=\"onSelectAll($event)\"\n    (onDeSelectAll)=\"onDeSelectAll($event)\"\n    >\n    <c-item>\n      <ng-template let-item=\"item\">\n        <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n      </ng-template>\n    </c-item>\n  </angular4-multiselect>\n  <br>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <p class=\"mb-1\">{{item.version_date | date}}</p>\n\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        <small>{{author}}</small>\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" type=\"text\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" disabled>\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <div class=\"btn-group-vertical container\">\n        <button type=\"button\" #AcademicBtn class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isAcademicPressed==true}\" (click)=\"showAcademicResearchDocs(true,false,false)\" name=\"AcademicResearch\">Academic Research</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isNewsArticlePressed==true}\" (click)=\"showAcademicResearchDocs(false,true,false)\" name=\"NewsArticles\">News Articles</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isReportsPressed==true}\" (click)=\"showAcademicResearchDocs(false,false,true)\" name=\"ReportsWhitepapers\">Reports & White Papers</button>\n      </div>\n      <br>\n      <br>\n      <div class=\"dr-dropdown\">\n        <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n        (onSelect)=\"onItemSelect($event)\"\n        (onDeSelect)=\"OnItemDeSelect($event)\"\n        (onSelectAll)=\"onSelectAll($event)\"\n        (onDeSelectAll)=\"onDeSelectAll($event)\"\n        >\n        <c-item >\n          <ng-template let-item=\"item\">\n            <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n          </ng-template>\n        </c-item>\n      </angular4-multiselect>\n    </div>\n    <br>\n    <div class=\"dr-dropdown\">\n      <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n  </div>\n  <br>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs | filter: searchText\">\n\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\" class=\"article-title\">{{item.title}}</h5>\n      </div>\n      <p class=\"mb-1\">{{item.abstract}}</p>\n      <p class=\"mb-1\"><span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> {{item.version_date | date}}</p>\n\n      <div class=\"\" *ngFor=\"let author of item.authors\">\n        <span class=\"fa fa-user\" aria-hidden=\"true\"></span> <small>{{author}}</small>\n      </div>\n    </a>\n  </div>\n</div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -448,6 +448,9 @@ var SearchDocComponent = (function () {
         this.authorsSelected = [];
         this.query = [];
         this.isAcademicChecked = false;
+        this.isAcademicPressed = false;
+        this.isNewsArticlePressed = false;
+        this.isReportsPressed = false;
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
     }
     SearchDocComponent.prototype.getList = function () {
@@ -494,7 +497,9 @@ var SearchDocComponent = (function () {
     };
     SearchDocComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.getList();
+        var el = this.AcademicBtn.nativeElement;
+        el.click();
+        //this.getList();
         this.authorService.getAll().subscribe(function (result) {
             _this.authors = result;
             _this.dropdownList = _this.authors;
@@ -539,31 +544,24 @@ var SearchDocComponent = (function () {
         if (isAcademicChecked) {
             this.selectedResearchScope.push({ 'research_scope': 'Academic' });
             this.isAcademicChecked = true;
+            this.isAcademicPressed = true;
+            this.isNewsArticlePressed = false;
+            this.isReportsPressed = false;
         }
         else if (isNewsChecked) {
             this.selectedResearchScope.push({ 'research_scope': 'News' });
+            this.isNewsArticlePressed = true;
+            this.isAcademicPressed = false;
+            this.isReportsPressed = false;
         }
         else if (isReportChecked) {
             this.selectedResearchScope.push({ 'research_scope': 'Report' });
+            this.isNewsArticlePressed = false;
+            this.isAcademicPressed = false;
+            this.isReportsPressed = true;
         }
         if (isAcademicChecked == undefined || isAcademicChecked == false) {
             this.isAcademicChecked = false;
-            this.selectedTypeOfDoc = [];
-        }
-        this.createQuery();
-    };
-    SearchDocComponent.prototype.checkResearchScopeValue = function (isAcademicChecked, isNewsChecked, isReportChecked) {
-        this.selectedResearchScope = [];
-        if (isAcademicChecked) {
-            this.selectedResearchScope.push({ 'research_scope': 'Academic' });
-        }
-        if (isNewsChecked) {
-            this.selectedResearchScope.push({ 'research_scope': 'News' });
-        }
-        if (isReportChecked) {
-            this.selectedResearchScope.push({ 'research_scope': 'Report' });
-        }
-        if (isAcademicChecked == undefined || isAcademicChecked == false) {
             this.selectedTypeOfDoc = [];
         }
         this.createQuery();
@@ -645,8 +643,12 @@ var SearchDocComponent = (function () {
     return SearchDocComponent;
 }());
 __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* ViewChild */])('AcademicBtn'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* ElementRef */]) === "function" && _a || Object)
+], SearchDocComponent.prototype, "AcademicBtn", void 0);
+__decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Output */])(),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]) === "function" && _a || Object)
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]) === "function" && _b || Object)
 ], SearchDocComponent.prototype, "addList", void 0);
 SearchDocComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
@@ -654,10 +656,10 @@ SearchDocComponent = __decorate([
         template: __webpack_require__("./src/app/search-doc/search-doc.component.html"),
         styles: [__webpack_require__("./src/app/search-doc/search-doc.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _e || Object])
 ], SearchDocComponent);
 
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=search-doc.component.js.map
 
 /***/ }),

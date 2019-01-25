@@ -18,37 +18,41 @@
   <div class="row">
     <div class="col-md-3">
       <div class="btn-group-vertical container">
-        <button type="button" class="btn btn-outline-primary" (click)="showAcademicResearchDocs(true,false,false)" name="AcademicResearch">Academic Research</button>
-        <button type="button" class="btn btn-outline-primary" (click)="showAcademicResearchDocs(false,true,false)" name="NewsArticles">News Articles</button>
-        <button type="button" class="btn btn-outline-primary" (click)="showAcademicResearchDocs(false,false,true)" name="ReportsWhitepapers">Reports & White Papers</button>
+        <button type="button" #AcademicBtn class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isAcademicPressed==true}" (click)="showAcademicResearchDocs(true,false,false)" name="AcademicResearch">Academic Research</button>
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isNewsArticlePressed==true}" (click)="showAcademicResearchDocs(false,true,false)" name="NewsArticles">News Articles</button>
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isReportsPressed==true}" (click)="showAcademicResearchDocs(false,false,true)" name="ReportsWhitepapers">Reports & White Papers</button>
       </div>
       <br>
       <br>
-      <angular4-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+      <div class="dr-dropdown">
+        <angular4-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+        (onSelect)="onItemSelect($event)"
+        (onDeSelect)="OnItemDeSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (onDeSelectAll)="onDeSelectAll($event)"
+        >
+        <c-item >
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.name}}</label>
+          </ng-template>
+        </c-item>
+      </angular4-multiselect>
+    </div>
+    <br>
+    <div class="dr-dropdown">
+      <angular4-multiselect [data]="dropdownListTypeOfDoc" *ngIf="isAcademicChecked" [(ngModel)]="selectedTypeOfDoc" [settings]="dropdownSettingsTypeOfDoc"
       (onSelect)="onItemSelect($event)"
       (onDeSelect)="OnItemDeSelect($event)"
       (onSelectAll)="onSelectAll($event)"
       (onDeSelectAll)="onDeSelectAll($event)"
       >
-      <c-item class="dr-dropdown">
+      <c-item>
         <ng-template let-item="item">
           <label style="color: #333;min-width: 150px;">{{item.name}}</label>
         </ng-template>
       </c-item>
     </angular4-multiselect>
-    <br>
-    <angular4-multiselect [data]="dropdownListTypeOfDoc" *ngIf="isAcademicChecked" [(ngModel)]="selectedTypeOfDoc" [settings]="dropdownSettingsTypeOfDoc"
-    (onSelect)="onItemSelect($event)"
-    (onDeSelect)="OnItemDeSelect($event)"
-    (onSelectAll)="onSelectAll($event)"
-    (onDeSelectAll)="onDeSelectAll($event)"
-    >
-    <c-item>
-      <ng-template let-item="item">
-        <label style="color: #333;min-width: 150px;">{{item.name}}</label>
-      </ng-template>
-    </c-item>
-  </angular4-multiselect>
+  </div>
   <br>
 </div>
 <div class="col-md-9">
@@ -59,10 +63,10 @@
         <h5 class="mb-1" class="article-title">{{item.title}}</h5>
       </div>
       <p class="mb-1">{{item.abstract}}</p>
-      <p class="mb-1">{{item.version_date | date}}</p>
+      <p class="mb-1"><span class="fa fa-calendar" aria-hidden="true"></span> {{item.version_date | date}}</p>
 
       <div class="" *ngFor="let author of item.authors">
-        <small>{{author}}</small>
+        <span class="fa fa-user" aria-hidden="true"></span> <small>{{author}}</small>
       </div>
     </a>
   </div>

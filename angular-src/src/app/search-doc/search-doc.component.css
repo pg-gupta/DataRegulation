@@ -70,14 +70,11 @@ margin-left: 90%;
 	color: white !important;
 }
 
-.btn-outline-primary:active:focus{
-	background-color: #0081C6 !important;
-}
-
 .dr-dropdown{
 	margin-left: -11px;
 }
 
-.cuppa-dropdown{
-	margin-left: -11px !important;
+.btn-pressed {
+	background-color: #0081C6 !important;
+	color: white !important;
 }
