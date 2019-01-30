@@ -60,7 +60,7 @@
 
     <a [routerLink]="['/details', item._id]" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1" class="article-title">{{item.title}}</h5>
+        <h5 [ngClass]="{'emphasize':item.is_emphasized}" class="mb-1" class="article-title">{{item.title}}</h5>
       </div>
       <p class="mb-1">{{item.abstract}}</p>
       <p class="mb-1"><span class="fa fa-calendar" aria-hidden="true"></span> {{item.version_date | date}}</p>

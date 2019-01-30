@@ -7,10 +7,12 @@ mongoose.set('useCreateIndex', true);
 const documentSchema = mongoose.Schema({
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
-  link:String,
+  link:{
+    type:String,
+    required:true
+  },
   abstract:String,
   authors: new Array(),
   version_date: String,
@@ -21,16 +23,15 @@ const documentSchema = mongoose.Schema({
   type_of_article: String,
   geographic_scope: String,
   citations: new Array(),
-  supplementary:String
+  supplementary:String,
+  is_emphasized:Boolean
 });
 
-const keywordSchema= mongoose.Schema({
-  name:String
-});
+documentSchema.index({ title: 1, link: 1}, { unique: true });
+
 
 //Create a model using mongoose.model and export it
 const documents = module.exports = mongoose.model('documents', documentSchema );
-const keywords=module.exports=mongoose.model('keywords',keywordSchema);
 //BucketList.find() returns all the lists
 module.exports.getAll = (callback) => {
   documents.find(callback);
