@@ -1,4 +1,4 @@
 // 27017 is the default port number.
 module.exports = {
-    database: 'mongodb://40.118.232.118:27017/dataregulation'
+    database: 'mongodb://23.99.182.152:27017/dataregulation'
 }

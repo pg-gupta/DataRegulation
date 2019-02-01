@@ -61,8 +61,18 @@ margin-left: 90%;
 	font-family: sans-serif;
 	font-size: medium;
 	margin-left: -27px !important;
-	border-radius: 4px !important;
+	width:118%;
+	/* border-radius: 4px !important; */
 }
+
+.c-btn [_ngcontent-c2]{
+	font-size: medium !important;
+	font-family: sans-serif !important;
+	border-color: #0081C6 !important;
+	color: #0081C6 !important;
+	box-shadow: none !important;
+}
+
 
 
 .btn-outline-primary:hover {
@@ -80,5 +90,9 @@ margin-left: 90%;
 }
 
 .emphasize{
-	color: purple;
+	font-family: sans-serif;
+	font-size: medium;
+	margin-left:-12px;
+	/* color: purple; */
+	/* font-size: x-large; */
 }

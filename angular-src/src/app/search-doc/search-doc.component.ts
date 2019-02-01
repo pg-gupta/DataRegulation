@@ -20,6 +20,7 @@ export class SearchDocComponent implements OnInit {
   dropdownSettingsTypeOfDoc = {};
   dropdownListResearchScope = [];
   selectedResearchScope = [];
+  isImportant=[];
   dropdownSettingsResearchScope = {};
   private newDoc: Document;
   docs: Document[];
@@ -192,6 +193,14 @@ public bindResearchScope(){
   };
 }
 
+public getMajor(istrue){
+  this.isImportant=[];
+  if(istrue){
+    this.isImportant.push({'is_emphasized':true});
+  }
+  this.createQuery();
+};
+
 public createQuery(){
   var selectedAuthors= this.selectedItems.map(function(obj){
     return {'authors':obj.name};
@@ -206,6 +215,7 @@ public createQuery(){
   // });
 
   var selectedResearchScopeItem= this.selectedResearchScope;
+  var isEmphasized=this.isImportant;
   this.query=[];
   if(selectedAuthors.length!=0){
     this.query.push({$or:selectedAuthors});
@@ -216,6 +226,10 @@ public createQuery(){
 
   if(selectedResearchScopeItem.length!=0){
     this.query.push({$or:selectedResearchScopeItem});
+  }
+
+  if(isEmphasized.length!=0){
+    this.query.push({$or:isEmphasized});
   }
 
   console.log("selected items: "+ JSON.stringify(selectedAuthors)+ " ** "+ JSON.stringify(selectedType)+"***"+ JSON.stringify(this.query));
