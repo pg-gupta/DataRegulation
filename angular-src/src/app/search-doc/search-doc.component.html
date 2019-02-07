@@ -56,8 +56,8 @@
   <br>
   <div class="emphasize button-checkbox">
     <input type="checkbox" [(ngModel)]="isChecked" name="major" value="" (change)="getMajor(isChecked?true:false)"/><span class="label-margin"><label for="">Major Developments</label></span>
-
   </div>
+  <br>
 </div>
 <div class="col-md-9">
   <div class="list-group" *ngFor="let item of docs | filter: searchText">
