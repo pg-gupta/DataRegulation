@@ -10,7 +10,7 @@ export class DocService {
 
   constructor(private http: Http) { }
 
-  //private serverApi= 'http://localhost:3000';
+  // private serverApi= 'http://localhost:3000';
   private serverApi= 'http://dataregulationrepository.azurewebsites.net/';
 
 

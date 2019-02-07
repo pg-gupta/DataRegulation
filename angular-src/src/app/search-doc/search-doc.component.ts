@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation  } from '@angular/core';
 import { Document } from '../models/Document';
 import { DocService } from '../services/doc.service';
 import { Author } from '../models/Author';
@@ -8,7 +8,8 @@ import { Router,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-search-doc',
   templateUrl: './search-doc.component.html',
-  styleUrls: ['./search-doc.component.css']
+  styleUrls: ['./search-doc.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SearchDocComponent implements OnInit {
 
@@ -91,31 +92,31 @@ onClick() {
 ngOnInit(){
 
   let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
-      el.click();
+  el.click();
 
   //this.getList();
   this.authorService.getAll().subscribe(result=>{
-    this.authors=result;
-    this.dropdownList=this.authors;
-    this.selectedItems = [
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      text:"Select Author",
-      showCheckbox: true,
-      selectAllText:'Select All',
-      unSelectAllText:'UnSelect All',
-      enableSearchFilter: true,
-      classes:"",
-      labelKey:'name',
-      primaryKey: '_id',
-    };
-  },error=>{
-    console.error(error);
-  });
+  this.authors=result;
+  this.dropdownList=this.authors;
+  this.selectedItems = [
+  ];
+  this.dropdownSettings = {
+    singleSelection: false,
+    text:"Select Author",
+    showCheckbox: true,
+    selectAllText:'Select All',
+    unSelectAllText:'UnSelect All',
+    enableSearchFilter: true,
+    classes:"",
+    labelKey:'name',
+    primaryKey: '_id',
+  };
+},error=>{
+  console.error(error);
+});
 
-  this.bindType();
-  this.bindResearchScope();
+this.bindType();
+this.bindResearchScope();
 }
 
 public bindType(){

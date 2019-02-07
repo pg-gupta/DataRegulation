@@ -61,16 +61,17 @@ margin-left: 90%;
 	font-family: sans-serif;
 	font-size: medium;
 	margin-left: -27px !important;
-	width:118%;
+	/* width:118%; */
 	/* border-radius: 4px !important; */
 }
 
-.c-btn [_ngcontent-c2]{
+.c-btn {
 	font-size: medium !important;
 	font-family: sans-serif !important;
 	border-color: #0081C6 !important;
 	color: #0081C6 !important;
 	box-shadow: none !important;
+	padding: 7px !important;
 }
 
 
@@ -93,6 +94,37 @@ margin-left: 90%;
 	font-family: sans-serif;
 	font-size: medium;
 	margin-left:-12px;
-	/* color: purple; */
+	color: #0081C6;
 	/* font-size: x-large; */
+}
+
+.button-checkbox {
+	position: relative;
+	border: 1px solid;
+	border-radius: 3px;
+	border-color: #0081C6;
+	padding-top:5px;
+	padding-left:5px;
+}
+
+.label-margin{
+	margin-left: 5px;
+	color:#0081C6 !important;
+	border-color:#0081C6;
+	font-family: sans-serif;
+	font-size: medium;
+	width:118%;
+	padding-left: 10px;
+}
+
+.btn-group-vertical{
+	width:116%;
+}
+
+.arrow-2{
+	border-bottom: 15px solid #0081C6 !important;
+}
+
+.list-area{
+	box-shadow: 0px 1px 8px #0081C6 !important;
 }
