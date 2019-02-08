@@ -54,3 +54,7 @@ margin-left: 90%;
 .article-title{
 	color: #0081C6
 }
+
+.wrap-content{
+	overflow-wrap: break-word;
+}
