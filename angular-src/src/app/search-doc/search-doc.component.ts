@@ -33,6 +33,9 @@ export class SearchDocComponent implements OnInit {
   isAcademicPressed=false;
   isNewsArticlePressed=false;
   isReportsPressed=false;
+  isMajorDevPressed=false;
+  totalDisplayed=2;
+
   @ViewChild('AcademicBtn') AcademicBtn: ElementRef;
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
   constructor(private docServ: DocService,private authorService:AuthorService, private router: Router) {
@@ -47,6 +50,10 @@ export class SearchDocComponent implements OnInit {
     this.peopleFilter={};
   }, error => console.error(error));
 }
+
+public loadMore() {
+  this.totalDisplayed += 2;
+};
 
 public getAuthors(callback){
   this.authorService.getAll().subscribe(result=>{
@@ -198,6 +205,18 @@ public getMajor(istrue){
   this.isImportant=[];
   if(istrue){
     this.isImportant.push({'is_emphasized':true});
+  }
+  this.createQuery();
+};
+
+public showMajorDevDocs(istrue){
+  this.isImportant=[];
+  if(!istrue){
+    this.isImportant.push({'is_emphasized':true});
+    this.isMajorDevPressed=true;
+  }
+  else{
+    this.isMajorDevPressed=false;
   }
   this.createQuery();
 };
