@@ -115,13 +115,14 @@ router.get('/:id', (req,res,next)=> {
   })
 });
 
-router.post('/query', (req,res,next)=> {
+router.post('/query/:no_of_pages', (req,res,next)=> {
   let str = req.body.querystr;
+  let pages=req.params.no_of_pages;
   console.log("querystr: "+ JSON.stringify(str));
-  document.query(str,(err,result) => {
+  document.query(str,pages,(err,result) => {
     if(err) {
       console.log("err: "+ err);
-      res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
+      res.json({success:false, message: `Failed to query the list. Error: ${err}`});
     }
     else if(result) {
       console.log("result: "+ result);

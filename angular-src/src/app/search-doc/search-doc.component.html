@@ -5,7 +5,7 @@
         <div class="input-group">
           <input [(ngModel)]="searchText"  name="searchDoc" type="text" id="search" class="search-query form-control" placeholder="Search" />
           <span class="input-group-btn">
-            <button type="button" disabled>
+            <button type="button" (click)=searchDoc()>
               <span class="fa fa-search"></span>
             </button>
           </span>
@@ -25,7 +25,7 @@
       <br>
       <br>
       <div class="btn-group-vertical container">
-        <button type="button" class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isMajorDevPressed==true}" (click)="showMajorDevDocs(isMajorDevPressed)" name="MajorDevlopments">Major Developments</button>
+        <button type="button" class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isMajorDevPressed==true}" (click)="showMajorDevDocs(isMajorDevPressed,$event)" name="MajorDevlopments">Major Developments</button>
       </div>
       <br>
       <br>
@@ -59,29 +59,27 @@
     </angular4-multiselect>
   </div>
   <br>
-  <!-- <div class="emphasize button-checkbox">
-    <input type="checkbox" [(ngModel)]="isChecked" name="major" value="" (change)="getMajor(isChecked?true:false)"/><span class="label-margin"><label for="">Major Developments</label></span>
-  </div> -->
   <br>
 </div>
 <div class="col-md-9">
-  <div class="list-group" *ngFor="let item of docs | filter: searchText">
-
+  <div class="list-group" *ngFor="let item of docs">
     <a [routerLink]="['/details', item._id]" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-between">
         <h5 [ngClass]="{'emphasize':item.is_emphasized}" class="mb-1" class="article-title"><span class="fa fa-star" *ngIf="item.is_emphasized" aria-hidden="true"></span> {{item.title}}</h5>
       </div>
       <p class="mb-1">{{item.abstract}}</p>
       <p class="mb-1"><span class="fa fa-calendar" aria-hidden="true"></span> {{item.version_date | date}}</p>
-
       <div class="" *ngFor="let author of item.authors">
         <span class="fa fa-user" aria-hidden="true"></span> <small>{{author}}</small>
       </div>
     </a>
   </div>
-  <!-- <button class="btn" (click)="loadMore()">Load more</button> -->
-
-
+  <br>
 </div>
+<button type="button" id="load-more-btn" class="btn-pressed" name="button" *ngIf="hasMoreData" (click)="loadMore()">Load More</button>
 </div>
+<hr>
+<footer>
+  <small id="copyright-footer">&copy; Copyright 2019, DataCatalyst</small>
+</footer>
 </div>

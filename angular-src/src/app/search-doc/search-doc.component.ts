@@ -35,10 +35,14 @@ export class SearchDocComponent implements OnInit {
   isReportsPressed=false;
   isMajorDevPressed=false;
   totalDisplayed=2;
+  no_pages=0;
+  searchText="";
+  hasMoreData=true;
 
   @ViewChild('AcademicBtn') AcademicBtn: ElementRef;
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
   constructor(private docServ: DocService,private authorService:AuthorService, private router: Router) {
+    this.docs=[];
   }
 
   public getList() {
@@ -46,14 +50,9 @@ export class SearchDocComponent implements OnInit {
       this.docs = result.sort((a: any, b: any) =>
       new Date(b.version_date).getTime() - new Date(a.version_date).getTime()
     );
-    //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
     this.peopleFilter={};
   }, error => console.error(error));
 }
-
-public loadMore() {
-  this.totalDisplayed += 2;
-};
 
 public getAuthors(callback){
   this.authorService.getAll().subscribe(result=>{
@@ -101,29 +100,27 @@ ngOnInit(){
   let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
   el.click();
 
-  //this.getList();
   this.authorService.getAll().subscribe(result=>{
-  this.authors=result;
-  this.dropdownList=this.authors;
-  this.selectedItems = [
-  ];
-  this.dropdownSettings = {
-    singleSelection: false,
-    text:"Select Author",
-    showCheckbox: true,
-    selectAllText:'Select All',
-    unSelectAllText:'UnSelect All',
-    enableSearchFilter: true,
-    classes:"",
-    labelKey:'name',
-    primaryKey: '_id',
-  };
-},error=>{
-  console.error(error);
-});
+    this.authors=result;
+    this.dropdownList=this.authors;
+    this.selectedItems = [
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      text:"Select Author",
+      showCheckbox: true,
+      selectAllText:'Select All',
+      unSelectAllText:'UnSelect All',
+      enableSearchFilter: true,
+      classes:"",
+      labelKey:'name',
+      primaryKey: '_id',
+    };
+  },error=>{
+    console.error(error);
+  });
 
-this.bindType();
-this.bindResearchScope();
+  this.bindType();
 }
 
 public bindType(){
@@ -148,13 +145,13 @@ public bindType(){
 
 public showAcademicResearchDocs(isAcademicChecked,isNewsChecked,isReportChecked){
   this.selectedResearchScope=[];
+  this.resetPage();
   if(isAcademicChecked){
     this.selectedResearchScope.push({'research_scope':'Academic'});
     this.isAcademicChecked=true;
     this.isAcademicPressed=true;
     this.isNewsArticlePressed=false;
     this.isReportsPressed=false;
-
   }
   else if(isNewsChecked){
     this.selectedResearchScope.push({'research_scope':'News'});
@@ -180,27 +177,6 @@ public showAcademicResearchDocs(isAcademicChecked,isNewsChecked,isReportChecked)
   this.createQuery();
 }
 
-public bindResearchScope(){
-  this.dropdownListResearchScope=[
-    {"id":1,"name":"Academic Research","value":"Academic"},
-    {"id":2,"name":"News Articles", "value":"News"},
-    {"id":3,"name":"Report & White Papers","value":"Report"}
-  ]
-  this.selectedResearchScope = [
-  ];
-  this.dropdownSettingsResearchScope = {
-    singleSelection: false,
-    text:"Select Research Scope",
-    showCheckbox: true,
-    selectAllText:'Select All',
-    unSelectAllText:'UnSelect All',
-    enableSearchFilter: true,
-    classes:"myclass custom-class",
-    labelKey:'name',
-    primaryKey: 'id',
-  };
-}
-
 public getMajor(istrue){
   this.isImportant=[];
   if(istrue){
@@ -211,6 +187,8 @@ public getMajor(istrue){
 
 public showMajorDevDocs(istrue){
   this.isImportant=[];
+  this.resetPage();
+
   if(!istrue){
     this.isImportant.push({'is_emphasized':true});
     this.isMajorDevPressed=true;
@@ -221,7 +199,13 @@ public showMajorDevDocs(istrue){
   this.createQuery();
 };
 
+public searchDoc(){
+  this.resetPage();
+  this.createQuery();
+}
+
 public createQuery(){
+  this.hasMoreData=true;
   var selectedAuthors= this.selectedItems.map(function(obj){
     return {'authors':obj.name};
   });
@@ -229,10 +213,6 @@ public createQuery(){
   var selectedType= this.selectedTypeOfDoc.map(function(obj){
     return {'type_of_article':obj.name};
   });
-
-  // var selectedResearchScopeItem= this.selectedResearchScope.map(function(obj){
-  //   return {'research_scope':obj.value};
-  // });
 
   var selectedResearchScopeItem= this.selectedResearchScope;
   var isEmphasized=this.isImportant;
@@ -247,6 +227,10 @@ public createQuery(){
   if(selectedResearchScopeItem.length!=0){
     this.query.push({$or:selectedResearchScopeItem});
   }
+  if(this.searchText.length!=0){
+    this.query.push({$text:{$search:this.searchText}});
+  }
+
 
   if(isEmphasized.length!=0){
     this.query.push({$or:isEmphasized});
@@ -258,35 +242,42 @@ public createQuery(){
 
 public fetchData(queryObj){
   if(queryObj.length!=0){
-    this.docServ.query(queryObj).subscribe(response=>{
-      this.docs=response.sort((a: any, b: any) =>
-      new Date(b.version_date).getTime() - new Date(a.version_date).getTime()
-    );
-  },error=>console.error(error))
+    this.docServ.query(queryObj,this.no_pages).subscribe(response=>{
+      if(response.length<10){
+        this.hasMoreData=false;
+      }
+      this.docs.push(...response);
+    },error=>console.error(error))
+  }
+  else{
+    this.getList();
+  }
 }
-else{
-  this.getList();
+
+public loadMore(){
+  this.no_pages+=1;
+  this.fetchData(this.query);
 }
-}
+
 onItemSelect(item:any){
-  // console.log(item);
-  // console.log(this.selectedItems);
+  this.resetPage();
   this.createQuery();
 }
 OnItemDeSelect(item:any){
-  // console.log(item);
-  // console.log(this.selectedItems);
+  this.resetPage();
   this.createQuery();
 
 }
 onSelectAll(items: any){
-  //console.log(items);
+  this.resetPage();
   this.createQuery();
 }
 onDeSelectAll(items: any){
-  //console.log(items);
+  this.resetPage();
   this.createQuery();
 }
-
-
+public resetPage(){
+  this.no_pages=0;
+  this.docs=[];
+}
 }

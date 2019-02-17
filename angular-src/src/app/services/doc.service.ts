@@ -47,9 +47,10 @@ export class DocService {
     .map(res => res.json());
   }
 
-  public query(querystr : any):Observable<Document[]> {
-    let URI = `${this.serverApi}/documents/query`;
+  public query(querystr : any, no_pages: number):Observable<Document[]> {
+    let URI = `${this.serverApi}/documents/query/`+no_pages;
     let body= JSON.stringify({querystr});
+    console.log(body);
     let headers = new Headers;
     headers.append('Content-Type', 'application/json');
 

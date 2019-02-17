@@ -28,13 +28,19 @@ const documentSchema = mongoose.Schema({
 });
 
 documentSchema.index({ title: 1, link: 1}, { unique: true });
+documentSchema.index({title: "text",abstract:"text",authors:"text",version_date:"text",keywords:"text",research_status:"text",
+research_scope:"text",type_of_article:"text",type_of_article:"text",geographic_scope:"text",citations:"text",supplementary:"text"});
 
 
 //Create a model using mongoose.model and export it
 const documents = module.exports = mongoose.model('documents', documentSchema );
 //BucketList.find() returns all the lists
 module.exports.getAll = (callback) => {
-  documents.find(callback);
+  var query={};
+  query.skip = 2;
+  query.limit = 10;
+  console.log("query");
+  documents.find(null,null,query,callback);
 }
 
 module.exports.deleteAll = (callback) => {
@@ -63,11 +69,15 @@ module.exports.addAll=(docs,callback)=>{
   documents.insertMany(docs, callback);
 }
 
-module.exports.query = (queryExp,callback) => {
-  console.log(queryExp);
+module.exports.query = (queryExp,no_of_pages,callback) => {
+  console.log( "abc: "+queryExp+" "+no_of_pages);
   console.log(JSON.stringify(queryExp));
+
+  var query={};
+  query.skip = 10*no_of_pages;
+  query.limit = 10;
   var obj= {$and:queryExp};
-  documents.find(obj,callback);
+  documents.find(obj,null,query,callback).sort('-version_date');
 }
 
 module.exports.getJsonData = () => {
