@@ -3,9 +3,9 @@
     <div class="col-12">
       <div id="custom-search-input">
         <div class="input-group">
-          <input [(ngModel)]="searchText"  name="searchDoc" type="text" id="search" class="search-query form-control" placeholder="Search" />
+          <input [(ngModel)]="searchText" (keyup.enter)="searchDoc()"  name="searchDoc" type="text" id="search" class="search-query form-control" placeholder="Search" />
           <span class="input-group-btn">
-            <button type="button" (click)=searchDoc()>
+            <button type="button" (click)="searchDoc()">
               <span class="fa fa-search"></span>
             </button>
           </span>
@@ -13,7 +13,6 @@
       </div>
     </div>
   </div>
-
   <br>
   <div class="row">
     <div class="col-md-3">
