@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container\">\n    <!--Navbar-->\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-blue\">\n      <span class=\"navbar-brand nav-title\">Data Regulation</span>\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': researchTab.isClicked}\" (click)=researchActive() [routerLink]=\"['/search']\">Research & News</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': eventsTab.isClicked}\" (click)=EventsAndConferenceActive() [routerLink]=\"['/eventsconf']\">Events & Conferences</a>\n          </li>\n        </ul>\n      </div>\n    </nav>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container\">\n    <!--Navbar-->\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-blue\">\n\n          <span class=\"navbar-brand nav-title\">Data Regulation</span>\n          <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n          <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n            <ul class=\"navbar-nav mr-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': researchTab.isClicked}\" (click)=researchActive() [routerLink]=\"['/search']\">Research & News</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': eventsTab.isClicked}\" (click)=EventsAndConferenceActive() [routerLink]=\"['/eventsconf']\">Events & Conferences</a>\n              </li>\n            </ul>\n          </div>\n\n    </nav>\n\n\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -717,7 +717,7 @@ var AuthorService = (function () {
     function AuthorService(http) {
         this.http = http;
         // private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulationrepository.azurewebsites.net/';
+        this.serverApi = 'https://dataregulationrepository.azurewebsites.net/';
     }
     AuthorService.prototype.getAll = function () {
         var URI = this.serverApi + "/authors/";
@@ -785,7 +785,7 @@ var DocService = (function () {
     function DocService(http) {
         this.http = http;
         // private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulationrepository.azurewebsites.net/';
+        this.serverApi = 'https://dataregulationrepository.azurewebsites.net/';
     }
     DocService.prototype.getAll = function () {
         var URI = this.serverApi + "/documents/";
@@ -863,7 +863,7 @@ var EventService = (function () {
     function EventService(http) {
         this.http = http;
         // private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulationrepository.azurewebsites.net/';
+        this.serverApi = 'https://dataregulationrepository.azurewebsites.net/';
     }
     EventService.prototype.getAll = function () {
         var URI = this.serverApi + "/events/";
@@ -911,8 +911,13 @@ var _a;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+// The file contents for the current environment will overwrite these during build.
 var environment = {
-    production: true
+    production: false
 };
 //# sourceMappingURL=environment.js.map
 
