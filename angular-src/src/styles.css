@@ -1,12 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import './bootstrap/bootstrap.min.css';
 
-/* @import url('https://fonts.googleapis.com/css?family=Nunito:400,400i,700'); */
-
-/* body {
-  font-family: 'Nunito', sans-serif;
-} */
-
 @font-face {
     font-family: Futura;
     src: url('fonts/Futura.otf');
