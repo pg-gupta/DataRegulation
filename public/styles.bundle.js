@@ -1,4 +1,4 @@
-webpackJsonp([2],{
+webpackJsonp([1],{
 
 /***/ "./node_modules/css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!./node_modules/postcss-loader/index.js?{\"ident\":\"postcss\"}!./src/bootstrap/bootstrap.min.css":
 /***/ (function(module, exports, __webpack_require__) {
@@ -23,7 +23,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.i(__webpack_require__("./node_modules/css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!./node_modules/postcss-loader/index.js?{\"ident\":\"postcss\"}!./src/bootstrap/bootstrap.min.css"), "");
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n\n/* @import url('https://fonts.googleapis.com/css?family=Nunito:400,400i,700'); */\n\n/* body {\n  font-family: 'Nunito', sans-serif;\n} */\n\n@font-face {\n    font-family: Futura;\n    src: url(" + __webpack_require__("./src/fonts/Futura.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-Bold';\n    src: url(" + __webpack_require__("./src/fonts/Futura-Bold.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-BoldOblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-BoldOblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-Book';\n    src: url(" + __webpack_require__("./src/fonts/Futura-Book.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-BookOblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-BookOblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-Condensed';\n    src: url(" + __webpack_require__("./src/fonts/Futura-Condensed.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-CondensedBold';\n    src: url(" + __webpack_require__("./src/fonts/Futura-CondensedBold.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-CondensedBoldOblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-CondensedBoldOblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-CondensedExtraBold';\n    src: url(" + __webpack_require__("./src/fonts/Futura-CondensedExtraBold.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-CondensedLight';\n    src: url(" + __webpack_require__("./src/fonts/Futura-CondensedLight.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-CondensedLtOblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-CondensedLtOblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-CondensedOblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-CondensedOblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-CondExtraBoldObl';\n    src: url(" + __webpack_require__("./src/fonts/Futura-CondExtraBoldObl.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-ExtraBold';\n    src: url(" + __webpack_require__("./src/fonts/Futura-ExtraBold.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-ExtraBoldOblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-ExtraBoldOblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-Heavy';\n    src: url(" + __webpack_require__("./src/fonts/Futura-Heavy.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-HeavyOblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-HeavyOblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-Light';\n    src: url(" + __webpack_require__("./src/fonts/Futura-Light.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-LightOblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-LightOblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\n@font-face {\n    font-family: 'Futura-Oblique';\n    src: url(" + __webpack_require__("./src/fonts/Futura-Oblique.otf") + ");\n    font-weight: normal;\n    font-style: normal;\n}\nbody {\n    font-family: 'Futura';\n}\n\nbody.is-iframe .iframe-hide {\n  display: none;\n}\n\n.list-group {\n  margin-bottom: 30px;\n}\n\n.article-title {\n  font-weight: 400;\n  font-size: 24px;\n  margin-bottom: 10px;\n}\n\n.article-title a {\n\tcolor: #0081C6;\n  font-weight: 400;\n}\n\n.article-title a:hover {\n\tcolor: inherit;\n}\n\n.article-title a:hover {\n\ttext-decoration: none;\n\tcolor: inherit;\n}\n\n.article-meta {\n\tmargin-bottom: 20px;\n}\n\n.article-meta:last-child {\n\tmargin-bottom: 0;\n}\n\n.article-meta .fa {\n\tdisplay: inline-block;\n\tmargin-right: 5px;\n}\n\n@media only screen and (min-width: 992px) {\n\t.article-meta > span + span {\n\t\tmargin-left: 10px;\n\t}\n}\n\n@media only screen and (max-width: 991px) {\n\t.article-meta > span {\n\t\tdisplay: block;\n\t\tmargin: 5px 0;\n\t}\n}\n\n.article-text {\n  color: #094063;\n  margin-bottom: 10px;\n}\n\n.back-button {\n  display: block;\n  /* background-color: #0081C6; */\n  width: 100%;\n\tcolor:#0081C6 !important;\n\tborder-color:#0081C6;\n\tfont-family: sans-serif;\n\tfont-size: medium;\n}\n\n.back-button:hover {\n\tbackground-color: #0081C6 !important;\n\tcolor: white !important;\n}\n\n#custom-search-input {\n  margin-bottom: 30px!important;\n}\n\n#custom-search-input button {\n\tborder: 0;\n\tbackground: none;\n\t/** belows styles are working good */\n\tposition: absolute;\n\tright: 5px;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n\t/* IE7-8 doesn't have border-radius, so don't indent the padding */\n\tmargin-bottom: 0;\n\tborder-radius: 3px;\n\tcolor:#D9230F;\n\tcursor: unset;\n\tz-index: 2;\n}\n", ""]);
 
 // exports
 
@@ -363,6 +363,146 @@ function updateLink(linkElement, obj) {
 		URL.revokeObjectURL(oldSrc);
 }
 
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-Bold.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-Bold.6d93ab94b1934141b38c.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-BoldOblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-BoldOblique.a50ebd67938940650854.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-Book.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-Book.8bf5d034d9ae41a230d6.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-BookOblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-BookOblique.75a069ed06a7144b3c17.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-CondExtraBoldObl.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-CondExtraBoldObl.f37f4a6c341cee644dd6.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-Condensed.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-Condensed.6c5876613baeb7455d13.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-CondensedBold.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-CondensedBold.34cf41720a80022cc616.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-CondensedBoldOblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-CondensedBoldOblique.de80e7ff699a4cb58239.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-CondensedExtraBold.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-CondensedExtraBold.4c873c36476b20e7867f.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-CondensedLight.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-CondensedLight.78b46aef67d27ef145b0.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-CondensedLtOblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-CondensedLtOblique.58aeb8d3151ff13abb61.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-CondensedOblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-CondensedOblique.80008ffcfcd731e222fd.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-ExtraBold.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-ExtraBold.53086d63036500f4d6de.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-ExtraBoldOblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-ExtraBoldOblique.4c2d7a34866f7f0d3ee3.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-Heavy.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-Heavy.0ae3ab52dbdc6f5011dd.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-HeavyOblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-HeavyOblique.ac91c89d9271a0d0c9c4.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-Light.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-Light.d9298eeeaeac6191f15c.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-LightOblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-LightOblique.edf9141c9857011de871.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura-Oblique.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura-Oblique.73b5d62a7d6f73253992.otf";
+
+/***/ }),
+
+/***/ "./src/fonts/Futura.otf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Futura.36346b3fc1ee01c22f3d.otf";
 
 /***/ }),
 

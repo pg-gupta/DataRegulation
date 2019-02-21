@@ -14,20 +14,25 @@
     </div>
   </div>
 
-  <br>
   <div class="row">
     <div class="col-md-12">
       <div class="list-group" *ngFor="let item of events | filter: searchText">
-        <a class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1" class="article-title">{{item.title}}</h5>
           </div>
-          <p class="mb-1">{{item.abstract}}</p>
+          <p class="mb-1 article-text">{{item.abstract}}</p>
           <a href="{{item.link}}" class="wrap-content" target="_blank"><u><h6>{{item.link}}</h6></u></a>
-          <p class="mb-1"> <span class="fa fa-map-marker" aria-hidden="true"></span> {{item.geographic_scope}}</p>
-          <span class="fa fa-calendar" aria-hidden="true"></span> <small>{{item.start_date | date}}</small> - <small>{{item.end_date | date}}</small>
+          <p class="article-meta">
+            <span class="geography">
+              <span class="fa fa-map-marker" aria-hidden="true"></span> {{item.geographic_scope}}
+            </span>
+            <span class="date">
+              <span class="fa fa-calendar" aria-hidden="true"></span> <span>{{item.start_date | date}}</span> - <span>{{item.end_date | date}}</span>
+            </span>
+          </p>
 
-        </a>
+        </div>
       </div>
     </div>
   </div>

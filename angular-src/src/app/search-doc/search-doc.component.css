@@ -19,24 +19,6 @@
 	border-radius: 0;
 }
 
-#custom-search-input button {
-	border: 0;
-	background: none;
-	/** belows styles are working good */
-	padding: 2px 5px;
-	margin-top: 2px;
-	position: absolute;
-	right:0;
-	/* IE7-8 doesn't have border-radius, so don't indent the padding */
-	margin-bottom: 0;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	color:#D9230F;
-	cursor: unset;
-	z-index: 2;
-}
-
 #load-more-btn{
 	margin-left: 91%;
 }
@@ -53,14 +35,9 @@
 	background-color: #0081C6 !important;
 }
 
-.article-title{
-	color: #0081C6
-}
-
 .btn-outline-primary {
 	color:#0081C6 !important;
 	border-color:#0081C6;
-	font-family: sans-serif;
 	font-size: medium;
 	margin-left: -27px !important;
 	/* width:118%; */
@@ -69,7 +46,6 @@
 
 .c-btn {
 	font-size: medium !important;
-	font-family: sans-serif !important;
 	border-color: #0081C6 !important;
 	color: #0081C6 !important;
 	box-shadow: none !important;
@@ -97,12 +73,8 @@
 	color:#0081C6;
 }
 
-.emphasize{
-	font-family: sans-serif;
-	font-size: medium;
-	margin-left:-12px;
-	color: #0081C6;
-	/* font-size: x-large; */
+.emphasize .fa {
+	margin-left: -12px;
 }
 
 .button-checkbox {
@@ -118,7 +90,6 @@
 	margin-left: 5px;
 	color:#0081C6 !important;
 	border-color:#0081C6;
-	font-family: sans-serif;
 	font-size: medium;
 	width:118%;
 	padding-left: 10px;

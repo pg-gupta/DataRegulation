@@ -25,23 +25,6 @@ margin-left: 90%;
 	border-radius: 0;
 }
 
-#custom-search-input button {
-	border: 0;
-	background: none;
-	/** belows styles are working good */
-	padding: 2px 5px;
-	margin-top: 2px;
-	position: absolute;
-	right:0;
-	/* IE7-8 doesn't have border-radius, so don't indent the padding */
-	margin-bottom: 0;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	color:#D9230F;
-	cursor: unset;
-	z-index: 2;
-}
 
 .search-query:focus{
 	z-index: 0;
@@ -49,10 +32,6 @@ margin-left: 90%;
 
 .bg-blue{
   background-color: #0081C6 !important;
-}
-
-.article-title{
-	color: #0081C6
 }
 
 .wrap-content{

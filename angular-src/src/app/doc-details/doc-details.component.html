@@ -1,13 +1,23 @@
 <div class="row">
-  <div class="col-9">
+  <div class="col-md-3">
+    <button class="btn back-button" (click)=backClicked()>Back to Search</button>
+  </div>
+  <div class="col-md-9" *ngIf="item">
     <h4 class="article-title">{{item.title}}</h4>
-      <span class="fa fa-user" aria-hidden="true"></span> <small *ngFor="let author of item.authors; let i=index">{{author}}<span *ngIf="i!==item.authors.length-1">,</span>&nbsp;</small>
-    <br>   <span class="fa fa-calendar" aria-hidden="true"></span> <small>{{item.version_date | date}}</small>
-    <br><small>{{item.type_of_article}}</small>
+    <p class="mb-2 article-meta">
+      <span class="date">
+        <span class="fa fa-calendar" aria-hidden="true"></span> {{item.version_date | date}}
+      </span>
+      <span class="authors">
+        <span class="fa fa-user" aria-hidden="true"></span>
+        <span class="author" *ngFor="let author of item.authors; index as i;">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>
+      </span>
+    </p>
+    <small>{{item.type_of_article}}</small>
     <br><small>{{item.research_status}}</small>
     <hr>
     <h6>Abstract</h6>
-    {{item.abstract}}
+    <p class="article-text">{{item.abstract}}</p>
     <hr>
     <h6>Keywords</h6>
     <small *ngFor="let keyword of item.keywords;let i=index">{{keyword}}<span *ngIf="i!==item.keywords.length-1">,</span> &nbsp;</small>

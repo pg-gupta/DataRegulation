@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Document } from '../models/Document';
@@ -13,7 +14,7 @@ export class DocDetailsComponent {
   private id;
   private sub: any;
   private item: Document;
-  constructor(private route: ActivatedRoute,private docServ: DocService) { }
+  constructor(private route: ActivatedRoute,private docServ: DocService, private location: Location) { }
 
   private ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -27,6 +28,10 @@ export class DocDetailsComponent {
 
   private ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  backClicked() {
+    this.location.back()
   }
 
 }

@@ -1,2 +1,228 @@
 /* You can add global styles to this file, and also import other style files */
 @import './bootstrap/bootstrap.min.css';
+
+/* @import url('https://fonts.googleapis.com/css?family=Nunito:400,400i,700'); */
+
+/* body {
+  font-family: 'Nunito', sans-serif;
+} */
+
+@font-face {
+    font-family: Futura;
+    src: url('fonts/Futura.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-Bold';
+    src: url('fonts/Futura-Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-BoldOblique';
+    src: url('fonts/Futura-BoldOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-Book';
+    src: url('fonts/Futura-Book.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-BookOblique';
+    src: url('fonts/Futura-BookOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-Condensed';
+    src: url('fonts/Futura-Condensed.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-CondensedBold';
+    src: url('fonts/Futura-CondensedBold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-CondensedBoldOblique';
+    src: url('fonts/Futura-CondensedBoldOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-CondensedExtraBold';
+    src: url('fonts/Futura-CondensedExtraBold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-CondensedLight';
+    src: url('fonts/Futura-CondensedLight.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-CondensedLtOblique';
+    src: url('fonts/Futura-CondensedLtOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-CondensedOblique';
+    src: url('fonts/Futura-CondensedOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-CondExtraBoldObl';
+    src: url('fonts/Futura-CondExtraBoldObl.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-ExtraBold';
+    src: url('fonts/Futura-ExtraBold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-ExtraBoldOblique';
+    src: url('fonts/Futura-ExtraBoldOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-Heavy';
+    src: url('fonts/Futura-Heavy.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-HeavyOblique';
+    src: url('fonts/Futura-HeavyOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-Light';
+    src: url('fonts/Futura-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-LightOblique';
+    src: url('fonts/Futura-LightOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Futura-Oblique';
+    src: url('fonts/Futura-Oblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'Futura';
+}
+
+body.is-iframe .iframe-hide {
+  display: none;
+}
+
+.list-group {
+  margin-bottom: 30px;
+}
+
+.article-title {
+  font-weight: 400;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.article-title a {
+	color: #0081C6;
+  font-weight: 400;
+}
+
+.article-title a:hover {
+	color: inherit;
+}
+
+.article-title a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+.article-meta {
+	margin-bottom: 20px;
+}
+
+.article-meta:last-child {
+	margin-bottom: 0;
+}
+
+.article-meta .fa {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+@media only screen and (min-width: 992px) {
+	.article-meta > span + span {
+		margin-left: 10px;
+	}
+}
+
+@media only screen and (max-width: 991px) {
+	.article-meta > span {
+		display: block;
+		margin: 5px 0;
+	}
+}
+
+.article-text {
+  color: #094063;
+  margin-bottom: 10px;
+}
+
+.back-button {
+  display: block;
+  /* background-color: #0081C6; */
+  width: 100%;
+	color:#0081C6 !important;
+	border-color:#0081C6;
+	font-family: sans-serif;
+	font-size: medium;
+}
+
+.back-button:hover {
+	background-color: #0081C6 !important;
+	color: white !important;
+}
+
+#custom-search-input {
+  margin-bottom: 30px!important;
+}
+
+#custom-search-input button {
+	border: 0;
+	background: none;
+	/** belows styles are working good */
+	position: absolute;
+	right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+	/* IE7-8 doesn't have border-radius, so don't indent the padding */
+	margin-bottom: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color:#D9230F;
+	cursor: unset;
+	z-index: 2;
+}
