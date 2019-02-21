@@ -32,12 +32,12 @@
 }
 
 .bg-blue{
-	background-color: #0081C6 !important;
+	background-color: #043f64 !important;
 }
 
 .btn-outline-primary {
-	color:#0081C6 !important;
-	border-color:#0081C6;
+	color:#043f64 !important;
+	border-color:#043f64;
 	font-size: medium;
 	margin-left: -27px !important;
 	/* width:118%; */
@@ -46,8 +46,8 @@
 
 .c-btn {
 	font-size: medium !important;
-	border-color: #0081C6 !important;
-	color: #0081C6 !important;
+	border-color: #043f64 !important;
+	color: #043f64 !important;
 	box-shadow: none !important;
 	padding: 7px !important;
 }
@@ -55,7 +55,8 @@
 
 
 .btn-outline-primary:hover {
-	background-color: #0081C6 !important;
+	background-color: #043f64 !important;
+	border-color: #043f64 !important;
 	color: white !important;
 }
 
@@ -64,13 +65,13 @@
 }
 
 .btn-pressed {
-	background-color: #0081C6 !important;
+	background-color: #043f64 !important;
 	color: white !important;
 }
 
 .btn-unpressed{
 	background-color: none !important;
-	color:#0081C6;
+	color:#043f64;
 }
 
 .emphasize .fa {
@@ -81,15 +82,15 @@
 	position: relative;
 	border: 1px solid;
 	border-radius: 3px;
-	border-color: #0081C6;
+	border-color: #043f64;
 	padding-top:5px;
 	padding-left:5px;
 }
 
 .label-margin{
 	margin-left: 5px;
-	color:#0081C6 !important;
-	border-color:#0081C6;
+	color:#043f64 !important;
+	border-color:#043f64;
 	font-size: medium;
 	width:118%;
 	padding-left: 10px;
@@ -100,9 +101,9 @@
 }
 
 .arrow-2{
-	border-bottom: 15px solid #0081C6 !important;
+	border-bottom: 15px solid #043f64 !important;
 }
 
 .list-area{
-	box-shadow: 0px 1px 8px #0081C6 !important;
+	box-shadow: 0px 1px 8px #043f64 !important;
 }

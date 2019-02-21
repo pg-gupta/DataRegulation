@@ -122,7 +122,8 @@
     font-style: normal;
 }
 body {
-    font-family: 'Futura';
+  font-family: 'Futura';
+  background-color: transparent!important;
 }
 
 body.is-iframe .iframe-hide {
@@ -179,23 +180,28 @@ body.is-iframe .iframe-hide {
 	}
 }
 
-.article-text {
+.article-text,
+.article-meta {
   color: #094063;
+}
+
+.article-text {
   margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .back-button {
   display: block;
   /* background-color: #0081C6; */
   width: 100%;
-	color:#0081C6 !important;
-	border-color:#0081C6;
+	color:#043f64 !important;
+	border-color:#043f64;
 	font-family: sans-serif;
 	font-size: medium;
 }
 
 .back-button:hover {
-	background-color: #0081C6 !important;
+	background-color: #043f64 !important;
 	color: white !important;
 }
 
