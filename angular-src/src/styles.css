@@ -140,6 +140,7 @@ body.is-iframe .iframe-hide {
   margin-bottom: 10px;
 }
 
+a,
 .article-title a {
 	color: #0081C6;
   font-weight: 400;
@@ -222,7 +223,7 @@ body.is-iframe .iframe-hide {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	color:#D9230F;
+	color:#043f64;
 	cursor: unset;
 	z-index: 2;
 }
