@@ -414,7 +414,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\" (keyup.enter)=\"searchDoc()\"  name=\"searchDoc\" type=\"text\" id=\"search\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" (click)=\"searchDoc()\">\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <div class=\"btn-group-vertical container\">\n        <button type=\"button\" #AcademicBtn class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isAcademicPressed==true}\" (click)=\"showAcademicResearchDocs(true,false,false)\" name=\"AcademicResearch\">Academic Research</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isNewsArticlePressed==true}\" (click)=\"showAcademicResearchDocs(false,true,false)\" name=\"NewsArticles\">News Articles</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isReportsPressed==true}\" (click)=\"showAcademicResearchDocs(false,false,true)\" name=\"ReportsWhitepapers\">Reports & White Papers</button>\n      </div>\n      <br>\n      <br>\n      <div class=\"btn-group-vertical container\">\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isMajorDevPressed==true}\" (click)=\"showMajorDevDocs(isMajorDevPressed,$event)\" name=\"MajorDevlopments\">Major Developments</button>\n      </div>\n      <br>\n      <br>\n      <div class=\"dr-dropdown\">\n        <angular4-multiselect [data]=\"dropdownList\" [(ngModel)]=\"selectedItems\" [settings]=\"dropdownSettings\"\n        (onSelect)=\"onItemSelect($event)\"\n        (onDeSelect)=\"OnItemDeSelect($event)\"\n        (onSelectAll)=\"onSelectAll($event)\"\n        (onDeSelectAll)=\"onDeSelectAll($event)\"\n        >\n        <c-item >\n          <ng-template let-item=\"item\">\n            <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n          </ng-template>\n        </c-item>\n      </angular4-multiselect>\n    </div>\n    <br>\n    <div class=\"dr-dropdown\">\n      <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n      (onSelect)=\"onItemSelect($event)\"\n      (onDeSelect)=\"OnItemDeSelect($event)\"\n      (onSelectAll)=\"onSelectAll($event)\"\n      (onDeSelectAll)=\"onDeSelectAll($event)\"\n      >\n      <c-item>\n        <ng-template let-item=\"item\">\n          <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n        </ng-template>\n      </c-item>\n    </angular4-multiselect>\n  </div>\n  <br>\n  <br>\n</div>\n<div class=\"col-md-9\">\n  <div class=\"list-group\" *ngFor=\"let item of docs\">\n    <div class=\"flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 [ngClass]=\"{'emphasize':item.is_emphasized}\" class=\"mb-1\" class=\"article-title\">\n          <a [routerLink]=\"['/details', item._id]\">\n            <span class=\"fa fa-star\" *ngIf=\"item.is_emphasized\" aria-hidden=\"true\"></span> {{item.title}}\n          </a>\n        </h5>\n      </div>\n      <p class=\"article-text\">{{item.abstract}}</p>\n      <p class=\"article-meta\">\n        <span class=\"date\">\n          <span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> {{item.version_date | date}}\n        </span>\n        <span class=\"authors\">\n          <span class=\"fa fa-user\" aria-hidden=\"true\"></span>\n          <span class=\"author\" *ngFor=\"let author of item.authors; index as i;\">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>\n        </span>\n      </p>\n    </div>\n  </div>\n  <br>\n</div>\n<button type=\"button\" id=\"load-more-btn\" class=\"btn-pressed btn\" name=\"button\" *ngIf=\"hasMoreData\" (click)=\"loadMore()\">Load More</button>\n</div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\" (keyup.enter)=\"searchDoc()\"  name=\"searchDoc\" type=\"text\" id=\"search\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" (click)=\"searchDoc()\">\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-3\">\n      <div class=\"btn-group-vertical container\">\n        <button type=\"button\" #AcademicBtn class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isAcademicPressed==true}\" (click)=\"showAcademicResearchDocs(true,false,false)\" name=\"AcademicResearch\">Academic Research</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isNewsArticlePressed==true}\" (click)=\"showAcademicResearchDocs(false,true,false)\" name=\"NewsArticles\">News Articles</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isReportsPressed==true}\" (click)=\"showAcademicResearchDocs(false,false,true)\" name=\"ReportsWhitepapers\">Reports & White Papers</button>\n      </div>\n      <br>\n      <br>\n      <div class=\"btn-group-vertical container\">\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isMajorDevPressed==true}\" (click)=\"showMajorDevDocs(isMajorDevPressed,$event)\" name=\"MajorDevlopments\">Major Developments</button>\n      </div>\n      <br>\n      <br>\n      <div class=\"dr-dropdown\">\n        <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n        (onSelect)=\"onItemSelect($event)\"\n        (onDeSelect)=\"OnItemDeSelect($event)\"\n        (onSelectAll)=\"onSelectAll($event)\"\n        (onDeSelectAll)=\"onDeSelectAll($event)\"\n        >\n        <c-item>\n          <ng-template let-item=\"item\">\n            <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n          </ng-template>\n        </c-item>\n      </angular4-multiselect>\n    </div>\n    <br>\n    <br>\n  </div>\n  <div class=\"col-md-9\">\n    <div class=\"list-group\" *ngFor=\"let item of docs\">\n      <div class=\"flex-column align-items-start\">\n        <div class=\"d-flex w-100 justify-content-between\">\n          <h5 [ngClass]=\"{'emphasize':item.is_emphasized}\" class=\"mb-1\" class=\"article-title\">\n            <a [routerLink]=\"['/details', item._id]\">\n              <span class=\"fa fa-star\" *ngIf=\"item.is_emphasized\" aria-hidden=\"true\"></span> {{item.title}}\n            </a>\n          </h5>\n        </div>\n        <p class=\"article-text\">{{item.abstract}}</p>\n        <p class=\"article-meta\">\n          <span class=\"date\">\n            <span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> {{item.version_date | date}}\n          </span>\n          <span class=\"authors\">\n            <span class=\"fa fa-user\" aria-hidden=\"true\"></span>\n            <span class=\"author\" *ngFor=\"let author of item.authors; index as i;\">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>\n          </span>\n        </p>\n      </div>\n    </div>\n    <br>\n  </div>\n  <button type=\"button\" id=\"load-more-btn\" class=\"btn-pressed btn\" name=\"button\" *ngIf=\"hasMoreData\" (click)=\"loadMore()\">Load More</button>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -424,8 +424,7 @@ module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <d
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_doc_service__ = __webpack_require__("./src/app/services/doc.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_author_service__ = __webpack_require__("./src/app/services/author.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchDocComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -439,11 +438,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var SearchDocComponent = (function () {
-    function SearchDocComponent(docServ, authorService, router) {
+    function SearchDocComponent(docServ, router) {
         this.docServ = docServ;
-        this.authorService = authorService;
         this.router = router;
         this.dropdownList = [];
         this.selectedItems = [];
@@ -455,7 +452,6 @@ var SearchDocComponent = (function () {
         this.selectedResearchScope = [];
         this.isImportant = [];
         this.dropdownSettingsResearchScope = {};
-        this.authorsSelected = [];
         this.query = [];
         this.isAcademicChecked = false;
         this.isAcademicPressed = false;
@@ -478,28 +474,6 @@ var SearchDocComponent = (function () {
             _this.peopleFilter = {};
         }, function (error) { return console.error(error); });
     };
-    SearchDocComponent.prototype.getAuthors = function (callback) {
-        var _this = this;
-        this.authorService.getAll().subscribe(function (result) {
-            _this.authors = result;
-            console.log(_this.authors);
-            callback(_this.authors);
-        }, function (error) {
-            console.error(error);
-            callback(false);
-        });
-    };
-    SearchDocComponent.prototype.toggleSelection = function (authorname) {
-        var index = this.authorsSelected.indexOf(authorname);
-        if (index > -1) {
-            this.authorsSelected.splice(index, 1);
-        }
-        else {
-            this.authorsSelected.push(authorname);
-        }
-        this.createQuery();
-        console.log(this.authorsSelected);
-    };
     SearchDocComponent.prototype.onSubmit = function () {
         var _this = this;
         this.docServ.add(this.newDoc).subscribe(function (response) {
@@ -511,27 +485,8 @@ var SearchDocComponent = (function () {
         this.router.navigate(['app-doc-details', '456']);
     };
     SearchDocComponent.prototype.ngOnInit = function () {
-        var _this = this;
         var el = this.AcademicBtn.nativeElement;
         el.click();
-        this.authorService.getAll().subscribe(function (result) {
-            _this.authors = result;
-            _this.dropdownList = _this.authors;
-            _this.selectedItems = [];
-            _this.dropdownSettings = {
-                singleSelection: false,
-                text: "Select Author",
-                showCheckbox: true,
-                selectAllText: 'Select All',
-                unSelectAllText: 'UnSelect All',
-                enableSearchFilter: true,
-                classes: "",
-                labelKey: 'name',
-                primaryKey: '_id',
-            };
-        }, function (error) {
-            console.error(error);
-        });
         this.bindType();
     };
     SearchDocComponent.prototype.bindType = function () {
@@ -607,18 +562,12 @@ var SearchDocComponent = (function () {
     };
     SearchDocComponent.prototype.createQuery = function () {
         this.hasMoreData = true;
-        var selectedAuthors = this.selectedItems.map(function (obj) {
-            return { 'authors': obj.name };
-        });
         var selectedType = this.selectedTypeOfDoc.map(function (obj) {
             return { 'type_of_article': obj.name };
         });
         var selectedResearchScopeItem = this.selectedResearchScope;
         var isEmphasized = this.isImportant;
         this.query = [];
-        if (selectedAuthors.length != 0) {
-            this.query.push({ $or: selectedAuthors });
-        }
         if (selectedType.length != 0) {
             this.query.push({ $or: selectedType });
         }
@@ -631,7 +580,6 @@ var SearchDocComponent = (function () {
         if (isEmphasized.length != 0) {
             this.query.push({ $or: isEmphasized });
         }
-        console.log("selected items: " + JSON.stringify(selectedAuthors) + " ** " + JSON.stringify(selectedType) + "***" + JSON.stringify(this.query));
         this.fetchData(this.query);
     };
     SearchDocComponent.prototype.fetchData = function (queryObj) {
@@ -690,10 +638,10 @@ SearchDocComponent = __decorate([
         styles: [__webpack_require__("./src/app/search-doc/search-doc.component.css")],
         encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* ViewEncapsulation */].None,
     }),
-    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_author_service__["a" /* AuthorService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_doc_service__["a" /* DocService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _d || Object])
 ], SearchDocComponent);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d;
 //# sourceMappingURL=search-doc.component.js.map
 
 /***/ }),

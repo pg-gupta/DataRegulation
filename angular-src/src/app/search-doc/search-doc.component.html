@@ -29,13 +29,13 @@
       <br>
       <br>
       <div class="dr-dropdown">
-        <angular4-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+        <angular4-multiselect [data]="dropdownListTypeOfDoc" *ngIf="isAcademicChecked" [(ngModel)]="selectedTypeOfDoc" [settings]="dropdownSettingsTypeOfDoc"
         (onSelect)="onItemSelect($event)"
         (onDeSelect)="OnItemDeSelect($event)"
         (onSelectAll)="onSelectAll($event)"
         (onDeSelectAll)="onDeSelectAll($event)"
         >
-        <c-item >
+        <c-item>
           <ng-template let-item="item">
             <label style="color: #333;min-width: 150px;">{{item.name}}</label>
           </ng-template>
@@ -43,47 +43,32 @@
       </angular4-multiselect>
     </div>
     <br>
-    <div class="dr-dropdown">
-      <angular4-multiselect [data]="dropdownListTypeOfDoc" *ngIf="isAcademicChecked" [(ngModel)]="selectedTypeOfDoc" [settings]="dropdownSettingsTypeOfDoc"
-      (onSelect)="onItemSelect($event)"
-      (onDeSelect)="OnItemDeSelect($event)"
-      (onSelectAll)="onSelectAll($event)"
-      (onDeSelectAll)="onDeSelectAll($event)"
-      >
-      <c-item>
-        <ng-template let-item="item">
-          <label style="color: #333;min-width: 150px;">{{item.name}}</label>
-        </ng-template>
-      </c-item>
-    </angular4-multiselect>
+    <br>
   </div>
-  <br>
-  <br>
-</div>
-<div class="col-md-9">
-  <div class="list-group" *ngFor="let item of docs">
-    <div class="flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 [ngClass]="{'emphasize':item.is_emphasized}" class="mb-1" class="article-title">
-          <a [routerLink]="['/details', item._id]">
-            <span class="fa fa-star" *ngIf="item.is_emphasized" aria-hidden="true"></span> {{item.title}}
-          </a>
-        </h5>
+  <div class="col-md-9">
+    <div class="list-group" *ngFor="let item of docs">
+      <div class="flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 [ngClass]="{'emphasize':item.is_emphasized}" class="mb-1" class="article-title">
+            <a [routerLink]="['/details', item._id]">
+              <span class="fa fa-star" *ngIf="item.is_emphasized" aria-hidden="true"></span> {{item.title}}
+            </a>
+          </h5>
+        </div>
+        <p class="article-text">{{item.abstract}}</p>
+        <p class="article-meta">
+          <span class="date">
+            <span class="fa fa-calendar" aria-hidden="true"></span> {{item.version_date | date}}
+          </span>
+          <span class="authors">
+            <span class="fa fa-user" aria-hidden="true"></span>
+            <span class="author" *ngFor="let author of item.authors; index as i;">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>
+          </span>
+        </p>
       </div>
-      <p class="article-text">{{item.abstract}}</p>
-      <p class="article-meta">
-        <span class="date">
-          <span class="fa fa-calendar" aria-hidden="true"></span> {{item.version_date | date}}
-        </span>
-        <span class="authors">
-          <span class="fa fa-user" aria-hidden="true"></span>
-          <span class="author" *ngFor="let author of item.authors; index as i;">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>
-        </span>
-      </p>
     </div>
+    <br>
   </div>
-  <br>
-</div>
-<button type="button" id="load-more-btn" class="btn-pressed btn" name="button" *ngIf="hasMoreData" (click)="loadMore()">Load More</button>
+  <button type="button" id="load-more-btn" class="btn-pressed btn" name="button" *ngIf="hasMoreData" (click)="loadMore()">Load More</button>
 </div>
 </div>

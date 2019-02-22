@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation  } from '@angular/core';
 import { Document } from '../models/Document';
 import { DocService } from '../services/doc.service';
-import { Author } from '../models/Author';
-import { AuthorService } from '../services/author.service';
 import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -25,9 +23,7 @@ export class SearchDocComponent implements OnInit {
   dropdownSettingsResearchScope = {};
   private newDoc: Document;
   docs: Document[];
-  authors: Author[];
   peopleFilter: any;
-  authorsSelected:string[]=[];
   query=[];
   isAcademicChecked=false;
   isAcademicPressed=false;
@@ -41,7 +37,7 @@ export class SearchDocComponent implements OnInit {
 
   @ViewChild('AcademicBtn') AcademicBtn: ElementRef;
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
-  constructor(private docServ: DocService,private authorService:AuthorService, private router: Router) {
+  constructor(private docServ: DocService,private router: Router) {
     this.docs=[];
   }
 
@@ -53,33 +49,6 @@ export class SearchDocComponent implements OnInit {
     this.peopleFilter={};
   }, error => console.error(error));
 }
-
-public getAuthors(callback){
-  this.authorService.getAll().subscribe(result=>{
-    this.authors=result;
-    console.log(this.authors);
-    callback(this.authors);
-  },error=>{
-    console.error(error);
-    callback(false);
-  });
-}
-
-toggleSelection(authorname){
-  var index=this.authorsSelected.indexOf(authorname);
-  if(index>-1){
-    this.authorsSelected.splice(index,1);
-  }
-  else{
-    this.authorsSelected.push(authorname);
-  }
-
-  this.createQuery();
-
-  console.log(this.authorsSelected);
-
-}
-
 
 public onSubmit() {
   this.docServ.add(this.newDoc).subscribe(
@@ -99,27 +68,6 @@ ngOnInit(){
 
   let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
   el.click();
-
-  this.authorService.getAll().subscribe(result=>{
-    this.authors=result;
-    this.dropdownList=this.authors;
-    this.selectedItems = [
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      text:"Select Author",
-      showCheckbox: true,
-      selectAllText:'Select All',
-      unSelectAllText:'UnSelect All',
-      enableSearchFilter: true,
-      classes:"",
-      labelKey:'name',
-      primaryKey: '_id',
-    };
-  },error=>{
-    console.error(error);
-  });
-
   this.bindType();
 }
 
@@ -206,9 +154,6 @@ public searchDoc(){
 
 public createQuery(){
   this.hasMoreData=true;
-  var selectedAuthors= this.selectedItems.map(function(obj){
-    return {'authors':obj.name};
-  });
 
   var selectedType= this.selectedTypeOfDoc.map(function(obj){
     return {'type_of_article':obj.name};
@@ -217,26 +162,19 @@ public createQuery(){
   var selectedResearchScopeItem= this.selectedResearchScope;
   var isEmphasized=this.isImportant;
   this.query=[];
-  if(selectedAuthors.length!=0){
-    this.query.push({$or:selectedAuthors});
-  }
+
   if(selectedType.length!=0){
     this.query.push({$or:selectedType});
   }
-
   if(selectedResearchScopeItem.length!=0){
     this.query.push({$or:selectedResearchScopeItem});
   }
   if(this.searchText.length!=0){
     this.query.push({$text:{$search:this.searchText}});
   }
-
-
   if(isEmphasized.length!=0){
     this.query.push({$or:isEmphasized});
   }
-
-  console.log("selected items: "+ JSON.stringify(selectedAuthors)+ " ** "+ JSON.stringify(selectedType)+"***"+ JSON.stringify(this.query));
   this.fetchData(this.query);
 }
 
