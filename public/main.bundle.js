@@ -722,8 +722,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthorService = (function () {
     function AuthorService(http) {
         this.http = http;
-        // private serverApi= 'http://localhost:3000';
-        this.serverApi = 'https://dataregulationrepository.azurewebsites.net/';
+        //private serverApi= 'http://localhost:3000';
+        this.serverApi = 'http://dataregulationrepository.azurewebsites.net';
     }
     AuthorService.prototype.getAll = function () {
         var URI = this.serverApi + "/authors/";
@@ -790,8 +790,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DocService = (function () {
     function DocService(http) {
         this.http = http;
-        // private serverApi= 'http://localhost:3000';
-        this.serverApi = 'https://dataregulationrepository.azurewebsites.net/';
+        //private serverApi= 'http://localhost:3000';
+        this.serverApi = 'http://dataregulationrepository.azurewebsites.net';
     }
     DocService.prototype.getAll = function () {
         var URI = this.serverApi + "/documents/";
@@ -868,8 +868,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var EventService = (function () {
     function EventService(http) {
         this.http = http;
-        // private serverApi= 'http://localhost:3000';
-        this.serverApi = 'https://dataregulationrepository.azurewebsites.net/';
+        //private serverApi= 'http://localhost:3000';
+        this.serverApi = 'http://dataregulationrepository.azurewebsites.net';
     }
     EventService.prototype.getAll = function () {
         var URI = this.serverApi + "/events/";
@@ -917,13 +917,8 @@ var _a;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-// The file contents for the current environment will overwrite these during build.
 var environment = {
-    production: false
+    production: true
 };
 //# sourceMappingURL=environment.js.map
 

@@ -10,8 +10,8 @@ export class AuthorService {
 
   constructor(private http: Http) { }
 
-  // private serverApi= 'http://localhost:3000';
-  private serverApi= 'https://dataregulationrepository.azurewebsites.net/';
+  //private serverApi= 'http://localhost:3000';
+  private serverApi= 'http://dataregulationrepository.azurewebsites.net';
 
   public getAll():Observable<Author[]> {
     let URI = `${this.serverApi}/authors/`;
