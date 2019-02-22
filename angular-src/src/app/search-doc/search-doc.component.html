@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div class="container-fluid zero-pad-container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-8 offset-md-4 col-lg-9 offset-lg-3">
       <div id="custom-search-input">
         <div class="input-group">
           <input [(ngModel)]="searchText" (keyup.enter)="searchDoc()"  name="searchDoc" type="text" id="search" class="search-query form-control" placeholder="Search" />
@@ -15,60 +15,59 @@
   </div>
 
   <div class="row">
-    <div class="col-md-3">
-      <div class="btn-group-vertical container">
+    <div class="col-md-4 col-lg-3">
+      <div class="btn-group-vertical">
         <button type="button" #AcademicBtn class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isAcademicPressed==true}" (click)="showAcademicResearchDocs(true,false,false)" name="AcademicResearch">Academic Research</button>
         <button type="button" class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isNewsArticlePressed==true}" (click)="showAcademicResearchDocs(false,true,false)" name="NewsArticles">News Articles</button>
         <button type="button" class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isReportsPressed==true}" (click)="showAcademicResearchDocs(false,false,true)" name="ReportsWhitepapers">Reports & White Papers</button>
       </div>
-      <br>
-      <br>
-      <div class="btn-group-vertical container">
+      <div class="btn-group-vertical">
         <button type="button" class="btn btn-outline-primary" [ngClass]="{'btn-pressed':isMajorDevPressed==true}" (click)="showMajorDevDocs(isMajorDevPressed,$event)" name="MajorDevlopments">Major Developments</button>
       </div>
-      <br>
-      <br>
       <div class="dr-dropdown">
         <angular4-multiselect [data]="dropdownListTypeOfDoc" *ngIf="isAcademicChecked" [(ngModel)]="selectedTypeOfDoc" [settings]="dropdownSettingsTypeOfDoc"
-        (onSelect)="onItemSelect($event)"
-        (onDeSelect)="OnItemDeSelect($event)"
-        (onSelectAll)="onSelectAll($event)"
-        (onDeSelectAll)="onDeSelectAll($event)"
-        >
-        <c-item>
-          <ng-template let-item="item">
-            <label style="color: #333;min-width: 150px;">{{item.name}}</label>
-          </ng-template>
-        </c-item>
-      </angular4-multiselect>
+          (onSelect)="onItemSelect($event)"
+          (onDeSelect)="OnItemDeSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (onDeSelectAll)="onDeSelectAll($event)"
+          >
+          <c-item>
+            <ng-template let-item="item">
+              <label style="color: #333;min-width: 150px;">{{item.name}}</label>
+            </ng-template>
+          </c-item>
+        </angular4-multiselect>
+      </div>
+      <br>
+      <br>
     </div>
-    <br>
-    <br>
-  </div>
-  <div class="col-md-9">
-    <div class="list-group" *ngFor="let item of docs">
-      <div class="flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 [ngClass]="{'emphasize':item.is_emphasized}" class="mb-1" class="article-title">
-            <a [routerLink]="['/details', item._id]">
-              <span class="fa fa-star" *ngIf="item.is_emphasized" aria-hidden="true"></span> {{item.title}}
-            </a>
-          </h5>
+    <div class="col-md-8 col-lg-9">
+      <div class="list-group" *ngFor="let item of docs">
+        <div class="flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 [ngClass]="{'emphasize':item.is_emphasized}" class="mb-1" class="article-title">
+              <a [routerLink]="['/details', item._id]">
+                <span class="fa fa-star" *ngIf="item.is_emphasized" aria-hidden="true"></span> {{item.title}}
+              </a>
+            </h5>
+          </div>
+          <p class="article-text">{{item.abstract}}</p>
+          <p class="article-meta">
+            <span class="date">
+              <span class="fa fa-calendar" aria-hidden="true"></span> {{item.version_date | date}}
+            </span>
+            <span class="authors">
+              <span class="fa fa-user" aria-hidden="true"></span>
+              <span class="author" *ngFor="let author of item.authors; index as i;">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>
+            </span>
+          </p>
         </div>
-        <p class="article-text">{{item.abstract}}</p>
-        <p class="article-meta">
-          <span class="date">
-            <span class="fa fa-calendar" aria-hidden="true"></span> {{item.version_date | date}}
-          </span>
-          <span class="authors">
-            <span class="fa fa-user" aria-hidden="true"></span>
-            <span class="author" *ngFor="let author of item.authors; index as i;">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>
-          </span>
-        </p>
       </div>
     </div>
-    <br>
   </div>
-  <button type="button" id="load-more-btn" class="btn-pressed btn" name="button" *ngIf="hasMoreData" (click)="loadMore()">Load More</button>
-</div>
+  <div class="row">
+    <div class="col-md-9 offset-md-3">
+      <button type="button" id="load-more-btn" class="btn-pressed btn" name="button" *ngIf="hasMoreData" (click)="loadMore()">Load More</button>
+    </div>
+  </div>
 </div>
