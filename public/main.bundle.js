@@ -723,7 +723,7 @@ var AuthorService = (function () {
     function AuthorService(http) {
         this.http = http;
         //private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulationrepository.azurewebsites.net';
+        this.serverApi = 'https://dataregulationrepository.azurewebsites.net';
     }
     AuthorService.prototype.getAll = function () {
         var URI = this.serverApi + "/authors/";
@@ -791,7 +791,7 @@ var DocService = (function () {
     function DocService(http) {
         this.http = http;
         //private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulationrepository.azurewebsites.net';
+        this.serverApi = 'https://dataregulationrepository.azurewebsites.net';
     }
     DocService.prototype.getAll = function () {
         var URI = this.serverApi + "/documents/";
@@ -869,7 +869,7 @@ var EventService = (function () {
     function EventService(http) {
         this.http = http;
         //private serverApi= 'http://localhost:3000';
-        this.serverApi = 'http://dataregulationrepository.azurewebsites.net';
+        this.serverApi = 'https://dataregulationrepository.azurewebsites.net';
     }
     EventService.prototype.getAll = function () {
         var URI = this.serverApi + "/events/";
