@@ -130,6 +130,11 @@ body.is-iframe .iframe-hide {
   display: none;
 }
 
+body.is-iframe .zero-pad-container {
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+
 .list-group {
   margin-bottom: 30px;
 }
@@ -199,6 +204,7 @@ a,
 	border-color:#043f64;
 	font-family: sans-serif;
 	font-size: medium;
+  margin-bottom: 30px;
 }
 
 .back-button:hover {
@@ -224,6 +230,6 @@ a,
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	color:#043f64;
-	cursor: unset;
-	z-index: 2;
+	cursor: pointer;
+	z-index: 9;
 }
