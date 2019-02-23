@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation, HostListener  } from '@angular/core';
 import { Document } from '../models/Document';
 import { DocService } from '../services/doc.service';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -34,11 +34,18 @@ export class SearchDocComponent implements OnInit {
   no_pages=0;
   searchText="";
   hasMoreData=true;
+  previousQuery=[];
+
 
   @ViewChild('AcademicBtn') AcademicBtn: ElementRef;
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
   constructor(private docServ: DocService,private router: Router) {
     this.docs=[];
+  }
+
+  @HostListener("window:beforeunload",["$event"])
+  clearLocalStorage(event){
+    localStorage.clear();
   }
 
   public getList() {
@@ -53,7 +60,6 @@ export class SearchDocComponent implements OnInit {
 public onSubmit() {
   this.docServ.add(this.newDoc).subscribe(
     response=> {
-
       if(response.success== true)
       this.addList.emit(this.newDoc);
     },
@@ -66,8 +72,52 @@ onClick() {
 }
 ngOnInit(){
 
-  let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
-  el.click();
+  if(localStorage.getItem("previousQuery")!=null){
+    this.previousQuery= JSON.parse(localStorage.getItem("previousQuery"));
+    this.previousQuery.forEach(item=>{
+      if(item.$or){
+        item.$or.forEach(or=>{
+          if(item.$or[0].hasOwnProperty(Object.keys(or)[0]))
+          {
+            var key =Object.keys(or)[0]
+            var value= item.$or[0][key];
+
+            if(key=='research_scope'){
+              if(value=='News'){
+                this.isNewsArticlePressed=true;
+              }
+              else if(value=='Academic'){
+                this.isAcademicPressed=true;
+                this.isAcademicChecked=true;
+              }
+              else{
+                this.isReportsPressed=true;
+              }
+              this.selectedResearchScope.push({'research_scope':value});
+            }
+            else if(key=='is_emphasized'){
+              this.isMajorDevPressed=true;
+              this.isImportant.push({'is_emphasized':true});
+            }
+            else if(key=='type_of_article'){
+              this.selectedTypeOfDoc.push(value);
+            }
+          }
+        });
+      }
+      else if(item.$text){
+         this.searchText=item.$text.$search;
+      }
+    });
+    console.log("previousQuery: "+ JSON.stringify(this.previousQuery));
+    this.fetchData(this.previousQuery);
+  }
+  else{
+    let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
+    el.click();
+  }
+  // let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
+  // el.click();
   this.bindType();
 }
 
@@ -106,8 +156,6 @@ public showAcademicResearchDocs(isAcademicChecked,isNewsChecked,isReportChecked)
     this.isNewsArticlePressed=true;
     this.isAcademicPressed=false;
     this.isReportsPressed=false;
-
-
   }
   else
   if(isReportChecked){
@@ -154,11 +202,9 @@ public searchDoc(){
 
 public createQuery(){
   this.hasMoreData=true;
-
   var selectedType= this.selectedTypeOfDoc.map(function(obj){
     return {'type_of_article':obj.name};
   });
-
   var selectedResearchScopeItem= this.selectedResearchScope;
   var isEmphasized=this.isImportant;
   this.query=[];
@@ -175,6 +221,8 @@ public createQuery(){
   if(isEmphasized.length!=0){
     this.query.push({$or:isEmphasized});
   }
+  // setting localstorage with previous query
+  localStorage.setItem("previousQuery",JSON.stringify(this.query));
   this.fetchData(this.query);
 }
 

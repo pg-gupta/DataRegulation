@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container-fluid\">\n    <!--Navbar-->\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-blue iframe-hide\">\n\n          <span class=\"navbar-brand nav-title\">Data Regulation</span>\n          <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n          <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n            <ul class=\"navbar-nav mr-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': researchTab.isClicked}\" (click)=researchActive() [routerLink]=\"['/search']\">Research & News</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': eventsTab.isClicked}\" (click)=EventsAndConferenceActive() [routerLink]=\"['/eventsconf']\">Events & Conferences</a>\n              </li>\n            </ul>\n          </div>\n\n    </nav>\n\n\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+module.exports = "<!--The whole content below can be removed with the new code.-->\n<div style=\"text-align:left\">\n  <div class=\"container-fluid\">\n    <!--Navbar-->\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-blue iframe-hide\">\n      <span class=\"navbar-brand nav-title\">Data Regulation</span>\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': researchTab.isClicked}\" (click)=researchActive() [routerLink]=\"['/search']\">Research & News</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link nav-tab\" [ngClass]=\"{'active': eventsTab.isClicked}\" (click)=EventsAndConferenceActive() [routerLink]=\"['/eventsconf']\">Events & Conferences</a>\n          </li>\n        </ul>\n      </div>\n    </nav>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -462,9 +462,13 @@ var SearchDocComponent = (function () {
         this.no_pages = 0;
         this.searchText = "";
         this.hasMoreData = true;
+        this.previousQuery = [];
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]();
         this.docs = [];
     }
+    SearchDocComponent.prototype.clearLocalStorage = function (event) {
+        localStorage.clear();
+    };
     SearchDocComponent.prototype.getList = function () {
         var _this = this;
         this.docServ.getAll().subscribe(function (result) {
@@ -485,8 +489,51 @@ var SearchDocComponent = (function () {
         this.router.navigate(['app-doc-details', '456']);
     };
     SearchDocComponent.prototype.ngOnInit = function () {
-        var el = this.AcademicBtn.nativeElement;
-        el.click();
+        var _this = this;
+        if (localStorage.getItem("previousQuery") != null) {
+            this.previousQuery = JSON.parse(localStorage.getItem("previousQuery"));
+            this.previousQuery.forEach(function (item) {
+                if (item.$or) {
+                    item.$or.forEach(function (or) {
+                        if (item.$or[0].hasOwnProperty(Object.keys(or)[0])) {
+                            var key = Object.keys(or)[0];
+                            var value = item.$or[0][key];
+                            if (key == 'research_scope') {
+                                if (value == 'News') {
+                                    _this.isNewsArticlePressed = true;
+                                }
+                                else if (value == 'Academic') {
+                                    _this.isAcademicPressed = true;
+                                    _this.isAcademicChecked = true;
+                                }
+                                else {
+                                    _this.isReportsPressed = true;
+                                }
+                                _this.selectedResearchScope.push({ 'research_scope': value });
+                            }
+                            else if (key == 'is_emphasized') {
+                                _this.isMajorDevPressed = true;
+                                _this.isImportant.push({ 'is_emphasized': true });
+                            }
+                            else if (key == 'type_of_article') {
+                                _this.selectedTypeOfDoc.push(value);
+                            }
+                        }
+                    });
+                }
+                else if (item.$text) {
+                    _this.searchText = item.$text.$search;
+                }
+            });
+            console.log("previousQuery: " + JSON.stringify(this.previousQuery));
+            this.fetchData(this.previousQuery);
+        }
+        else {
+            var el = this.AcademicBtn.nativeElement;
+            el.click();
+        }
+        // let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
+        // el.click();
         this.bindType();
     };
     SearchDocComponent.prototype.bindType = function () {
@@ -580,6 +627,8 @@ var SearchDocComponent = (function () {
         if (isEmphasized.length != 0) {
             this.query.push({ $or: isEmphasized });
         }
+        // setting localstorage with previous query
+        localStorage.setItem("previousQuery", JSON.stringify(this.query));
         this.fetchData(this.query);
     };
     SearchDocComponent.prototype.fetchData = function (queryObj) {
@@ -631,6 +680,12 @@ __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Output */])(),
     __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]) === "function" && _b || Object)
 ], SearchDocComponent.prototype, "addList", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_2" /* HostListener */])("window:beforeunload", ["$event"]),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], SearchDocComponent.prototype, "clearLocalStorage", null);
 SearchDocComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
         selector: 'app-search-doc',

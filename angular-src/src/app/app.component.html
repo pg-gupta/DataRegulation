@@ -3,26 +3,22 @@
   <div class="container-fluid">
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-blue iframe-hide">
-
-          <span class="navbar-brand nav-title">Data Regulation</span>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link nav-tab" [ngClass]="{'active': researchTab.isClicked}" (click)=researchActive() [routerLink]="['/search']">Research & News</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link nav-tab" [ngClass]="{'active': eventsTab.isClicked}" (click)=EventsAndConferenceActive() [routerLink]="['/eventsconf']">Events & Conferences</a>
-              </li>
-            </ul>
-          </div>
-
+      <span class="navbar-brand nav-title">Data Regulation</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link nav-tab" [ngClass]="{'active': researchTab.isClicked}" (click)=researchActive() [routerLink]="['/search']">Research & News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-tab" [ngClass]="{'active': eventsTab.isClicked}" (click)=EventsAndConferenceActive() [routerLink]="['/eventsconf']">Events & Conferences</a>
+          </li>
+        </ul>
+      </div>
     </nav>
-
-
     <br>
     <router-outlet></router-outlet>
   </div>
