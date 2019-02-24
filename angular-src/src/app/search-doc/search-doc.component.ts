@@ -20,7 +20,6 @@ export class SearchDocComponent implements OnInit {
   dropdownListResearchScope = [];
   selectedResearchScope = [];
   isImportant=[];
-  dropdownSettingsResearchScope = {};
   private newDoc: Document;
   docs: Document[];
   peopleFilter: any;
@@ -35,7 +34,6 @@ export class SearchDocComponent implements OnInit {
   searchText="";
   hasMoreData=true;
   previousQuery=[];
-
 
   @ViewChild('AcademicBtn') AcademicBtn: ElementRef;
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
@@ -57,30 +55,22 @@ export class SearchDocComponent implements OnInit {
   }, error => console.error(error));
 }
 
-public onSubmit() {
-  this.docServ.add(this.newDoc).subscribe(
-    response=> {
-      if(response.success== true)
-      this.addList.emit(this.newDoc);
-    },
-  );
-
-}
-
 onClick() {
   this.router.navigate(['app-doc-details', '456']);
 }
+
 ngOnInit(){
 
+  this.bindType();
   if(localStorage.getItem("previousQuery")!=null){
     this.previousQuery= JSON.parse(localStorage.getItem("previousQuery"));
     this.previousQuery.forEach(item=>{
       if(item.$or){
         item.$or.forEach(or=>{
-          if(item.$or[0].hasOwnProperty(Object.keys(or)[0]))
-          {
-            var key =Object.keys(or)[0]
-            var value= item.$or[0][key];
+          for(let prop in or){
+            console.log("prop:"+ prop+" value:"+ or[prop]);
+            var key =prop;
+            var value= or[prop];
 
             if(key=='research_scope'){
               if(value=='News'){
@@ -100,15 +90,21 @@ ngOnInit(){
               this.isImportant.push({'is_emphasized':true});
             }
             else if(key=='type_of_article'){
-              this.selectedTypeOfDoc.push(value);
+              if(value=='Empirical'){
+                this.selectedTypeOfDoc.push({"id":1,"name":"Empirical"});
+              }
+              else if(value=='Theoretical'){
+                this.selectedTypeOfDoc.push({"id":2,"name":"Theoretical"});
+              }
             }
           }
         });
       }
       else if(item.$text){
-         this.searchText=item.$text.$search;
+        this.searchText=item.$text.$search;
       }
     });
+
     console.log("previousQuery: "+ JSON.stringify(this.previousQuery));
     this.fetchData(this.previousQuery);
   }
@@ -116,9 +112,6 @@ ngOnInit(){
     let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
     el.click();
   }
-  // let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
-  // el.click();
-  this.bindType();
 }
 
 public bindType(){
@@ -134,7 +127,7 @@ public bindType(){
     showCheckbox: true,
     selectAllText:'Select All',
     unSelectAllText:'UnSelect All',
-    enableSearchFilter: true,
+    // enableSearchFilter: true,
     classes:"myclass custom-class",
     labelKey:'name',
     primaryKey: 'id',
@@ -239,12 +232,10 @@ public fetchData(queryObj){
     this.getList();
   }
 }
-
 public loadMore(){
   this.no_pages+=1;
   this.fetchData(this.query);
 }
-
 onItemSelect(item:any){
   this.resetPage();
   this.createQuery();
@@ -252,7 +243,6 @@ onItemSelect(item:any){
 OnItemDeSelect(item:any){
   this.resetPage();
   this.createQuery();
-
 }
 onSelectAll(items: any){
   this.resetPage();

@@ -451,7 +451,6 @@ var SearchDocComponent = (function () {
         this.dropdownListResearchScope = [];
         this.selectedResearchScope = [];
         this.isImportant = [];
-        this.dropdownSettingsResearchScope = {};
         this.query = [];
         this.isAcademicChecked = false;
         this.isAcademicPressed = false;
@@ -478,26 +477,21 @@ var SearchDocComponent = (function () {
             _this.peopleFilter = {};
         }, function (error) { return console.error(error); });
     };
-    SearchDocComponent.prototype.onSubmit = function () {
-        var _this = this;
-        this.docServ.add(this.newDoc).subscribe(function (response) {
-            if (response.success == true)
-                _this.addList.emit(_this.newDoc);
-        });
-    };
     SearchDocComponent.prototype.onClick = function () {
         this.router.navigate(['app-doc-details', '456']);
     };
     SearchDocComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.bindType();
         if (localStorage.getItem("previousQuery") != null) {
             this.previousQuery = JSON.parse(localStorage.getItem("previousQuery"));
             this.previousQuery.forEach(function (item) {
                 if (item.$or) {
                     item.$or.forEach(function (or) {
-                        if (item.$or[0].hasOwnProperty(Object.keys(or)[0])) {
-                            var key = Object.keys(or)[0];
-                            var value = item.$or[0][key];
+                        for (var prop in or) {
+                            console.log("prop:" + prop + " value:" + or[prop]);
+                            var key = prop;
+                            var value = or[prop];
                             if (key == 'research_scope') {
                                 if (value == 'News') {
                                     _this.isNewsArticlePressed = true;
@@ -516,7 +510,12 @@ var SearchDocComponent = (function () {
                                 _this.isImportant.push({ 'is_emphasized': true });
                             }
                             else if (key == 'type_of_article') {
-                                _this.selectedTypeOfDoc.push(value);
+                                if (value == 'Empirical') {
+                                    _this.selectedTypeOfDoc.push({ "id": 1, "name": "Empirical" });
+                                }
+                                else if (value == 'Theoretical') {
+                                    _this.selectedTypeOfDoc.push({ "id": 2, "name": "Theoretical" });
+                                }
                             }
                         }
                     });
@@ -532,9 +531,6 @@ var SearchDocComponent = (function () {
             var el = this.AcademicBtn.nativeElement;
             el.click();
         }
-        // let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
-        // el.click();
-        this.bindType();
     };
     SearchDocComponent.prototype.bindType = function () {
         this.dropdownListTypeOfDoc = [
@@ -548,7 +544,7 @@ var SearchDocComponent = (function () {
             showCheckbox: true,
             selectAllText: 'Select All',
             unSelectAllText: 'UnSelect All',
-            enableSearchFilter: true,
+            // enableSearchFilter: true,
             classes: "myclass custom-class",
             labelKey: 'name',
             primaryKey: 'id',
