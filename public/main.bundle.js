@@ -312,9 +312,7 @@ var EventComponent = (function () {
     EventComponent.prototype.getList = function () {
         var _this = this;
         this.eventServ.getAll().subscribe(function (result) {
-            _this.events = result.sort(function (a, b) {
-                return new Date(b.end_date).getTime() - new Date(a.end_date).getTime();
-            });
+            _this.events = result;
         }, function (error) { return console.error(error); });
     };
     EventComponent.prototype.onSubmit = function () {

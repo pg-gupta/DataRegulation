@@ -22,9 +22,9 @@ const eventSchema = mongoose.Schema({
 const events = module.exports = mongoose.model('events', eventSchema );
 
 
-//BucketList.find() returns all the lists
+//find() returns all the lists
 module.exports.getAll = (callback) => {
-  events.find(callback);
+  events.find(callback).sort({end_date:-1});
 }
 
 //newList.save is used to insert the document into MongoDB
@@ -39,7 +39,7 @@ module.exports.deleteById = (id, callback) => {
   events.remove(query, callback);
 }
 
-//We pass on an id and remove it from DB using Bucketlist.remove()
+//We pass on an id and remove it from DB using remove()
 module.exports.getById = (id, callback) => {
   let query = {_id: id};
   events.findOne({_id: id}, callback);
@@ -58,7 +58,7 @@ module.exports.query = (queryExp,callback) => {
   console.log(JSON.stringify(queryExp));
 
   var obj= {$and:queryExp};
-  events.find(obj,callback);
+  events.find(obj,callback).sort({end_date: -1});
 }
 
 module.exports.getJsonData = () => {

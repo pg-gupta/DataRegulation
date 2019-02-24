@@ -15,7 +15,7 @@ const documentSchema = mongoose.Schema({
   },
   abstract:String,
   authors: new Array(),
-  version_date: String,
+  version_date: Date,
   keywords: new Array(),
   no_of_pages:Number,
   research_status: String,
