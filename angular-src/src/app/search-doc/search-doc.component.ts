@@ -239,6 +239,12 @@ public fetchData(queryObj){
 
   if(queryObj.length!=0){
     this.docServ.query(queryObj,this.no_pages).subscribe(response=>{
+
+      response.forEach(item=>{
+        var tmpDate=new Date(item.version_date);
+        // convert into UTC time
+        item.version_date= new Date(tmpDate.getTime()+ new Date().getTimezoneOffset()*60000);
+      });
       if(response.length<10){
         this.hasMoreData=false;
       }

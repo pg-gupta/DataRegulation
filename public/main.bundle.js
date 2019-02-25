@@ -643,6 +643,11 @@ var SearchDocComponent = (function () {
         localStorage.setItem("no_of_pages", JSON.stringify(this.no_pages));
         if (queryObj.length != 0) {
             this.docServ.query(queryObj, this.no_pages).subscribe(function (response) {
+                response.forEach(function (item) {
+                    var tmpDate = new Date(item.version_date);
+                    // convert into UTC time
+                    item.version_date = new Date(tmpDate.getTime() + new Date().getTimezoneOffset() * 60000);
+                });
                 if (response.length < 10) {
                     _this.hasMoreData = false;
                 }
