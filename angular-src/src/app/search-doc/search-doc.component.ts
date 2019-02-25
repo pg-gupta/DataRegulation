@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, ViewEnc
 import { Document } from '../models/Document';
 import { DocService } from '../services/doc.service';
 import { Router,ActivatedRoute } from '@angular/router';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-search-doc',
@@ -34,6 +35,9 @@ export class SearchDocComponent implements OnInit {
   searchText="";
   hasMoreData=true;
   previousQuery=[];
+  previous_no_of_pages=0;
+  subscription: any;
+  timer: any;
 
   @ViewChild('AcademicBtn') AcademicBtn: ElementRef;
   @Output() addList: EventEmitter<Document> = new EventEmitter<Document>();
@@ -105,8 +109,18 @@ ngOnInit(){
       }
     });
 
-    console.log("previousQuery: "+ JSON.stringify(this.previousQuery));
-    this.fetchData(this.previousQuery);
+    this.previous_no_of_pages=+localStorage.getItem("no_of_pages");
+    this.no_pages = -1;
+    this.timer = Observable.timer(100, 2000);
+    this.subscription = this.timer.subscribe(t => {
+      this.no_pages= this.no_pages+1;
+      this.fetchData(this.previousQuery);
+      if(t==this.previous_no_of_pages){
+        this.subscription.unsubscribe();
+      }
+    });
+
+    this.query=this.previousQuery;
   }
   else{
     let el: HTMLElement = this.AcademicBtn.nativeElement as HTMLElement;
@@ -219,7 +233,10 @@ public createQuery(){
   this.fetchData(this.query);
 }
 
+
 public fetchData(queryObj){
+  localStorage.setItem("no_of_pages",JSON.stringify(this.no_pages));
+
   if(queryObj.length!=0){
     this.docServ.query(queryObj,this.no_pages).subscribe(response=>{
       if(response.length<10){
@@ -232,6 +249,7 @@ public fetchData(queryObj){
     this.getList();
   }
 }
+
 public loadMore(){
   this.no_pages+=1;
   this.fetchData(this.query);

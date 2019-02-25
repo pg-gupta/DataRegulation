@@ -423,6 +423,8 @@ module.exports = "<div class=\"container-fluid zero-pad-container\">\n  <div cla
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_doc_service__ = __webpack_require__("./src/app/services/doc.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__("./node_modules/rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchDocComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -433,6 +435,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -460,6 +463,7 @@ var SearchDocComponent = (function () {
         this.searchText = "";
         this.hasMoreData = true;
         this.previousQuery = [];
+        this.previous_no_of_pages = 0;
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* EventEmitter */]();
         this.docs = [];
     }
@@ -522,8 +526,17 @@ var SearchDocComponent = (function () {
                     _this.searchText = item.$text.$search;
                 }
             });
-            console.log("previousQuery: " + JSON.stringify(this.previousQuery));
-            this.fetchData(this.previousQuery);
+            this.previous_no_of_pages = +localStorage.getItem("no_of_pages");
+            this.no_pages = -1;
+            this.timer = __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__["Observable"].timer(100, 2000);
+            this.subscription = this.timer.subscribe(function (t) {
+                _this.no_pages = _this.no_pages + 1;
+                _this.fetchData(_this.previousQuery);
+                if (t == _this.previous_no_of_pages) {
+                    _this.subscription.unsubscribe();
+                }
+            });
+            this.query = this.previousQuery;
         }
         else {
             var el = this.AcademicBtn.nativeElement;
@@ -627,6 +640,7 @@ var SearchDocComponent = (function () {
     };
     SearchDocComponent.prototype.fetchData = function (queryObj) {
         var _this = this;
+        localStorage.setItem("no_of_pages", JSON.stringify(this.no_pages));
         if (queryObj.length != 0) {
             this.docServ.query(queryObj, this.no_pages).subscribe(function (response) {
                 if (response.length < 10) {
