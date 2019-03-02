@@ -26,29 +26,31 @@
       </div>
       <div class="dr-dropdown">
         <angular4-multiselect [data]="dropdownListTypeOfDoc" *ngIf="isAcademicChecked" [(ngModel)]="selectedTypeOfDoc" [settings]="dropdownSettingsTypeOfDoc"
-          (onSelect)="onItemSelect($event)"
-          (onDeSelect)="OnItemDeSelect($event)"
-          (onSelectAll)="onSelectAll($event)"
-          (onDeSelectAll)="onDeSelectAll($event)"
-          >
-          <c-item>
-            <ng-template let-item="item">
-              <label style="color: #333;min-width: 150px;">{{item.name}}</label>
-            </ng-template>
-          </c-item>
-        </angular4-multiselect>
-      </div>
-      <br>
-      <br>
+        (onSelect)="onItemSelect($event)"
+        (onDeSelect)="OnItemDeSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (onDeSelectAll)="onDeSelectAll($event)"
+        >
+        <c-item>
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.name}}</label>
+          </ng-template>
+        </c-item>
+      </angular4-multiselect>
     </div>
-    <div class="col-md-8 col-lg-9">
-      <div class="list-group" *ngFor="let item of docs">
-        <div class="flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 [ngClass]="{'emphasize':item.is_emphasized}" class="mb-1" class="article-title">
-              <a [routerLink]="['/details', item._id]">
-                <span class="fa fa-star" *ngIf="item.is_emphasized" aria-hidden="true"></span> {{item.title}}
-              </a>
+    <br>
+    <br>
+  </div>
+  <div class="col-md-8 col-lg-9">
+    <div class="list-group" *ngFor="let item of docs">
+      <div class="flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 [ngClass]="{'emphasize':item.is_emphasized}" class="mb-1" class="article-title">
+            <a [routerLink]="['/details', item._id]" *ngIf="item.research_scope!=='News'">
+              <span class="fa fa-star" *ngIf="item.is_emphasized" aria-hidden="true"></span> {{item.title}}
+            </a>
+            <a href="{{item.link}}" target="_blank" *ngIf="item.research_scope==='News'">
+              <span class="fa fa-star" *ngIf="item.is_emphasized" aria-hidden="true"></span> {{item.title}}</a>
             </h5>
           </div>
           <p class="article-text">{{item.abstract}}</p>
