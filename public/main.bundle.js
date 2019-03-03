@@ -412,7 +412,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid zero-pad-container\">\n  <div class=\"row\">\n    <div class=\"col-md-8 offset-md-4 col-lg-9 offset-lg-3\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\" (keyup.enter)=\"searchDoc()\"  name=\"searchDoc\" type=\"text\" id=\"search\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" (click)=\"searchDoc()\">\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-4 col-lg-3\">\n      <div class=\"btn-group-vertical\">\n        <button type=\"button\" #AcademicBtn class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isAcademicPressed==true}\" (click)=\"showAcademicResearchDocs(true,false,false)\" name=\"AcademicResearch\">Academic Research</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isNewsArticlePressed==true}\" (click)=\"showAcademicResearchDocs(false,true,false)\" name=\"NewsArticles\">News Articles</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isReportsPressed==true}\" (click)=\"showAcademicResearchDocs(false,false,true)\" name=\"ReportsWhitepapers\">Reports & White Papers</button>\n      </div>\n      <div class=\"btn-group-vertical\">\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isMajorDevPressed==true}\" (click)=\"showMajorDevDocs(isMajorDevPressed,$event)\" name=\"MajorDevlopments\">Major Developments</button>\n      </div>\n      <div class=\"dr-dropdown\">\n        <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n        (onSelect)=\"onItemSelect($event)\"\n        (onDeSelect)=\"OnItemDeSelect($event)\"\n        (onSelectAll)=\"onSelectAll($event)\"\n        (onDeSelectAll)=\"onDeSelectAll($event)\"\n        >\n        <c-item>\n          <ng-template let-item=\"item\">\n            <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n          </ng-template>\n        </c-item>\n      </angular4-multiselect>\n    </div>\n    <br>\n    <br>\n  </div>\n  <div class=\"col-md-8 col-lg-9\">\n    <div class=\"list-group\" *ngFor=\"let item of docs\">\n      <div class=\"flex-column align-items-start\">\n        <div class=\"d-flex w-100 justify-content-between\">\n          <h5 [ngClass]=\"{'emphasize':item.is_emphasized}\" class=\"mb-1\" class=\"article-title\">\n            <a [routerLink]=\"['/details', item._id]\" *ngIf=\"item.research_scope!=='News'\">\n              <span class=\"fa fa-star\" *ngIf=\"item.is_emphasized\" aria-hidden=\"true\"></span> {{item.title}}\n            </a>\n            <a href=\"{{item.link}}\" target=\"_blank\" *ngIf=\"item.research_scope==='News'\">\n              <span class=\"fa fa-star\" *ngIf=\"item.is_emphasized\" aria-hidden=\"true\"></span> {{item.title}}</a>\n            </h5>\n          </div>\n          <p class=\"article-text\">{{item.abstract}}</p>\n          <p class=\"article-meta\">\n            <span class=\"date\">\n              <span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> {{item.version_date | date}}\n            </span>\n            <span class=\"authors\">\n              <span class=\"fa fa-user\" aria-hidden=\"true\"></span>\n              <span class=\"author\" *ngFor=\"let author of item.authors; index as i;\">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>\n            </span>\n          </p>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-9 offset-md-3\">\n      <button type=\"button\" id=\"load-more-btn\" class=\"btn-pressed btn\" name=\"button\" *ngIf=\"hasMoreData\" (click)=\"loadMore()\">Load More</button>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-fluid zero-pad-container\">\n  <div class=\"row\">\n    <div class=\"col-md-8 offset-md-4 col-lg-9 offset-lg-3\">\n      <div id=\"custom-search-input\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"searchText\" (keyup.enter)=\"searchDoc()\"  name=\"searchDoc\" type=\"text\" id=\"search\" class=\"search-query form-control\" placeholder=\"Search\" />\n          <span class=\"input-group-btn\">\n            <button type=\"button\" (click)=\"searchDoc()\">\n              <span class=\"fa fa-search\"></span>\n            </button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-4 col-lg-3\">\n      <div class=\"btn-group-vertical\">\n        <button type=\"button\" #AcademicBtn class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isAcademicChecked==true}\" (click)=\"isAcademicChecked=!isAcademicChecked;showAcademicResearchDocs()\" name=\"AcademicResearch\">Academic Research</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isNewsChecked==true}\" (click)=\"isNewsChecked=!isNewsChecked;showAcademicResearchDocs()\" name=\"NewsArticles\">News Articles</button>\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isReportsChecked==true}\" (click)=\"isReportsChecked=!isReportsChecked;showAcademicResearchDocs()\" name=\"ReportsWhitepapers\">Reports & White Papers</button>\n      </div>\n      <div class=\"btn-group-vertical\">\n        <button type=\"button\" class=\"btn btn-outline-primary\" [ngClass]=\"{'btn-pressed':isMajorDevPressed==true}\" (click)=\"showMajorDevDocs(isMajorDevPressed,$event)\" name=\"MajorDevlopments\">Major Developments</button>\n      </div>\n      <div class=\"dr-dropdown\">\n        <angular4-multiselect [data]=\"dropdownListTypeOfDoc\" *ngIf=\"isAcademicChecked\" [(ngModel)]=\"selectedTypeOfDoc\" [settings]=\"dropdownSettingsTypeOfDoc\"\n        (onSelect)=\"onItemSelect($event)\"\n        (onDeSelect)=\"OnItemDeSelect($event)\"\n        (onSelectAll)=\"onSelectAll($event)\"\n        (onDeSelectAll)=\"onDeSelectAll($event)\"\n        >\n        <c-item>\n          <ng-template let-item=\"item\">\n            <label style=\"color: #333;min-width: 150px;\">{{item.name}}</label>\n          </ng-template>\n        </c-item>\n      </angular4-multiselect>\n    </div>\n    <br>\n    <br>\n  </div>\n  <div class=\"col-md-8 col-lg-9\">\n    <div class=\"list-group\" *ngFor=\"let item of docs\">\n      <div class=\"flex-column align-items-start\">\n        <div class=\"d-flex w-100 justify-content-between\">\n          <h5 [ngClass]=\"{'emphasize':item.is_emphasized}\" class=\"mb-1\" class=\"article-title\">\n            <a [routerLink]=\"['/details', item._id]\" *ngIf=\"item.research_scope!=='News'\">\n              <span class=\"fa fa-star\" *ngIf=\"item.is_emphasized\" aria-hidden=\"true\"></span> {{item.title}}\n            </a>\n            <a href=\"{{item.link}}\" target=\"_blank\" *ngIf=\"item.research_scope==='News'\">\n              <span class=\"fa fa-star\" *ngIf=\"item.is_emphasized\" aria-hidden=\"true\"></span> {{item.title}}</a>\n            </h5>\n          </div>\n          <p class=\"article-text\">{{item.abstract}}</p>\n          <p class=\"article-meta\">\n            <span class=\"date\">\n              <span class=\"fa fa-calendar\" aria-hidden=\"true\"></span> {{item.version_date | date}}\n            </span>\n            <span class=\"authors\">\n              <span class=\"fa fa-user\" aria-hidden=\"true\"></span>\n              <span class=\"author\" *ngFor=\"let author of item.authors; index as i;\">{{author}}{{ i < item.authors.length - 1 ? ', ' : '' }}</span>\n            </span>\n          </p>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-9 offset-md-3\">\n      <button type=\"button\" id=\"load-more-btn\" class=\"btn-pressed btn\" name=\"button\" *ngIf=\"hasMoreData\" (click)=\"loadMore()\">Load More</button>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -443,22 +443,19 @@ var SearchDocComponent = (function () {
     function SearchDocComponent(docServ, router) {
         this.docServ = docServ;
         this.router = router;
-        this.dropdownList = [];
-        this.selectedItems = [];
-        this.dropdownSettings = {};
         this.dropdownListTypeOfDoc = [];
         this.selectedTypeOfDoc = [];
         this.dropdownSettingsTypeOfDoc = {};
-        this.dropdownListResearchScope = [];
         this.selectedResearchScope = [];
         this.isImportant = [];
         this.query = [];
         this.isAcademicChecked = false;
         this.isAcademicPressed = false;
+        this.isNewsChecked = false;
+        this.isReportsChecked = false;
         this.isNewsArticlePressed = false;
         this.isReportsPressed = false;
         this.isMajorDevPressed = false;
-        this.totalDisplayed = 2;
         this.no_pages = 0;
         this.searchText = "";
         this.hasMoreData = true;
@@ -469,15 +466,6 @@ var SearchDocComponent = (function () {
     }
     SearchDocComponent.prototype.clearLocalStorage = function (event) {
         localStorage.clear();
-    };
-    SearchDocComponent.prototype.getList = function () {
-        var _this = this;
-        this.docServ.getAll().subscribe(function (result) {
-            _this.docs = result.sort(function (a, b) {
-                return new Date(b.version_date).getTime() - new Date(a.version_date).getTime();
-            });
-            _this.peopleFilter = {};
-        }, function (error) { return console.error(error); });
     };
     SearchDocComponent.prototype.onClick = function () {
         this.router.navigate(['app-doc-details', '456']);
@@ -494,16 +482,39 @@ var SearchDocComponent = (function () {
                             console.log("prop:" + prop + " value:" + or[prop]);
                             var key = prop;
                             var value = or[prop];
-                            if (key == 'research_scope') {
+                            if (key == '$and') {
+                                value.forEach(function (item) {
+                                    if (item.$or) {
+                                        item.$or.forEach(function (type) {
+                                            for (var prop_1 in type) {
+                                                if (type[prop_1] == 'Empirical') {
+                                                    _this.selectedTypeOfDoc.push({ "id": 1, "name": "Empirical" });
+                                                }
+                                                else {
+                                                    _this.selectedTypeOfDoc.push({ "id": 2, "name": "Theoretical" });
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        if (item.research_scope == 'Academic') {
+                                            _this.isAcademicChecked = true;
+                                            _this.isAcademicPressed = true;
+                                        }
+                                    }
+                                    console.log(item);
+                                });
+                            }
+                            else if (key == 'research_scope') {
                                 if (value == 'News') {
-                                    _this.isNewsArticlePressed = true;
+                                    _this.isNewsChecked = true;
                                 }
                                 else if (value == 'Academic') {
                                     _this.isAcademicPressed = true;
                                     _this.isAcademicChecked = true;
                                 }
                                 else {
-                                    _this.isReportsPressed = true;
+                                    _this.isReportsChecked = true;
                                 }
                                 _this.selectedResearchScope.push({ 'research_scope': value });
                             }
@@ -539,8 +550,7 @@ var SearchDocComponent = (function () {
             this.query = this.previousQuery;
         }
         else {
-            var el = this.AcademicBtn.nativeElement;
-            el.click();
+            this.fetchData({});
         }
     };
     SearchDocComponent.prototype.bindType = function () {
@@ -555,35 +565,24 @@ var SearchDocComponent = (function () {
             showCheckbox: true,
             selectAllText: 'Select All',
             unSelectAllText: 'UnSelect All',
-            // enableSearchFilter: true,
             classes: "myclass custom-class",
             labelKey: 'name',
             primaryKey: 'id',
         };
     };
-    SearchDocComponent.prototype.showAcademicResearchDocs = function (isAcademicChecked, isNewsChecked, isReportChecked) {
+    SearchDocComponent.prototype.showAcademicResearchDocs = function () {
         this.selectedResearchScope = [];
         this.resetPage();
-        if (isAcademicChecked) {
+        if (this.isAcademicChecked) {
             this.selectedResearchScope.push({ 'research_scope': 'Academic' });
-            this.isAcademicChecked = true;
-            this.isAcademicPressed = true;
-            this.isNewsArticlePressed = false;
-            this.isReportsPressed = false;
         }
-        else if (isNewsChecked) {
+        if (this.isNewsChecked) {
             this.selectedResearchScope.push({ 'research_scope': 'News' });
-            this.isNewsArticlePressed = true;
-            this.isAcademicPressed = false;
-            this.isReportsPressed = false;
         }
-        else if (isReportChecked) {
+        if (this.isReportsChecked) {
             this.selectedResearchScope.push({ 'research_scope': 'Report' });
-            this.isNewsArticlePressed = false;
-            this.isAcademicPressed = false;
-            this.isReportsPressed = true;
         }
-        if (isAcademicChecked == undefined || isAcademicChecked == false) {
+        if (this.isAcademicChecked == undefined || this.isAcademicChecked == false) {
             this.isAcademicChecked = false;
             this.selectedTypeOfDoc = [];
         }
@@ -623,10 +622,21 @@ var SearchDocComponent = (function () {
         var isEmphasized = this.isImportant;
         this.query = [];
         if (selectedType.length != 0) {
-            this.query.push({ $or: selectedType });
+            var researchScopeQuery = [];
+            researchScopeQuery.push({ $and: [{ $or: selectedType }, { 'research_scope': 'Academic' }] });
+            if (this.isNewsChecked) {
+                researchScopeQuery.push({ 'research_scope': 'News' });
+            }
+            if (this.isReportsChecked) {
+                researchScopeQuery.push({ 'research_scope': 'Report' });
+            }
+            this.query.push({ $or: researchScopeQuery });
         }
-        if (selectedResearchScopeItem.length != 0) {
-            this.query.push({ $or: selectedResearchScopeItem });
+        else {
+            var selectedResearchScopeItem = this.selectedResearchScope;
+            if (selectedResearchScopeItem.length != 0) {
+                this.query.push({ $or: selectedResearchScopeItem });
+            }
         }
         if (this.searchText.length != 0) {
             this.query.push({ $text: { $search: this.searchText } });
@@ -641,23 +651,18 @@ var SearchDocComponent = (function () {
     SearchDocComponent.prototype.fetchData = function (queryObj) {
         var _this = this;
         localStorage.setItem("no_of_pages", JSON.stringify(this.no_pages));
-        if (queryObj.length != 0) {
-            this.docServ.query(queryObj, this.no_pages).subscribe(function (response) {
-                response.forEach(function (item) {
-                    var tmpDate = new Date(item.version_date);
-                    // convert into UTC time
-                    item.version_date = new Date(tmpDate.getTime() + new Date().getTimezoneOffset() * 60000);
-                });
-                if (response.length < 10) {
-                    _this.hasMoreData = false;
-                }
-                (_a = _this.docs).push.apply(_a, response);
-                var _a;
-            }, function (error) { return console.error(error); });
-        }
-        else {
-            this.getList();
-        }
+        this.docServ.query(queryObj, this.no_pages).subscribe(function (response) {
+            response.forEach(function (item) {
+                var tmpDate = new Date(item.version_date);
+                // convert into UTC time
+                item.version_date = new Date(tmpDate.getTime() + new Date().getTimezoneOffset() * 60000);
+            });
+            if (response.length < 10) {
+                _this.hasMoreData = false;
+            }
+            (_a = _this.docs).push.apply(_a, response);
+            var _a;
+        }, function (error) { return console.error(error); });
     };
     SearchDocComponent.prototype.loadMore = function () {
         this.no_pages += 1;

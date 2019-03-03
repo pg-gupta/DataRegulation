@@ -37,10 +37,7 @@ const documents = module.exports = mongoose.model('documents', documentSchema );
 //BucketList.find() returns all the lists
 module.exports.getAll = (callback) => {
   var query={};
-  query.skip = 2;
-  query.limit = 10;
-  console.log("query");
-  documents.find(null,null,query,callback);
+  documents.find(null,null,query,callback).sort('-version_date');
 }
 
 module.exports.deleteAll = (callback) => {
@@ -70,13 +67,14 @@ module.exports.addAll=(docs,callback)=>{
 }
 
 module.exports.query = (queryExp,no_of_pages,callback) => {
-  console.log( "abc: "+queryExp+" "+no_of_pages);
   console.log(JSON.stringify(queryExp));
-
+  var exp=JSON.stringify(queryExp);
   var query={};
   query.skip = 10*no_of_pages;
   query.limit = 10;
-  var obj= {$and:queryExp};
+  if(exp!="{}"&& exp!="[]"){
+    var obj= {$and:queryExp};
+  }
   documents.find(obj,null,query,callback).sort('-version_date');
 }
 
