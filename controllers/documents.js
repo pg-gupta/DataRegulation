@@ -38,22 +38,13 @@ router.get('/',(req,res) => {
 
 router.post('/', (req,res,next) => {
   console.log(req.body);
-  let newDoc = new document({
-    title: req.body.title,
-    description: req.body.description,
-    url: req.body.url,
-    content: req.body.content,
-    doctype: req.body.doctype
-
-  });
-  document.add(newDoc,(err, result) => {
+  let newDoc = new document(req.body);
+  document.add(newDoc,(err) => {
     if(err) {
       res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
-      res.write(JSON.stringify({success: true, message: `Failed to create a new list. Error: ${err}`}));
     }
     else
     res.json({success:true, message: "Added successfully."});
-    res.write(JSON.stringify({success: true, message: "Added successfully."}));
 
   });
 });
@@ -125,7 +116,6 @@ router.post('/query/:no_of_pages', (req,res,next)=> {
       res.json({success:false, message: `Failed to query the list. Error: ${err}`});
     }
     else if(result) {
-      console.log("result: "+ result);
       res.write(JSON.stringify({success: true, docs:result},null,2));
       res.end();
     }
