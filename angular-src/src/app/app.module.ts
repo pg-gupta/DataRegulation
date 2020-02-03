@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SearchDocComponent } from './search-doc/search-doc.component';
 import { DocDetailsComponent } from './doc-details/doc-details.component';
 import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
 import { EventComponent } from './event/event.component';
 import { DocService } from './services/doc.service';
 import { AuthorService } from './services/author.service';
@@ -28,8 +29,9 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
       { path: 'search', component: SearchDocComponent,  },
       { path: 'details/:id', component: DocDetailsComponent },
       //{ path: 'home',component:HomeComponent},
-      { path: 'eventsconf',component:EventComponent},
-      { path: '**', redirectTo: 'home' }
+      { path: 'eventsconf', component:EventComponent},
+      { path: '**', redirectTo: 'home' },
+      { path: 'admin', component: AdminComponent},
     ]),
   ],
   //Components are added here
@@ -38,7 +40,8 @@ import { AngularMultiSelectModule } from 'angular4-multiselect-dropdown/angular4
   SearchDocComponent,
   DocDetailsComponent,
   HomeComponent,
-  EventComponent
+  EventComponent,
+  AdminComponent
 ],
 //All the modules are declared as imports
 

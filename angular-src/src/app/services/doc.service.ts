@@ -10,8 +10,8 @@ export class DocService {
 
   constructor(private http: Http) { }
 
-  //private serverApi= 'http://localhost:3000';
-  private serverApi= 'https://dataregulationrepository.azurewebsites.net';
+  private serverApi= 'http://localhost:3000';
+  // private serverApi= 'https://dataregulationrepository.azurewebsites.net';
 
 
   public getAll():Observable<Document[]> {
@@ -42,6 +42,15 @@ export class DocService {
     let URI = `${this.serverApi}/documents/`;
     let headers = new Headers;
     let body = JSON.stringify({title: list.title, abstract: list.abstract});
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(URI, body ,{headers: headers})
+    .map(res => res.json());
+  }
+
+  public addMultiple(list: Document[]) {
+    let URI = `${this.serverApi}/documents/insertmany`;
+    let headers = new Headers;
+    let body = JSON.stringify(list);
     headers.append('Content-Type', 'application/json');
     return this.http.post(URI, body ,{headers: headers})
     .map(res => res.json());

@@ -1,0 +1,46 @@
+
+<div>
+  <button class="btn btn-primary" (click)="file.click()">
+    Upload File
+  </button>
+  <input 
+    style="display:none"
+    type="file" 
+    (change)="handleFileInput(file.files)" 
+    #file>
+    <button class="btn btn-primary" (click)="submitMultipleDocuments()">
+      Submit
+    </button>
+</div>
+<div>
+  <table class="table">
+      <thead>
+        <th>Title</th>
+        <th>Link</th>
+        <th>Abstract</th>
+        <th>Authors</th>
+        <th>Version date</th>
+        <th>Keywords</th>
+        <th>No of pages</th>
+        <th>Research Status</th>
+        <th>Research Scope</th>
+        <th>Type of Article</th>
+        <th>IsEmphasized</th>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of docs">
+            <td class="text-truncate" style="max-width: 150px">{{item.title}}</td>
+            <td class="text-truncate" style="max-width: 200px">{{item.link}}</td>
+            <td class="text-truncate" style="max-width: 200px">{{item.abstract}}</td>
+            <td class="text-truncate" style="max-width: 200px">{{item.authors}}</td>
+            <td>{{item.version_date | date:'shortDate'}}</td>
+            <td class="text-truncate" style="max-width: 150px">{{item.keywords}}</td>
+            <td>{{item.no_of_pages}}</td>
+            <td>{{item.research_status}}</td>
+            <td>{{item.research_scope}}</td>
+            <td>{{item.type_of_article}}</td>
+            <td>{{item.isemphasized}}</td>
+            </tr>
+      </tbody>
+  </table>
+</div>

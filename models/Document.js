@@ -24,11 +24,11 @@ const documentSchema = mongoose.Schema({
   geographic_scope: String,
   citations: new Array(),
   supplementary:String,
-  is_emphasized:Boolean
+  isemphasized:Boolean
 });
 
-documentSchema.index({ title: 1, link: 1}, { unique: true });
-documentSchema.index({title: "text",abstract:"text",authors:"text",version_date:"text",keywords:"text",research_status:"text",
+// documentSchema.index({ title: 1, link: 1}, { unique: true });
+documentSchema.index({title: "text",abstract:"text",authors:"text",keywords:"text",research_status:"text",
 research_scope:"text",type_of_article:"text",type_of_article:"text",geographic_scope:"text",citations:"text",supplementary:"text"});
 
 
